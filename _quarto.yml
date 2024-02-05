@@ -1,0 +1,23 @@
+project:
+  type: book
+
+book:
+  title: "Doing Meta-Analysis with R. A Hands-On Guide"
+  author: "Mathias Harrer, Pim Cuijpers, Toshi Furukawa, David D. Ebert"
+  date: "2/5/2024"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+
