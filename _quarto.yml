@@ -2,14 +2,36 @@ project:
   type: book
 
 book:
-  title: "Doing Meta-Analysis with R. A Hands-On Guide"
-  author: "Mathias Harrer, Pim Cuijpers, Toshi Furukawa, David D. Ebert"
-  date: "2/5/2024"
+  title: "Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide"
+  author: "Harrie Jonkman"
+  date: today
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
-    - references.qmd
+    - part: "Van start gaan"
+      chapters:
+        - 01-introductie.qmd
+        - 02-discovering_R.qmd
+    - part: "Meta-Analysis in R"
+      chapters:
+        - 03-effect_sizes.qmd
+        - 04-pooling_effect_sizes.qmd
+        - 05-between_study_heterogeneity.qmd
+        - 06-forest_plots.qmd
+        - 07-subgroup_analyses.qmd
+        - 08-meta_regression.qmd
+        - 09-publication_bias.qmd
+    - part: "Advanced Methods"
+      chapters:
+        - 10-multilevel_meta-analysis.qmd
+        - 11-seq_meta-analysis.qmd
+        - 12-network_meta-analysis.qmd
+        - 13-bayesian_meta-analysis.qmd
+    - part: "Helpful Tools"
+      chapters:
+        - 14-power_analysis.qmd
+        - 15-risk_bias_plots.qmd
+        - 16-reporting_reproducibility.qmd
+        - 17-es_calculation_conversion.qmd
 
 bibliography: references.bib
 

@@ -1,0 +1,23 @@
+# Introductie
+
+Met die grote hoeveelheden onderzoeksresultaten die elke dag worden geproduceerd, is het nog belangrijker geworden om het bewijsmateriaal in zijn geheel te bekijken en het kritisch te beoordelen. **Meta-analyse** kan hierbij enorm helpen, zolang de beperkingen en vooroordelen ervan worden erkend. Het doel van meta-analyse is om al het beschikbare bewijsmateriaal met betrekking tot een duidelijk gedefinieerd onderzoeksgebied of onderzoeksvraag te combineren, dat samen te vatten en uiteindelijk te interpreteren. Er zijn ten minste drie verschillende manieren waarop bewijs uit meerdere onderzoeken kan worden samengevoegd:   
+
+- **Traditionele/narratieve reviews** (geschreven door experts en autoriteiten in het veld zonder duidelijke regels).\
+- **Systematische reviews** (om bewijs samen te vatten met behulp van duidelijk gedefinieerde en transparante regels).   
+- **Meta-analyses** (om bewijs te combineren en samen te vatten over alle onderzoeken met behulp van duidelijk gedefinieerde en transparante regels op kwantitatieve wijze).
+
+<br>
+
+Meta-analyse is niet uitgevonden door één persoon alleen, maar kent vele grondleggers en vaders. De eerste pogingen om de effecten van afzonderlijke, maar vergelijkbare onderzoeken statistisch samen te vatten, dateren van ongeveer 100 jaar geleden. Talloze innovaties hebben de toepasbaarheid, robuustheid en veelzijdigheid van de meta-analytische methoden in de laatste vier decennia vergroot. In die periode is meta-analyse een universeel geaccepteerd onderzoeksinstrument geworden. Er zijn veel valkuilen en het boek leidt ons langs veelvoorkomende valkuilen in de uitvoering van meta-analyse. Hier worden er vier genoemd:
+
+<br>
+
+1.  **Het "Appels en Sinaasappelen" probleem:** Je zou kunnen stellen dat meta-analyse appels met peren combineren is. De reikwijdte en specificiteit van een meta-analyse moet daarom gebaseerd zijn op de onderzoeksvraag die beantwoord moet worden, en deze vraag moet van praktisch belang zijn. Variatie tussen studies kan onproblematisch zijn, zelfs inzichtgevend, als die op de juiste manier wordt opgenomen in de doelen en probleemspecificatie van een meta-analyse.    \
+2.  **Het "Vuiligheid Erin, Vuiligheid Eruit"-probleem:** De kwaliteit van het bewijs dat een meta-analyse oplevert, hangt sterk af van de kwaliteit van de studies die erin worden samengevat. Anders krijg je "vuiligheid erin, vuiligheid eruit".   \
+3.  **Het "Dossierlader"-probleem:** Het dossierladerprobleem verwijst naar het probleem dat niet alle relevante onderzoeksresultaten worden gepubliceerd. Negatieve of 'teleurstellende' resultaten zijn ondervertegenwoordigd. Daarom moet je kijken naar **publicatiebias**.   \
+4.  **Het "agenda van de onderzoeker"-probleem:** Meta-analyse gaat gepaard met veel "vrijheidsgraden van de onderzoeker", waardoor er veel ruimte overblijft voor beslissingen die soms willekeurig en soms het resultaat van geheime persoonlijke voorkeuren zijn. Een manier om het probleem van de agenda van de onderzoeker te verminderen, is het vooraf registreren en publiceren van een gedetailleerd analyseplan voordat met het verzamelen van gegevens voor een meta-analyse wordt begonnen.
+
+<br>
+
+Belangrijk is dat de methodologische beslissingen zowel transparant als reproduceerbaar zijn. Hier worden de eerste bouwstenen gepresenteerd. **Definieer de onderzoeksvraag:** of een goede onderzoeksvraag te definiëren, helpt het om deze eerst te zien als een vorm van probleemspecificatie. Door jezelf stap voor stap deze vragen te stellen, zou het gemakkelijker moeten worden om te definiëren wat je wilt bereiken met je meta-analyse. Gebruik bijvoorbeeld het FINER-raamwerk (Feasible, Interesting, Novel, Ethical, Relevant) of PICO (Population, Intervention, Comparison, Outcome) om je onderzoeksvraag te definiëren.    
+Kijk verder ook naar in aanmerking komende **onderzoeksdesigns**, houd rekening met **culturele** en **taalkundige** verschillen tussen in aanmerking komende studies, en kijk naar **publicatietype** en de rol van **grijze literatuur**. Schrijf deze dingen in **inclusie** en **uitsluitingscriteria**. Houd bij dit alles rekening met de PRISMA- () en MARS- ()-richtlijnen. Veel van deze problemen kunnen worden verminderd door een duidelijke onderzoeksvraag en geschiktheidscriteria te definiëren, een analyseplan te schrijven, de meta-analyse vooraf te registreren en de studiezoektocht en gegevensextractie op een systematische en reproduceerbare manier uit te voeren.
