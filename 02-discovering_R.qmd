@@ -1,1 +1,161 @@
 # Discovering R
+## Theory
+
+`R` has become one of the most powerful and frequently used statistical programming languages in the world. Whether you are working in academia or at a company, the things you can do in R will often seem like a superpower to others. But it is a superpower that everyone can learn, provided some time and effort. The book shows how to install `R` and `RStudio` (the last one which gives us a user interface which makes it easier to handle our data, packages and output). R is not a computer program with a graphical user interface and pre-defined functionality. It show how it works.
+
+`R` is a full programming language to which people all around the world can contribute freely available add-ons, so-called packages. Important packages for working with this book and to do meta-analysis are `meta`, `metafor`, `dmetar` and (for data wrangling) `tidyverse`. You have to install these on your computer. When installed you have to load them everytime you start your work.
+
+The fundamental building blocks of R are functions. Many of these functions can be imported through packages which we can install from the internet. Functions can be used to import, manipulate, transform and save data using R. Examples important for doing meta-analysis in R are given.
+
+## Practice
+
+Install first the packages needed for this book. I had to install an other version of meta to install the package `dmetar`.
+
+```{r}
+#require(remotes)
+#install_version("meta", version = "6.5.0", repos = "http://cran.us.r-project.org")
+
+#install.packages("tidyverse")
+
+#install.packages("metafor")
+
+#install.packages("devtools")
+
+#devtools::install_github("MathiasHarrer/dmetar")
+```
+
+Load the packages needed for this book.
+
+```{r}
+library(meta)
+library(tidyverse)
+library(metafor)
+library(dmetar)
+```
+
+Download the example dataset `SuicidePrevention.xlx` from [here](https://www.protectlab.org/en/datasets/suicide-prevention/) and open it.
+
+```{r}
+library(openxlsx)
+data <-read.xlsx("SuicidePrevention.xlsx")
+```
+
+Let us have a look at the dataset and look at the kind of variables we have.
+
+```{r}
+glimpse(SuicidePrevention)
+```
+
+You can check specfic columns directly
+
+```{r}
+SuicidePrevention$n.e
+```
+
+And look what kind of variable is this:
+
+```{r}
+class(SuicidePrevention$n.e)
+```
+
+Look at the mean of this variable.
+
+```{r}
+mean(SuicidePrevention$n.e)
+```
+
+Be sure the variables have the good class, e.g.here numeric. Let us change this for some variables.
+
+```{r}
+SuicidePrevention$mean.e <- as.numeric(SuicidePrevention$mean.e)
+SuicidePrevention$sd.e <- as.numeric(SuicidePrevention$sd.e)
+SuicidePrevention$n.c <- as.numeric(SuicidePrevention$n.c)
+SuicidePrevention$mean.c <- as.numeric(SuicidePrevention$mean.c)
+SuicidePrevention$sd.c <- as.numeric(SuicidePrevention$sd.c)
+SuicidePrevention$n.c <- as.numeric(SuicidePrevention$n.c)
+```
+
+Two variables we have to change to factors to analyse them correctly.
+
+```{r}
+SuicidePrevention$age_group <- as.factor(SuicidePrevention$age_group)
+SuicidePrevention$control <- as.factor(SuicidePrevention$control)
+```
+
+In my case the variable `age_group` is already split in the levels `gen` and `older`, see here:
+
+```{r}
+SuicidePrevention$age_group
+```
+
+A logical variable can also be handy, e.g. for the next one:
+
+```{r}
+SuicidePrevention$pubyear
+```
+
+```{r}
+as.logical(SuicidePrevention$pubyear >= 2010)
+```
+
+Sometimes it is good to look at specific data from the dataframe. Remember: `data.frame[rows, columns]`. So look at row 2 becomes
+
+```{r}
+SuicidePrevention[2,]
+
+```
+
+If you want to see information of first column and second row becomes
+
+```{r}
+SuicidePrevention[2,1]
+
+```
+
+For selecting parts of the dataframe use `c()` function. To extract rows 2 and 3 as well as columns 4 and 6 becomes
+
+```{r}
+SuicidePrevention[c(2,3),c(4,6)]
+
+```
+
+Rows you select by number, columns you also can select by name,a s in this example.
+
+```{r}
+SuicidePrevention[, c("author", "control")]
+```
+
+You can also `filter` a data set based on row values.
+
+For example (more examples as given):
+
+```{r}
+filter(SuicidePrevention, n.e <= 50)
+```
+
+You can transform data easy. So, if you want to transform the study of **De Vries et al.** from 2019 to 2018 you can write it as:
+
+```{r}
+SuicidePrevention[2, "pubyear"] <- 2018
+SuicidePrevention[2, "pubyear"]
+```
+
+If you want to add a new column to your dataframe (e.g mean difference) you can do it as follows:
+
+```{r}
+SuicidePrevention$md <- SuicidePrevention$mean.e - SuicidePrevention$mean.c
+```
+
+Once we transformed it, we can save it. You can save it as a .rda file
+
+```{r}
+save(SuicidePrevention, file = "SuicidePrevention.rda")
+```
+
+or as a .csv file
+
+```{r}
+write.csv(SuicidePrevention, file = "SuicidePrevention.csv")
+```
+
+Important: Keep your transformation syntax, so you know what you did from original data to the final data.
