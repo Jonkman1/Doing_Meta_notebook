@@ -159,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-discovering_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discovering R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R ontdekken</span></span></a>
   </div>
 </li>
       </ul>
@@ -297,8 +297,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#theory" id="toc-theory" class="nav-link active" data-scroll-target="#theory"><span class="header-section-number">3.1</span> Theory</a></li>
-  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">3.2</span> Practice</a></li>
+  <li><a href="#theorie" id="toc-theorie" class="nav-link active" data-scroll-target="#theorie"><span class="header-section-number">3.1</span> Theorie</a></li>
+  <li><a href="#praktijk" id="toc-praktijk" class="nav-link" data-scroll-target="#praktijk"><span class="header-section-number">3.2</span> Praktijk</a></li>
   </ul>
 </nav>
     </div>
@@ -322,36 +322,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="theory" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="theory"><span class="header-section-number">3.1</span> Theory</h2>
-<p>Effect size is defined here as a metric quantifying the relationship between two entities. It captures the <strong>direction</strong> and <strong>magnitude</strong> of this relationship. If relationships are expressed as the same effect size, it is possible to compare them.Effect sizes are the building blocks of meta-analyses.</p>
-<p>To perform a meta-analysis, we need at least an estimate of the effect size and its standard error. They should be comparable, computable, reliable and interpretable. The standard error of an effect size represents how precise the study’s estimate of the effect is. Meta-analysis gives effect sizes with a greater precision a higher weight because they are better estimators of the true effect.</p>
-<p>There are various effect sizes we can use in meta-analyses. Common ones are “one-variable” relationship measures, such as: - means (summing all individual values deviding by sum of sample size);<br>
-- proportions (number of individuals falling into a specific subgroup deviding by total number of individuals);<br>
-- correlations (expresses teh amount of co-variation between two variables, for example the Pearson Product-Moment Correlation and Point-Biserial Correlation);<br>
-- (standardized) mean differences (difference in means between two independent groups deviding by the pooled standard deviation); - risk ratio (relative risk) as the ratio of two risks; - odds ratio, as the number of cases which fall into a specific subgroup deviding by the number of cases which do not fall into that subgroup. - incidence rate ratios (also called rate ratio), takes into account the person/time-aspects of two groups.</p>
-<p>Effect sizes can also be biased, for example by measurement error and range restriction. There are formulas to correct for some biases, including the small sample bias of standardized mean differences, attenuation due to unreliability, as well as range restriction problems. Other common problems are that studies report the data needed to calculate effect sizes in different formats, as well as the unit-of-analysis problem, which arises when studies contribute more than one effect size.</p>
+<section id="theorie" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="theorie"><span class="header-section-number">3.1</span> Theorie</h2>
+<p>Effect size wordt hier gedefinieerd als een metriek die de relatie tussen twee entiteiten kwantificeert. Het geeft de <strong>richting</strong> en <strong>sterkte</strong> van deze relatie weer. Als relaties worden uitgedrukt in een vergelijkbare effect size, is het mogelijk om ze te vergelijken. Effect sizes zijn de bouwstenen van meta-analyses.Om een meta-analyse uit te voeren, is op zijn minst een schatting nodig van de effect size en de standaard-fout ervan. Deze moeten <em>vergelijkbaar</em>, <em>berekenbaar</em>, <em>betrouwbaar</em> en <em>interpreteerbaar</em> zijn. De standaard-fout van een effect size geeft aan hoe nauwkeurig de schatting van het effect van de studie is. Meta-analyse geeft effect-sizes met een grotere precisie een hoger gewicht omdat ze betere schatters zijn van het ware effect.</p>
+<p>Er zijn verschillende effectmaten die we kunnen gebruiken in meta-analyses. Gebruikelijke zijn “één-variabele” relatiematen, zoals:<br>
+- gemiddelden (som van alle individuele waarden, gedeeld door de som van de steekproefgrootte);<br>
+- proporties (aantal individuen dat in een specifieke subgroep valt, gedeeld door het totale aantal individuen);<br>
+- correlaties (drukt de mate van co-variatie tussen twee variabelen uit, bijvoorbeeld de Pearson Product-Moment Correlatie en Point-Biserial Correlatie);<br>
+- risicoverhouding (relatief risico) als de verhouding tussen twee risico’s;<br>
+- odds ratio, als het aantal gevallen dat in een bepaalde subgroep valt, gedeeld door het aantal gevallen dat niet in die subgroep valt;<br>
+- incidentieratio’s (ook wel rate ratio genoemd), houdt rekening met de persoon/tijd-aspecten van twee groepen.</p>
+<p>Effectgroottes kunnen ook vertekend zijn, bijvoorbeeld door meetfouten en bereikbeperking. Er bestaan formules om te corrigeren voor sommige vertekeningen, waaronder de kleine steekproefvertekening van gestandaardiseerde gemiddelde verschillen, verzwakking door onbetrouwbaarheid en problemen met bereikbeperking. Andere veel voorkomende problemen zijn dat studies de gegevens die nodig zijn om effectgroottes te berekenen in verschillende formaten rapporteren, evenals het probleem van de analyse-eenheid, dat optreedt wanneer studies meer dan één effect size bijdragen.</p>
 </section>
-<section id="practice" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="practice"><span class="header-section-number">3.2</span> Practice</h2>
-<p>Let us look first at the bewteen-group standardized mean difference (SMD) effect size. It is used when the outcome is continuous and the predictor is categorical. It is the difference in means between two independent groups deviding by the pooled standard deviation. It is also called Cohen’s d.</p>
+<section id="praktijk" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="praktijk"><span class="header-section-number">3.2</span> Praktijk</h2>
+<p>Laten we eerst kijken naar de gestandaardiseerde size van het verschil tussen groepen (SMD). Deze wordt gebruikt als de uitkomst continu is en de voorspeller categorisch. Het is het verschil in gemiddelden tussen twee onafhankelijke groepen gedeeld door de gepoolde standaardafwijking. Het wordt ook Cohen’s <span class="math inline">\(d\)</span> genoemd.</p>
 <p><span class="math display">\[SMD_{between} = \frac{\bar{X}_1 - \bar{X}_2}{s_p}\]</span></p>
-<p>where <span class="math inline">\(\bar{X}_1\)</span> and <span class="math inline">\(\bar{X}_2\)</span> are the means of the two groups and <span class="math inline">\(s_p\)</span> is the pooled standard deviation. SMD’s are often interpreted as small (0.2), medium (0.5) and large (0.8) effects.</p>
-<p>There are several functions in R which allow us to calculate SMDbetween/Cohen’s <code>d</code> in one step. Here, we use the <code>esc_mean_sd</code> function, which is part of the <code>esc</code>-package. We have not used this package before, so it is necessary to install it first.</p>
+<p>waarbij <span class="math inline">\(\bar{X}_1\)</span> en <span class="math inline">\(\bar{X}_2\)</span> de gemiddelden van de twee groepen zijn en <span class="math inline">\(s_p\)</span> de gepoolde standaardafwijking. SMD’s worden vaak geïnterpreteerd als kleine (0,2), middelgrote (0,5) en grote (0,8) effecten. Er zijn verschillende functies in R waarmee we SMDbetween/Cohen’s <code>d</code> in één stap kunnen berekenen. Hier gebruiken we de functie <code>esc_mean_sd</code>, die deel uitmaakt van het <code>esc</code>-pakket. We hebben dit pakket nog niet eerder gebruikt, dus het is noodzakelijk om het eerst te installeren.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("esc")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(esc)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the data we need to calculate SMD/d</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># This is just some example data that we made up</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>grp1m <span class="ot">&lt;-</span> <span class="dv">50</span>   <span class="co"># mean of group 1</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>grp2m <span class="ot">&lt;-</span> <span class="dv">60</span>   <span class="co"># mean of group 2</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>grp1sd <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># sd of group 1</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>grp2sd <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># sd of group 2</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>grp1n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># n of group1</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>grp2n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># n of group2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Defineeer data die nodig zijn om SMD/d te berekenen</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Dit is een eenvoudig voorbeeld om een dataset te maken</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>grp1m <span class="ot">&lt;-</span> <span class="dv">50</span>   <span class="co"># gemiddelde van groep 1</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>grp2m <span class="ot">&lt;-</span> <span class="dv">60</span>   <span class="co"># gemiddelde van groep 2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>grp1sd <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># sd van groep 1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>grp2sd <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># sd van groep 2</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>grp1n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># n van groep 1 </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>grp2n <span class="ot">&lt;-</span> <span class="dv">100</span>  <span class="co"># n van groep 2</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate effect size</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># CalculEER effect size</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">esc_mean_sd</span>(<span class="at">grp1m =</span> grp1m, <span class="at">grp2m =</span> grp2m, </span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">grp1sd =</span> grp1sd, <span class="at">grp2sd =</span> grp2sd, </span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">grp1n =</span> grp1n, <span class="at">grp2n =</span> grp2n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -368,26 +369,31 @@ Effect Size Calculation for Meta Analysis
          Weight:  44.4444</code></pre>
 </div>
 </div>
-<p>To conduct a meta-analysis of standardized mean differences, our data set should at least contain the following columns:</p>
+<p>Om een meta-analyse van gestandaardiseerde gemiddelde verschillen uit te voeren, moet onze dataset ten minste de volgende kolommen bevatten:</p>
 <ul>
-<li><strong>n.e.</strong> The number of observations in the intervention/experimental group.</li>
-<li><strong>mean.e.</strong> The mean of the intervention/experimental group.</li>
-<li><strong>sd.e.</strong> The standard deviation in the intervention/experimental group.</li>
-<li><strong>n.c.</strong> The number of observations in the control group.</li>
-<li><strong>mean.c.</strong> The mean of the control group.</li>
-<li><strong>sd.c.</strong> The standard deviation in the control group.</li>
+<li><strong>n.e.</strong> Het aantal observaties in de interventie/experimentele groep.<br>
+</li>
+<li><strong>mean.e.</strong> Het gemiddelde van de interventie/experimentele groep.<br>
+</li>
+<li><strong>sd.e.</strong> De standaardafwijking in de interventie/experimentele groep.<br>
+</li>
+<li><strong>n.c.</strong> Het aantal observaties in de controlegroep.<br>
+</li>
+<li><strong>mean.c.</strong> Het gemiddelde van de controlegroep.<br>
+</li>
+<li><strong>sd.c.</strong> De standaardafwijking in de controlegroep.</li>
 </ul>
-<p>For binary outcomes <strong>odds ratios</strong> can be used. The <code>esc_2x2</code> function in the <code>esc</code> package provides an easy way to calculate the (log) odds ratio in R.</p>
+<p>Voor binaire uitkomsten kunnen <strong>kansverhoudingen</strong> worden gebruikt. De functie <code>esc_2x2</code> in het pakket <code>esc</code> biedt een eenvoudige manier om de (log)odds ratio in R te berekenen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(esc)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define data</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>grp1yes <span class="ot">&lt;-</span> <span class="dv">45</span>  <span class="co"># events in the treatment group</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>grp1no <span class="ot">&lt;-</span> <span class="dv">98</span>   <span class="co"># non-events in the treatment group</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>grp2yes <span class="ot">&lt;-</span> <span class="dv">67</span>  <span class="co"># events in the control group</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>grp2no <span class="ot">&lt;-</span> <span class="dv">76</span>   <span class="co"># non-events in the control group</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Defineeer data die nodig zijn om de odds ratio te berekenen</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>grp1yes <span class="ot">&lt;-</span> <span class="dv">45</span>  <span class="co"># gebeurtenissen in de behandelingsgroep</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>grp1no <span class="ot">&lt;-</span> <span class="dv">98</span>   <span class="co"># niet-gebeurtenissen in de behandelingsgroep</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>grp2yes <span class="ot">&lt;-</span> <span class="dv">67</span>  <span class="co"># gebeurtenissen in de controlegroep</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>grp2no <span class="ot">&lt;-</span> <span class="dv">76</span>   <span class="co"># niet-gebeurtenissen in de controlegroep</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate OR by setting es.type to "or"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculeer OR door es.type op "or" te zetten</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">esc_2x2</span>(<span class="at">grp1yes =</span> grp1yes, <span class="at">grp1no =</span> grp1no,</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">grp2yes =</span> grp2yes, <span class="at">grp2no =</span> grp2no,</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">es.type =</span> <span class="st">"or"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -404,26 +410,25 @@ Effect Size Calculation for Meta Analysis
          Weight:  16.5263</code></pre>
 </div>
 </div>
-<p>To conduct a meta-analysis of odds ratios in R, the following columns should be included in our data set:</p>
+<p>Om een meta-analyse van odds ratio’s uit te voeren in R, moeten de volgende kolommen worden opgenomen in onze dataset:</p>
 <ul>
-<li><strong>event.e.</strong> The number of events in the treatment or experimental group.<br>
+<li><strong>event.e.</strong> Het aantal geberutenissen in de experimentele groep.</li>
+<li><strong>n.e.</strong> De sample size van de experimentele groep.<br>
 </li>
-<li><strong>n.e.</strong> The sample size of the treatment or experimental group.<br>
+<li><strong>event.c.</strong> Het aantal gebeurtenissen in de controle groep.<br>
 </li>
-<li><strong>event.c.</strong> The number of events in the control group.<br>
-</li>
-<li><strong>n.c.</strong> The sample size of the control group.</li>
+<li><strong>n.c.</strong> De sample size van de controle groep.</li>
 </ul>
-<p>For a practice sample for correction we look at small sample correction. We can easily convert unstandardized SMDs/Cohen’s <code>d</code>to Hedges’ <code>g</code> using the <code>hedges_g</code> function in the <code>esc</code>-package.</p>
+<p>Voor een voorbeeld voor correctie kijken we naar kleine steekproefcorrectie. We kunnen niet-gestandaardiseerde SMD’s/Cohen’s <code>d</code> eenvoudig omzetten naar Hedges’ <code>g</code> met behulp van de <code>hedges_g</code> functie in het <code>esc</code> pakket.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load esc package</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Laad esc pakket</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(esc)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define uncorrected SMD and sample size n</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Defineer niet aangepast SMD en sample size n</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>SMD <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to Hedges g</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Zet om naar Hedges g</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">hedges_g</span>(SMD, n)</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -671,7 +676,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./02-discovering_R.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discovering R</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R ontdekken</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

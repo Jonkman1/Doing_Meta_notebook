@@ -1,15 +1,17 @@
-# Discovering R
-## Theory
+# R ontdekken
+## Theorie
 
-`R` has become one of the most powerful and frequently used statistical programming languages in the world. Whether you are working in academia or at a company, the things you can do in R will often seem like a superpower to others. But it is a superpower that everyone can learn, provided some time and effort. The book shows how to install `R` and `RStudio` (the last one which gives us a user interface which makes it easier to handle our data, packages and output). R is not a computer program with a graphical user interface and pre-defined functionality. It show how it works.
+`R` is uitgegroeid tot een van de krachtigste en meest gebruikte statistische programmeertalen ter wereld. Of je nu in de academische wereld werkt of in een bedrijf, de dingen die je in R kunt doen lijken vaak een superkracht voor anderen. Maar het is een superkracht die iedereen kan leren, mits je er wat tijd en moeite in stot. 
 
-`R` is a full programming language to which people all around the world can contribute freely available add-ons, so-called packages. Important packages for working with this book and to do meta-analysis are `meta`, `metafor`, `dmetar` and (for data wrangling) `tidyverse`. You have to install these on your computer. When installed you have to load them everytime you start your work.
+Het boek laat zien hoe je `R` en `RStudio` installeert (de laatste geeft ons een gebruikersinterface die het makkelijker maakt om met onze gegevens, pakketten en uitvoer om te gaan). `R` is geen computerprogramma met een grafische gebruikersinterface en voorgedefinieerde functionaliteit. `RStudio` laat jou makkelijker met `R` werken. `R` is de moter en `RStduio` is meer het dashboard. Het boek laat zien hoe het met elkaar werkt.
 
-The fundamental building blocks of R are functions. Many of these functions can be imported through packages which we can install from the internet. Functions can be used to import, manipulate, transform and save data using R. Examples important for doing meta-analysis in R are given.
+`R` is een volledige programmeertaal waaraan mensen over de hele wereld met vrij beschikbare uitbreidingen, zogenaamde specifieke pakketten, kunnen bijdragen. Belangrijke specifieke pakketten voor het werken met dit boek en het doen van meta-analyse met `R` zijn `meta` (zie bv [hier](https://www.r-bloggers.com/2021/08/meta-analysis-in-r/)), `metafor`(zie bv [hier](https://www.r-bloggers.com/2019/12/meta-analysis-2/)), `dmetar` (zie [hier](https://dmetar.protectlab.org/articles/dmetar)) en (voor data bewerking) `tidyverse` (zie [hier](https://www.tidyverse.org/learn/). 
 
-## Practice
+Nadat je `R` en `RStudio` hebt geïnstalleerd op jouw computer, moet deze pakketten installeren op je computer. De fundamentele bouwstenen van R zijn functies, waarmee in dit hoofdstuk wordt gewerkt en waarmee je een goed idee krijgt hoe een en ander voor het uitvoeren van meta-analyses werkt. Veel van de functies kunnen worden geïmporteerd en uitgevoerd via pakketten die met internet zijn te installeren. Functies kunnen worden gebruikt om gegevens te importeren, te manipuleren, te transformeren en op te slaan met behulp van `R`. Er worden voorbeelden gegeven van basisfuncties die belangrijk zijn voor het uitvoeren van meta-analyses in R en in de hoofdstukken hierna worden uitgevoerd.
 
-Install first the packages needed for this book. I had to install an other version of meta to install the package `dmetar`.
+## Praktijk
+
+Installeer eerst de pakketten die nodig zijn voor dit boek. Ik moest zelf een vorige versie van `meta` installeren om het pakket `dmetar` te installeren. Als je dit niet eerder hebt gedaan met je de hekjes (`#`) weghalen en de code uitvoeren. Dat installeren hoef je maar één keer te doen.
 
 ```{r}
 #require(remotes)
@@ -24,47 +26,47 @@ Install first the packages needed for this book. I had to install an other versi
 #devtools::install_github("MathiasHarrer/dmetar")
 ```
 
-Load the packages needed for this book.
+Laad de pakketten die nodig zijn om de voorbeelden in dit boek uit te voeren.
 
 ```{r}
 library(meta)
-library(tidyverse)
 library(metafor)
 library(dmetar)
+library(tidyverse)
 ```
 
-Download the example dataset `SuicidePrevention.xlx` from [here](https://www.protectlab.org/en/datasets/suicide-prevention/) and open it.
+Haal ook de dataset`SuicidePrevention.xlx` die je [hier](https://www.protectlab.org/en/datasets/suicide-prevention/) vandaan kunt halen en open die set.
 
 ```{r}
 library(openxlsx)
 data <-read.xlsx("SuicidePrevention.xlsx")
 ```
 
-Let us have a look at the dataset and look at the kind of variables we have.
+Laten we naar die dataset kijken en zien welke variabelen er zijn. Er zijn tien kolommen (variabelen) en negen rijgen (individuele studies)
 
 ```{r}
 glimpse(SuicidePrevention)
 ```
 
-You can check specfic columns directly
+Je kunt de inhoud van een bepaalde kolommen alleen bekijken, bv deze:
 
 ```{r}
 SuicidePrevention$n.e
 ```
 
-And look what kind of variable is this:
+En je kunt ook zien wat voor een soort variabele het is.
 
 ```{r}
 class(SuicidePrevention$n.e)
 ```
 
-Look at the mean of this variable.
+Laten we het gemiddelde van deze variabele vaststellen.
 
 ```{r}
 mean(SuicidePrevention$n.e)
 ```
 
-Be sure the variables have the good class, e.g.here numeric. Let us change this for some variables.
+Zorg ervoor dat de variabelen de goede klasse hebben, bijvoorbeeld numeriek. Laten we dit veranderen voor enkele variabelen.
 
 ```{r}
 SuicidePrevention$mean.e <- as.numeric(SuicidePrevention$mean.e)
@@ -75,87 +77,91 @@ SuicidePrevention$sd.c <- as.numeric(SuicidePrevention$sd.c)
 SuicidePrevention$n.c <- as.numeric(SuicidePrevention$n.c)
 ```
 
-Two variables we have to change to factors to analyse them correctly.
+Twee variabelen moeten we veranderen in factoren om de analyse later correct te kunnen uitvoeren.
 
 ```{r}
 SuicidePrevention$age_group <- as.factor(SuicidePrevention$age_group)
 SuicidePrevention$control <- as.factor(SuicidePrevention$control)
 ```
 
-In my case the variable `age_group` is already split in the levels `gen` and `older`, see here:
+In dit geval is de variabele `age_group` opgesplitst in de niveaus `gen` en `older`, zie hier:
 
 ```{r}
 SuicidePrevention$age_group
 ```
 
-A logical variable can also be handy, e.g. for the next one:
+Een logische variabele kan ook handig zijn, bijvoorbeeld voor de volgende variabele:
 
 ```{r}
 SuicidePrevention$pubyear
 ```
 
+Deze zetten we om in een logische variabele.
+
 ```{r}
 as.logical(SuicidePrevention$pubyear >= 2010)
 ```
 
-Sometimes it is good to look at specific data from the dataframe. Remember: `data.frame[rows, columns]`. So look at row 2 becomes
+Soms is het goed om naar specifieke gegevens uit het dataframe te kijken. Onthoud: `data.frame[rijen, kolommen]`. Dus kijken naar rij 2 wordt:
+
 
 ```{r}
 SuicidePrevention[2,]
 
 ```
 
-If you want to see information of first column and second row becomes
+Als je informatie van de eerste kolom én de tweede rij wilt zien, schrijf je:
 
 ```{r}
 SuicidePrevention[2,1]
 
 ```
 
-For selecting parts of the dataframe use `c()` function. To extract rows 2 and 3 as well as columns 4 and 6 becomes
+Gebruik de functie `c()` om delen van het dataframe te selecteren. Om rijen 2 en 3 en kolommen 4 en 6 te extraheren wordt
 
 ```{r}
 SuicidePrevention[c(2,3),c(4,6)]
 
 ```
 
-Rows you select by number, columns you also can select by name,a s in this example.
+Rijen selecteer je op nummer, kolommen kun je ook op naam selecteren, zoals in dit voorbeeld.
 
 ```{r}
 SuicidePrevention[, c("author", "control")]
 ```
 
-You can also `filter` a data set based on row values.
-
-For example (more examples as given):
+Je kunt voor een gegevensverzameling ook de functie `filter` gebruiken, die werkt op basis van rijwaarden, bijvoorbeeld de rijwaarden van `n.e.` zijn kleiner of gelijk aan 50. Dan schrijf je:
 
 ```{r}
 filter(SuicidePrevention, n.e <= 50)
 ```
 
-You can transform data easy. So, if you want to transform the study of **De Vries et al.** from 2019 to 2018 you can write it as:
+Je kunt gegevens zelf gemakkelijk transformeren. Dus als je de studie van **De Vries et al.** wilt transformeren van 2019 naar 2018, kun je het schrijven als:
 
 ```{r}
 SuicidePrevention[2, "pubyear"] <- 2018
 SuicidePrevention[2, "pubyear"]
 ```
 
-If you want to add a new column to your dataframe (e.g mean difference) you can do it as follows:
+Als je een nieuwe kolom wilt toevoegen aan je dataframe (bijvoorbeeld het gemiddelde verschil), kun je dat als volgt doen:
 
 ```{r}
 SuicidePrevention$md <- SuicidePrevention$mean.e - SuicidePrevention$mean.c
 ```
 
-Once we transformed it, we can save it. You can save it as a .rda file
+Zodra alles is getransformeerd, kunnen we het bewerkte bestand opslaan. Je kunt het opslaan als een .rda-bestand, zo dan:
 
 ```{r}
 save(SuicidePrevention, file = "SuicidePrevention.rda")
 ```
 
-or as a .csv file
+of opslaan als een .csv-bestand, zo dan:
 
 ```{r}
 write.csv(SuicidePrevention, file = "SuicidePrevention.csv")
 ```
 
-Important: Keep your transformation syntax, so you know what you did from original data to the final data.
+
+::: {.callout-important}
+Bewaar je transformatie syntax, zodat je weet wat je hebt gedaan van de originele gegevens naar de uiteindelijke gegevens.
+:::

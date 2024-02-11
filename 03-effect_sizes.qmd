@@ -1,42 +1,45 @@
 # Effect Sizes
 
-## Theory
+## Theorie
 
-Effect size is defined here as a metric quantifying the relationship between two entities. It captures the **direction** and **magnitude** of this relationship. If relationships are expressed as the same effect size, it is possible to compare them.Effect sizes are the building blocks of meta-analyses.
+Effect size wordt hier gedefinieerd als een metriek die de relatie tussen twee entiteiten kwantificeert. Het geeft de **richting** en **sterkte** van deze relatie weer. Als relaties worden uitgedrukt in een vergelijkbare effect size, is het mogelijk om ze te vergelijken. Effect sizes zijn de bouwstenen van meta-analyses.Om een meta-analyse uit te voeren, is op zijn minst een schatting nodig van de effect size en de standaard-fout ervan. Deze moeten *vergelijkbaar*, *berekenbaar*, *betrouwbaar* en *interpreteerbaar* zijn. De standaard-fout van een effect size geeft aan hoe nauwkeurig de schatting van het effect van de studie is. Meta-analyse geeft effect-sizes met een grotere precisie een hoger gewicht omdat ze betere schatters zijn van het ware effect.
 
-To perform a meta-analysis, we need at least an estimate of the effect size and its standard error. They should be comparable, computable, reliable and interpretable. The standard error of an effect size represents how precise the study’s estimate of the effect is. Meta-analysis gives effect sizes with a greater precision a higher weight because they are better estimators of the true effect.
+Er zijn verschillende effectmaten die we kunnen gebruiken in meta-analyses. Gebruikelijke zijn "één-variabele" relatiematen, zoals:    
+- gemiddelden (som van alle individuele waarden, gedeeld door de som van de steekproefgrootte);    
+- proporties (aantal individuen dat in een specifieke subgroep valt, gedeeld door het totale aantal individuen);     
+- correlaties (drukt de mate van co-variatie tussen twee variabelen uit, bijvoorbeeld de Pearson Product-Moment Correlatie en Point-Biserial Correlatie);     
+- risicoverhouding (relatief risico) als de verhouding tussen twee risico's;     
+- odds ratio, als het aantal gevallen dat in een bepaalde subgroep valt, gedeeld door het aantal gevallen dat niet in die subgroep valt;     
+- incidentieratio's (ook wel rate ratio genoemd), houdt rekening met de persoon/tijd-aspecten van twee groepen.
 
-There are various effect sizes we can use in meta-analyses. Common ones are “one-variable” relationship measures, such as: - means (summing all individual values deviding by sum of sample size);\
-- proportions (number of individuals falling into a specific subgroup deviding by total number of individuals);\
-- correlations (expresses teh amount of co-variation between two variables, for example the Pearson Product-Moment Correlation and Point-Biserial Correlation);\
-- (standardized) mean differences (difference in means between two independent groups deviding by the pooled standard deviation); - risk ratio (relative risk) as the ratio of two risks; - odds ratio, as the number of cases which fall into a specific subgroup deviding by the number of cases which do not fall into that subgroup. - incidence rate ratios (also called rate ratio), takes into account the person/time-aspects of two groups.
 
-Effect sizes can also be biased, for example by measurement error and range restriction. There are formulas to correct for some biases, including the small sample bias of standardized mean differences, attenuation due to unreliability, as well as range restriction problems. Other common problems are that studies report the data needed to calculate effect sizes in different formats, as well as the unit-of-analysis problem, which arises when studies contribute more than one effect size.
+Effectgroottes kunnen ook vertekend zijn, bijvoorbeeld door meetfouten en bereikbeperking. Er bestaan formules om te corrigeren voor sommige vertekeningen, waaronder de kleine steekproefvertekening van gestandaardiseerde gemiddelde verschillen, verzwakking door onbetrouwbaarheid en problemen met bereikbeperking. Andere veel voorkomende problemen zijn dat studies de gegevens die nodig zijn om effectgroottes te berekenen in verschillende formaten rapporteren, evenals het probleem van de analyse-eenheid, dat optreedt wanneer studies meer dan één effect size bijdragen.
 
-## Practice
 
-Let us look first at the bewteen-group standardized mean difference (SMD) effect size. It is used when the outcome is continuous and the predictor is categorical. It is the difference in means between two independent groups deviding by the pooled standard deviation. It is also called Cohen’s d.
+## Praktijk
+
+
+Laten we eerst kijken naar de gestandaardiseerde size van het verschil tussen groepen (SMD). Deze wordt gebruikt als de uitkomst continu is en de voorspeller categorisch. Het is het verschil in gemiddelden tussen twee onafhankelijke groepen gedeeld door de gepoolde standaardafwijking. Het wordt ook Cohen's $d$ genoemd.
 
 $$SMD_{between} = \frac{\bar{X}_1 - \bar{X}_2}{s_p}$$
 
-where $\bar{X}_1$ and $\bar{X}_2$ are the means of the two groups and $s_p$ is the pooled standard deviation. SMD's are often interpreted as small (0.2), medium (0.5) and large (0.8) effects.
 
-There are several functions in R which allow us to calculate SMDbetween/Cohen’s `d` in one step. Here, we use the `esc_mean_sd` function, which is part of the `esc`-package. We have not used this package before, so it is necessary to install it first.
+waarbij $\bar{X}_1$ en $\bar{X}_2$ de gemiddelden van de twee groepen zijn en $s_p$ de gepoolde standaardafwijking. SMD's worden vaak geïnterpreteerd als kleine (0,2), middelgrote (0,5) en grote (0,8) effecten. Er zijn verschillende functies in R waarmee we SMDbetween/Cohen's `d` in één stap kunnen berekenen. Hier gebruiken we de functie `esc_mean_sd`, die deel uitmaakt van het `esc`-pakket. We hebben dit pakket nog niet eerder gebruikt, dus het is noodzakelijk om het eerst te installeren.
 
 ```{r}
 # install.packages("esc")
 library(esc)
 
-# Define the data we need to calculate SMD/d
-# This is just some example data that we made up
-grp1m <- 50   # mean of group 1
-grp2m <- 60   # mean of group 2
-grp1sd <- 10  # sd of group 1
-grp2sd <- 10  # sd of group 2
-grp1n <- 100  # n of group1
-grp2n <- 100  # n of group2
+# Defineeer data die nodig zijn om SMD/d te berekenen
+# Dit is een eenvoudig voorbeeld om een dataset te maken
+grp1m <- 50   # gemiddelde van groep 1
+grp2m <- 60   # gemiddelde van groep 2
+grp1sd <- 10  # sd van groep 1
+grp2sd <- 10  # sd van groep 2
+grp1n <- 100  # n van groep 1 
+grp2n <- 100  # n van groep 2
 
-# Calculate effect size
+# CalculEER effect size
 esc_mean_sd(grp1m = grp1m, grp2m = grp2m, 
             grp1sd = grp1sd, grp2sd = grp2sd, 
             grp1n = grp1n, grp2n = grp2n)
@@ -44,50 +47,51 @@ esc_mean_sd(grp1m = grp1m, grp2m = grp2m,
 
 ```
 
-To conduct a meta-analysis of standardized mean differences, our data set should at least contain the following columns:
+Om een meta-analyse van gestandaardiseerde gemiddelde verschillen uit te voeren, moet onze dataset ten minste de volgende kolommen bevatten:
 
--   **n.e.** The number of observations in the intervention/experimental group.
--   **mean.e.** The mean of the intervention/experimental group.
--   **sd.e.** The standard deviation in the intervention/experimental group.
--   **n.c.** The number of observations in the control group.
--   **mean.c.** The mean of the control group.
--   **sd.c.** The standard deviation in the control group.
+- **n.e.** Het aantal observaties in de interventie/experimentele groep.   
+- **mean.e.** Het gemiddelde van de interventie/experimentele groep.   
+- **sd.e.** De standaardafwijking in de interventie/experimentele groep.   
+- **n.c.** Het aantal observaties in de controlegroep.   
+- **mean.c.** Het gemiddelde van de controlegroep.   
+- **sd.c.** De standaardafwijking in de controlegroep.
 
-For binary outcomes **odds ratios** can be used. The `esc_2x2` function in the `esc` package provides an easy way to calculate the (log) odds ratio in R.
+Voor binaire uitkomsten kunnen **kansverhoudingen** worden gebruikt. De functie `esc_2x2` in het pakket `esc` biedt een eenvoudige manier om de (log)odds ratio in R te berekenen.
+
 
 ```{r}
 library(esc)
 
-# Define data
-grp1yes <- 45  # events in the treatment group
-grp1no <- 98   # non-events in the treatment group
-grp2yes <- 67  # events in the control group
-grp2no <- 76   # non-events in the control group
+# Defineeer data die nodig zijn om de odds ratio te berekenen
+grp1yes <- 45  # gebeurtenissen in de behandelingsgroep
+grp1no <- 98   # niet-gebeurtenissen in de behandelingsgroep
+grp2yes <- 67  # gebeurtenissen in de controlegroep
+grp2no <- 76   # niet-gebeurtenissen in de controlegroep
 
-# Calculate OR by setting es.type to "or"
+# Calculeer OR door es.type op "or" te zetten
 esc_2x2(grp1yes = grp1yes, grp1no = grp1no,
         grp2yes = grp2yes, grp2no = grp2no,
         es.type = "or")
 ```
 
-To conduct a meta-analysis of odds ratios in R, the following columns should be included in our data set:
+Om een meta-analyse van odds ratio's uit te voeren in R, moeten de volgende kolommen worden opgenomen in onze dataset:
 
--   **event.e.** The number of events in the treatment or experimental group.\
--   **n.e.** The sample size of the treatment or experimental group.\
--   **event.c.** The number of events in the control group.\
--   **n.c.** The sample size of the control group.
+-   **event.e.** Het aantal geberutenissen in de experimentele groep.
+-   **n.e.** De sample size van de experimentele groep.\
+-   **event.c.** Het aantal gebeurtenissen in de controle groep.\
+-   **n.c.** De sample size van de controle groep.
 
-For a practice sample for correction we look at small sample correction. We can easily convert unstandardized SMDs/Cohen’s `d`to Hedges’ `g` using the `hedges_g` function in the `esc`-package.
+Voor een voorbeeld voor correctie kijken we naar kleine steekproefcorrectie. We kunnen niet-gestandaardiseerde SMD's/Cohen's `d` eenvoudig omzetten naar Hedges' `g` met behulp van de `hedges_g` functie in het `esc` pakket.
 
 ```{r}
-# Load esc package
+# Laad esc pakket
 library(esc)
 
-# Define uncorrected SMD and sample size n
+# Defineer niet aangepast SMD en sample size n
 SMD <- 0.5
 n <- 30
 
-# Convert to Hedges g
+# Zet om naar Hedges g
 g <- hedges_g(SMD, n)
 g
 ```
