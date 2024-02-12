@@ -1,1 +1,209 @@
 # "Multilevel" Meta-Analysis
+
+## Theorie
+
+Als mensen het over multilevel meta-analyse hebben, denken ze aan **meta-analyse modellen op drie niveaus**. In *Doing meta-analysis with R* beschrijven Harrer et al. waarom meta-analyse van nature al een multilevel structuur van de data heeft en laten ze zien hoe zo'n conventionele meta-analyse kan worden uitbreid naar een model op drie niveaus. Aan de hand van een praktijkvoorbeeld laten ze het zien hoe het werkt in `R`.
+
+Ze gaan eerst terug naar de random-effects model formule die ons bekend is: Deze formule beschrijft dus eigenlijk al een multilevelstructuur van meta-analysegegevens. Om dit duidelijker te maken, wordt de vergelijking opgesplitst in twee formules, waarbij elke formule correspondeert met een van de twee niveaus. Als we dit doen, krijgen we het volgende resultaat:
+
+\vspace{4mm}
+
+**Niveau 1 (participanten) model:**
+
+$$\hat\theta_k = \theta_k + \epsilon_k$$ 
+
+\vspace{2mm}
+
+**Niveau 2 (studies) model:**
+
+$$\theta_k = \mu + \zeta_k$$
+
+\vspace{2mm}
+
+Dit oude-vertrouwde meta-analysemodel heeft de multilevel-eigenschap "ingebouwd". Het heeft namelijk deze eigenschap omdat we aannemen dat deelnemers geclusterd zijn binnen studies in onze data. Het is nu mogelijk om deze twee-niveausstructuur verder uit te breiden om bepaalde mechanismen, die onze data hebben gegenereerd, beter vast te leggen. Dit is waar drie-niveaumodellen om de hoek komen kijken (Cheung 2014; Assink, Wibbelink, et al. 2016).
+
+Modellen met drie niveaus kunnen worden gebruikt voor afhankelijke effectgroottes. Wanneer een bepaalde studie bijvoorbeeld meer dan één effect sizes omvat, kunnen we er meestal niet vanuit gaan dat deze verschillende resultaten onafhankelijk zijn. Een drie niveaumodel ondervangt dit probleem door aan te nemen dat effect sizes geclusterd zijn binnen grotere clusters (in dit geval bijvoorbeeld studies).
+
+Die model met drie niveau's ziet er als volgt uit:
+
+![Drie niveaustructuur](img/Screenshot2.png)
+
+Het is mogelijk om de formule van dit model met drie lagen op te schrijven met dezelfde formules die we hierboven gebruikten. Het grootste verschil is dat we nu drie formules moeten definiëren in plaats van twee:
+
+\vspace{4mm}
+
+**Level 1 model:(participanten)**
+
+$$\hat\theta_{ij} = \theta_{ij} + \epsilon_{ij}$$
+
+\vspace{2mm}
+
+**Level 2 model:(binnen studies)**
+
+$$\theta_{ij} = \kappa_{j} + \zeta_{(2)ij}$$
+
+\vspace{2mm}
+
+**Level 3 model:(tussen studies)**
+
+$$\kappa_{j} = \mu + \zeta_{(3)j}$$
+
+\vspace{2mm}
+
+Waarbij $\hat\theta_{ij}$ een schatting is van de ware effectgrootte $\theta_{ij}$. De term $ij$ kan worden gelezen als "een effect size" $i$ geclusterd in cluster $j$". De parameter $\kappa_{j}$ is de gemiddelde effect size in cluster $j$, en $\mu$ het totale gemiddelde populatie-effect. Net als voorheen kunnen we deze formules samenvoegen en zo de formule reduceren tot één regel:
+
+$$\hat\theta_{ij} = \mu + \zeta_{(2)ij} + \zeta_{(3)j} + \epsilon_{ij}$$
+
+In tegenstelling tot de conventionele meta-analyse (random-effects models) schatten modellen met drie niveau's twee heterogeniteitsvarianties: de random-effectvariantie *binnen* clusters en de heterogeniteitsvariantie *tussen* clusters (de clusters zijn in dit geval studies). Het is ook mogelijk om categorische of continue voorspellers te testen met een model met drie niveaus. Dit resulteert in een mixed-effects model met drie niveaus.
+
+## Praktijk
+
+### Voorbereiding
+
+Het **{metafor}** pakket is heel geschikt om meta-analyse op drie niveau's uit te voeren. Het gebruikt '(restricted) maximum likelihood' (REML-) procedures om dat te doen.
+
+We moeten eerst de biblitheek hiervan openen.
+
+```{r, message=F, warning=F}
+# Wees er zeker van dat het pakket is geïnstalleerd
+library(metafor)
+```
+
+Voor hier gebruiken we de `Chernobyl` data set. xxx Die dataset is deel van het `dmetar` pakket waar meer datasets voor meta-analyse in zitten. Laten we ook dat pakket, het pakket en de data set laden. Laten we meteen ook `tidyverse` laden, omdat we dat later nodig hebben.
+
+```{r, message=F, warning=F}
+# Wees er zeker van dat het pakket is geïnstalleerd
+library(dmetar)
+library(tidyverse)
+data(Chernobyl)
+```
+
+Laten we eens zien hoe die dataset eruit ziet.
+
+```{r, message=F, warning=F}
+head(Chernobyl)
+glimpse(Chernobyl)
+```
+
+De data set omvat acht kolommen (variabelen) en 33 rijen (studies). De eerste, `author`, geeft de naam van het onderzoek weer. De kolom `cor` toont de (niet-getransformeerde) correlatie tussen stralingsblootstelling en mutatiepercentages, terwijl `n` staat voor de steekproefgrootte. De kolommen `z`, `se.z`, en `var.z` zijn de Fisher-$z$ getransformeerde correlaties, evenals hun standaardfout en variantie. De kolom `radiation` dient als moderator, die effectgroottes verdeelt in twee subgroepen, één met een lage en één met hoge totale stralingsblootstelling. De kolom `es.id` bevat eenvoudigweg een unieke ID voor elke effectgrootte (d.w.z. elke rij in ons dataframe).
+
+Een eigenaardigheid aan deze dataset is dat er herhaalde (geclusterde) vermeldingen in de kolom `author` staan. Dit komt doordat de meeste studies in deze meta-analyse meer dan één waargenomen effectgrootte hebben bijgedragen. Als we naar deze structuur kijken, is het duidelijk dat effectgroottes in onze dataset niet onafhankelijk zijn. Ze volgen een geclusterde structuur, waarbij verschillende effectgroottes geclusterd zijn in één studie. Het zou dus een goed idee kunnen zijn om een meta-analyse op drie niveaus uit te voeren om deze afhankelijkheden in onze gegevens adequaat te modelleren.
+
+### Het fitten van een drie niveau ma-model
+
+Een meta-analysemodel met drie niveaus kan worden uitgevoerd met de functie `rma.mv` in **{metafor}**. Hier is een lijst van de belangrijkste argumenten voor deze functie en hoe ze gespecificeerd moeten worden:\
+
+-   `yi`. De naam van de kolom in onze dataset die de berekende effectgroottes bevat. In ons voorbeeld is dit `z`, omdat Fisher-$z$ getransformeerde correlaties betere wiskundige eigenschappen hebben dan "niet-getransformeerde" correlaties.\
+
+-   `V`. De naam van de kolom in onze gegevensverzameling is die de **variantie** van de berekende effectgroottes bevat. In ons geval is dit `var.z`. Het is ook mogelijk om de gekwadrateerde standaardfout van de effectgrootte te gebruiken, aangezien $SE^2_k=vk$\
+
+-   `s.lab`. De naam van de kolom in onze dataset die de studielabels bevat.\
+
+-   `data`. De naam van de data set.\
+
+-   `test`. De test die we willen toepassen op onze regressiecoëfficiënten. We kunnen kiezen uit `"z"` (standaard) en `"t"` (aanbevolen; gebruikt een test vergelijkbaar met de Knapp-Hartung methode).\
+
+-   `methode`. De methode die wordt gebruikt om de modelparameters te schatten. Zowel `"REML"` (aanbevolen; restricted maximum-likelihood) als `"ML"` (maximum likelihood) zijn mogelijk. Hou er rekening mee dat andere soorten heterogeniteitsschattingen tussen studies (bijv. Paule-Mandel) hier niet van toepassing zijn.
+
+-   `random`. De naam van de kolom die hier het belangrijkst is. de algemene structuur van de formule ziet er als volgt uit: `~ 1 | cluster/effecten_binnen_cluster`. Hier gaan we uit van een structuur met drie niveaus: individuen (niveau 1), individuele effectgroottes (niveau 2) en studies (niveau 3), dus krijgen we de formule `~ 1 | author/es.id`.
+
+```{r}
+full.model <- rma.mv(yi = z, 
+                     V = var.z, 
+                     slab = author,
+                     data = Chernobyl,
+                     random = ~ 1 | author/es.id, 
+                     test = "t", 
+                     method = "REML")
+```
+
+De resultaten van dit multilevel model kun je vervolgens krijgen door `summary` functie in te tikken:
+
+```{r}
+summary(full.model)
+```
+
+Kijk naar de`Variance Components`:\
+- `sigma^2.1` toont de variantie op niveau 3 (variantie tussen clusters). Dit komt overeen met de heterogeniteitsvariantie tussen studies $tau^2$ van een conventionele meta-analyse (aangezien de clusters `author` (14 stuks in totaal) in ons model studies vertegenwoordigen). Dit is gelijk aan 33 effectgroottes (`author/es.id`) en de heterogeniteitsvariantie binnen studies.\
+- Onder `Modelresultaten` zien we de schatting van ons gepoolde effect ($z=$ 0.52 (95%CI: 0.25-0.80)). Om de interpretatie te vergemakkelijken, is het raadzaam om het effect terug te transformeren naar een normale correlatie. Dit kan worden gedaan met de functie `convert_z2r` in het pakket **{esc}**:
+
+```{r}
+library(esc)
+convert_z2r(0.52)
+```
+
+We zien dat dit leidt tot een correlatie van ongeveer $\tau\approx$0,48. Dit kan als groot worden beschouwd. Er lijkt een substantieel verband te zijn tussen mutatiepercentages en blootstelling aan straling van Tsjernobyl. De `Test voor Heterogeniteit` in de uitvoer wijst op echte effectgrootteverschillen in onze gegevens ($p\$\<0,001). Dit resultaat is echter niet erg informatief. We zijn meer geïnteresseerd in de precieze hoeveelheid heterogeniteitsvariantie die door elk niveau in ons model wordt gevangen. Het zou goed zijn om te weten hoeveel van de heterogeniteit wordt veroorzaakt door verschillen tussen participanten (niveau 1), binnen studies (niveau 2) en hoeveel door verschillen tussen studies (niveau 3).
+
+### Variantie die aan elk niveau is toe te schrijven.
+
+In modellen met drie niveaus wordt deze heterogeniteitsvariantie in drie delen gesplitst: individuele verschillen, een deel dat kan worden toegeschreven aan echte effectgrootteverschillen binnen clusters en een deel dat kan worden toegeschreven aan variatie tussen clusters. Er zijn dus drie $I^2$ waarden, die het percentage van de totale variatie kwantificeren dat is geassocieerd met niveau 1, niveau 2 of niveau 3. De `var.comp` functie heeft alleen een passend `rma.mv` model als invoer nodig. We slaan de uitvoer op in `i2` en gebruiken dan de functie `summary` om de resultaten af te drukken.
+
+```{r}
+i2 <- var.comp(full.model)
+summary(i2)
+
+```
+
+No variance(niveau 1), binnen-variantie (niveau 2) is bijna $40\%$ en de tussen-variantie (level 3) is bijna $60\%$.
+
+We kunnen dit visualiseren door het `i2` object in de `plot` functie te zetten.
+
+```{r}
+plot(i2)
+
+```
+
+Is een model met drie niveaus eigenlijk wel nodig? Hiervoor moeten we het drie-niveau model vergelijken met een twee-niveau model. Die vergelijking kunnen we doen met behulp van de functie `anova`. Laten we eerst een tweeniveaumodel maken. Dat doen we door onder `method = "REML"` de optie `sigma2 = c(0, NA)` toe te voegen. Dit betekent dat we de variantie op niveau 3 op 0 zetten.
+
+```{r}
+l3.removed <- rma.mv(yi = z, 
+                     V = var.z, 
+                     slab = author,
+                     data = Chernobyl,
+                     random = ~ 1 | author/es.id, 
+                     test = "t", 
+                     method = "REML",
+                     sigma2 =  c(0, NA))
+
+summary(l3.removed)
+```
+
+Nu is de functie `anova` te gebruiken door twee modellen te vergelijken. Dit geeft een $p$-waarde terug. Als nu de $p$-waarde significant is, heeft het complexere model (drie niveaus) de voorkeur. Als de $p$-waarde niet significant is, heeft het eenvoudigere model (twee niveaus) de voorkeur.
+
+```{r}
+anova(l3.removed, full.model)
+```
+
+We zien dat het `Full` (drie-niveaus) model inderdaad beter past dan het `Reduced` model met twee niveaus. De Akaike (AIC) en Bayesiaanse Informatie Criterium (BIC) zijn lager voor dit model, wat duidt op gunstige prestaties. De likelihood ratio test (`LRT`) die beide modellen vergelijkt is significant ($\chi^2_1=$ 16,1, $p<$ 0,001), en wijst dus in dezelfde richting.
+
+We kunnen zeggen dat, hoewel het model met drie niveaus één extra parameter introduceert (d.w.z. het heeft 3 vrijheidsgraden in plaats van 2), deze extra complexiteit gerechtvaardigd lijkt. Het modelleren van de geclusterde datastructuur was waarschijnlijk een goed idee en heeft onze schatting van het gepoolde effect verbeterd.
+
+Houd er echter rekening mee dat er vaak goede redenen zijn om vast te houden aan een structuur met drie niveaus, zelfs als dit **geen** significant betere fit oplevert. Het is met name zinvol om vast te houden aan een model met drie niveaus als we denken dat het gebaseerd is op een solide theoretische onderbouwing.
+
+### Subgroup analyse (moderatoren analyse) in dit drie niveau's model
+
+Zodra ons model op drie niveaus is ingesteld, is het ook mogelijk om de invloed van mogelijke moderatoren op het totale effect te beoordelen. Eerder in deze gids hebben we ontdekt dat subgroepanalyses kunnen worden uitgedrukt als een meta-regressiemodel met een dummycode voorspeller. Op vergelijkbare wijze kunnen we regressietermen toevoegen aan een "multilevel" model, wat leidt tot een \*\* mixed-effects model met drie niveaus\*\*:
+
+$$\hat\theta_{ij} = \theta + \beta x_i + \zeta_{(2)ij} + \zeta_{(3)j} + \epsilon_{ij}$$
+
+Waarbij $\theta$ het intercept is en $\beta$ het regressiegewicht van een voorspellende variabele $x$. Als we $x_i$ vervangen door een dummy, krijgen we een model dat kan worden gebruikt voor subgroepanalyses. Als $x$ continu is, stelt de bovenstaande formule een meta-regressiemodel met drie niveaus voor.
+
+Categorische of continue voorspellers kunnen gespecificeerd worden in `rma.mv` met het `mods` argument. Het argument vereist een formule, beginnend met een tilde (`~`), en dan de naam van de voorspeller. Meervoudige meta-regressie is ook mogelijk door meer dan één voorspeller op te geven (bijvoorbeeld `~ var1 + var2`).
+
+In ons `Chernobyl` voorbeeld willen we controleren of correlaties verschillen afhankelijk van de totale hoeveelheid straling in het onderzochte monster (laag, gemiddeld of hoog). Deze informatie staat in de kolom \`radiation\`\` in onze dataset. Met onderstaande code kunnen we een moderatorenmodel met drie niveaus fitten:
+
+\vspace{2mm}
+
+```{r, message=F, warning=F, eval=F}
+mod.model <- rma.mv(yi = z, V = var.z, 
+                    slab = author, data = Chernobyl,
+                    random = ~ 1 | author/es.id, 
+                    test = "t", method = "REML",
+                    mods = ~ radiation)
+
+summary(mod.model)
+```
+
+De eerste belangrijke uitkomst is de `Test van moderatoren`. We zien dat $F_{2,28}$= 0,45, met $p$= 0,64. Dit betekent dat er geen significant verschil is tussen de subgroepen. Dit is hoe we de resultaten zouden beschrijven
+
+> "De gepoolde correlatie op basis van het meta-analytische model met drie niveaus was $r=$ 0,48 (95%CI: 0,25-0,66; $p$ \< 0,001). De geschatte variantiecomponenten waren $0,179$ en $0,119$. Dit betekent dat $I^2_{Level 3}=$ 0,179 en $I^2_{Level 2}=$ 0,119. Dit betekent dat $I^2_{{Level 3}}=$ 58,22% van de totale variatie kan worden toegeschreven aan tussen-cluster heterogeniteit en $I^2_{{Level 2}}=$ 31,86% aan binnen-cluster heterogeniteit. We vonden dat het model met drie niveaus een significant betere fit gaf vergeleken met een model met twee niveaus waarbij heterogeniteit op niveau 3 tot nul werd beperkt ($I^2_1=$ 16,10; $p$\< 0,001)."

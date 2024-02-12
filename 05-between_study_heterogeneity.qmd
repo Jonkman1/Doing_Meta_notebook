@@ -1,1 +1,96 @@
 # Between-Study-Herterogeneity
+
+
+## Theorie
+
+
+In meta-analyses moeten we niet alleen letten op de gepoolde (samen gebrachte) effectgrootte, maar ook op de heterogeniteit van de gegevens waarop dit gemiddelde effect is gebaseerd. Het totale effect legt niet vast dat de werkelijke effecten in sommige onderzoeken aanzienlijk kunnen verschillen van de puntschatting (bijv. subgroepen kunnen hele verschillende uitkomsten laten zien). Elke goede meta-analyse moet niet alleen een globaal overall-effect rapporteren, maar ook aangeven hoe betrouwbaar deze schatting is. Een essentieel onderdeel hiervan is het kwantificeren en analyseren van de heterogeniteit tussen studies $\zeta_k$ (anders dan de steekproeffout $\epsilon_k$).
+
+
+Cochran's $Q$ wordt vaak gebruikt om de variabiliteit in de meta-analyse gegevens te kwantificeren. Omdat we weten dat $Q$ een verdeling van $\chi^2$ volgt, stelt deze maat ons in staat om te detecteren of er meer variatie aanwezig is dan verwacht kan worden op basis van alleen steekproeffouten. Deze **overmatige variabiliteit** bovenop de steekproeffout vertegenwoordigt echte verschillen in de effectgroottes van studies.
+
+
+Een statistische test van $Q$ hangt echter sterk af van het type gegevens dat we hebben. We moeten niet alleen op $Q$ vertrouwen om de mate van heterogeniteit te beoordelen. Er zijn andere maten, zoals $I^2$, $H^2$, $tau$ of voorspellingsintervallen, die aanvullend gebruikt kunnen worden om iets over de tussen-studie-heterogeniteit te zeggen.
+
+
+Het gemiddelde effect in een meta-analyse kan vertekend zijn als er uitschieters in onze gegevens zitten. Uitschieters hebben niet altijd een grote invloed op de resultaten van een meta-analyse. Maar als ze dat wel doen, spreken we van invloedrijke gevallen. Er zijn verschillende methoden om uitschieters en invloedrijke gevallen te identificeren. Als dergelijke studies die eruit schieten worden ontdekt, is het raadzaam om de resultaten van de meta-analyse opnieuw te berekenen zonder deze studies om te zien of dit de interpretatie van onze resultaten verandert.
+
+
+## Practice
+
+
+Ook hier de onderstaande pakketten laden, het databestand `ThirdWave` openen en dit databestand goed bekijken.
+
+```{r}
+library(tidyverse) # needed for 'glimpse'
+library(dmetar)
+library(meta)
+
+data(ThirdWave)
+glimpse(ThirdWave)
+```
+Er zitten acht variabelen (kolommen) in (`Author`, `Year`, `TE`, `seTE`, `RiskOfBias`, `TypeControlGroup`, `InterventionDuration`, `InterventionType`, and `ModeOfDelivery`) en achttien studies (rijen) in. De uitkomstmaat is `TE` (Treatment Effect) en de standaardfout van de uitkomstmaat is `seTE` (Standard Error of the Treatment Effect). De variabele `Author` bevat de namen van de auteurs van de studies. De uitkomstmaat is een Standardized Mean Difference (SMD), er wordt een random-effects model gebruikt met de methode `REML`. 
+
+```{r}
+m.gen <- metagen(TE = TE,
+                 seTE = seTE,
+                 studlab = Author,
+                 data = ThirdWave,
+                 sm = "SMD",
+                 fixed = FALSE,
+                 random = TRUE,
+                 method.tau = "REML",
+                 hakn = TRUE,
+                 title = "Third Wave Psychotherapies")
+```
+
+We gaan het voorspellen.
+
+```{r}
+m.gen <- update.meta(m.gen, prediction = TRUE)
+```
+
+We kunnen de resultaten van de meta-analyse bekijken met de `summary` functie.
+
+```{r}
+summary(m.gen)
+```
+
+Dit is wat er gerapporteerd kan worden: 
+> "De heterogeniteitsvariantie tussen studies werd geschat op $\tau^2$ = 0,08 (95%CI: 0,03-0,35), met een $I^2$-waarde van 63% (95%CI: 38-78%). Het voorspellingsinterval varieerde van $g$ = -0,06 tot 1,21, wat aangeeft dat negatieve interventie-effecten niet kunnen worden uitgesloten voor toekomstige studies."
+
+Om uitschieters te vinden hebben we de functie `find.outliers` gebruikt, die een object nodig heeft dat is gemaakt door de functie `metagen`.
+
+```{r}
+find.outliers(m.gen)
+
+```
+
+We zien dat de `find.outliers` functie twee uitschieters detecteerde, “DanitzOrsillo” en “Shapiro et al.”. Het {dmetar} pakket bevat ook een functie genaamd `InfluenceAnalysis`, waarmee we deze verschillende invloedsdiagnoses kunnen berekenen met behulp van één functie. De functie kan worden gebruikt voor elk type meta-analyseobject dat is gemaakt door {meta} functies. We slaan de resultaten van de functie op in een object genaamd `m.gen.inf`.
+
+
+```{r}
+m.gen.inf <- InfluenceAnalysis(m.gen, random = TRUE)
+```
+
+Dit creëert een `baujat` plot, die een grafische weergave geeft van de invloed van elke studie op de heterogeniteit van de meta-analyse.
+
+```{r}
+plot(m.gen.inf, "baujat")
+
+```
+
+De volgende plot bevat verschillende invloedsdiagnoses voor elk van onze onderzoeken. Deze kunnen worden uitgezet met deze code:
+
+
+```{r}
+plot(m.gen.inf, "influence")
+
+```
+
+Het {dmetar} pakket bevat, tenslotte, ook een functie genaamd `InfluenceAnalysis`, waarmee we deze resultaten kunnen berekenen met behulp van de 'leave-one-out'-methode. De eerste is gesorteerd op effectgrootte, de tweede op heterogeniteit. 
+
+```{r}
+plot(m.gen.inf, "es")
+plot(m.gen.inf, "i2")
+```

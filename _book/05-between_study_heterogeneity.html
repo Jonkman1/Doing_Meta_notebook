@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Doing Meta-Analysis with R. A Hands-On Guide - 5&nbsp; Between-Study-Herterogeneity</title>
+<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 5&nbsp; Between-Study-Herterogeneity</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -62,6 +96,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -89,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Doing Meta-Analysis with R. A Hands-On Guide</a> 
+      <a href="./">Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -123,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-discovering_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discovering R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R ontdekken</span></span></a>
   </div>
 </li>
       </ul>
@@ -146,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pooling_effect_sizes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pooling Effect Sizes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Effect Sizes samenbrengen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -257,7 +293,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#theorie" id="toc-theorie" class="nav-link active" data-scroll-target="#theorie"><span class="header-section-number">5.1</span> Theorie</a></li>
+  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">5.2</span> Practice</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -279,8 +322,196 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="theorie" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="theorie"><span class="header-section-number">5.1</span> Theorie</h2>
+<p>In meta-analyses moeten we niet alleen letten op de gepoolde (samen gebrachte) effectgrootte, maar ook op de heterogeniteit van de gegevens waarop dit gemiddelde effect is gebaseerd. Het totale effect legt niet vast dat de werkelijke effecten in sommige onderzoeken aanzienlijk kunnen verschillen van de puntschatting (bijv. subgroepen kunnen hele verschillende uitkomsten laten zien). Elke goede meta-analyse moet niet alleen een globaal overall-effect rapporteren, maar ook aangeven hoe betrouwbaar deze schatting is. Een essentieel onderdeel hiervan is het kwantificeren en analyseren van de heterogeniteit tussen studies <span class="math inline">\(\zeta_k\)</span> (anders dan de steekproeffout <span class="math inline">\(\epsilon_k\)</span>).</p>
+<p>Cochran’s <span class="math inline">\(Q\)</span> wordt vaak gebruikt om de variabiliteit in de meta-analyse gegevens te kwantificeren. Omdat we weten dat <span class="math inline">\(Q\)</span> een verdeling van <span class="math inline">\(\chi^2\)</span> volgt, stelt deze maat ons in staat om te detecteren of er meer variatie aanwezig is dan verwacht kan worden op basis van alleen steekproeffouten. Deze <strong>overmatige variabiliteit</strong> bovenop de steekproeffout vertegenwoordigt echte verschillen in de effectgroottes van studies.</p>
+<p>Een statistische test van <span class="math inline">\(Q\)</span> hangt echter sterk af van het type gegevens dat we hebben. We moeten niet alleen op <span class="math inline">\(Q\)</span> vertrouwen om de mate van heterogeniteit te beoordelen. Er zijn andere maten, zoals <span class="math inline">\(I^2\)</span>, <span class="math inline">\(H^2\)</span>, <span class="math inline">\(tau\)</span> of voorspellingsintervallen, die aanvullend gebruikt kunnen worden om iets over de tussen-studie-heterogeniteit te zeggen.</p>
+<p>Het gemiddelde effect in een meta-analyse kan vertekend zijn als er uitschieters in onze gegevens zitten. Uitschieters hebben niet altijd een grote invloed op de resultaten van een meta-analyse. Maar als ze dat wel doen, spreken we van invloedrijke gevallen. Er zijn verschillende methoden om uitschieters en invloedrijke gevallen te identificeren. Als dergelijke studies die eruit schieten worden ontdekt, is het raadzaam om de resultaten van de meta-analyse opnieuw te berekenen zonder deze studies om te zien of dit de interpretatie van onze resultaten verandert.</p>
+</section>
+<section id="practice" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="practice"><span class="header-section-number">5.2</span> Practice</h2>
+<p>Ook hier de onderstaande pakketten laden, het databestand <code>ThirdWave</code> openen en dit databestand goed bekijken.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># needed for 'glimpse'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Extensive documentation for the dmetar package can be found at: 
+ www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading 'meta' package (version 6.5-0).
+Type 'help(meta)' for a brief overview.
+Readers of 'Meta-Analysis with R (Use R!)' should install
+older version of 'meta' package: https://tinyurl.com/dt4y5drs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ThirdWave)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 18
+Columns: 8
+$ Author               &lt;chr&gt; "Call et al.", "Cavanagh et al.", "DanitzOrsillo"…
+$ TE                   &lt;dbl&gt; 0.7091362, 0.3548641, 1.7911700, 0.1824552, 0.421…
+$ seTE                 &lt;dbl&gt; 0.2608202, 0.1963624, 0.3455692, 0.1177874, 0.144…
+$ RiskOfBias           &lt;chr&gt; "high", "low", "high", "low", "low", "low", "high…
+$ TypeControlGroup     &lt;chr&gt; "WLC", "WLC", "WLC", "no intervention", "informat…
+$ InterventionDuration &lt;chr&gt; "short", "short", "short", "short", "short", "sho…
+$ InterventionType     &lt;chr&gt; "mindfulness", "mindfulness", "ACT", "mindfulness…
+$ ModeOfDelivery       &lt;chr&gt; "group", "online", "group", "group", "online", "g…</code></pre>
+</div>
+</div>
+<p>Er zitten acht variabelen (kolommen) in (<code>Author</code>, <code>Year</code>, <code>TE</code>, <code>seTE</code>, <code>RiskOfBias</code>, <code>TypeControlGroup</code>, <code>InterventionDuration</code>, <code>InterventionType</code>, and <code>ModeOfDelivery</code>) en achttien studies (rijen) in. De uitkomstmaat is <code>TE</code> (Treatment Effect) en de standaardfout van de uitkomstmaat is <code>seTE</code> (Standard Error of the Treatment Effect). De variabele <code>Author</code> bevat de namen van de auteurs van de studies. De uitkomstmaat is een Standardized Mean Difference (SMD), er wordt een random-effects model gebruikt met de methode <code>REML</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">metagen</span>(<span class="at">TE =</span> TE,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">seTE =</span> seTE,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> Author,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> ThirdWave,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"REML"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Third Wave Psychotherapies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We gaan het voorspellen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">update.meta</span>(m.gen, <span class="at">prediction =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We kunnen de resultaten van de meta-analyse bekijken met de <code>summary</code> functie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.gen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Review:     Third Wave Psychotherapies
+
+                          SMD            95%-CI %W(random)
+Call et al.            0.7091 [ 0.1979; 1.2203]        5.0
+Cavanagh et al.        0.3549 [-0.0300; 0.7397]        6.3
+DanitzOrsillo          1.7912 [ 1.1139; 2.4685]        3.8
+de Vibe et al.         0.1825 [-0.0484; 0.4133]        7.9
+Frazier et al.         0.4219 [ 0.1380; 0.7057]        7.3
+Frogeli et al.         0.6300 [ 0.2458; 1.0142]        6.3
+Gallego et al.         0.7249 [ 0.2846; 1.1652]        5.7
+Hazlett-Stevens &amp; Oren 0.5287 [ 0.1162; 0.9412]        6.0
+Hintz et al.           0.2840 [-0.0453; 0.6133]        6.9
+Kang et al.            1.2751 [ 0.6142; 1.9360]        3.9
+Kuhlmann et al.        0.1036 [-0.2781; 0.4853]        6.3
+Lever Taylor et al.    0.3884 [-0.0639; 0.8407]        5.6
+Phang et al.           0.5407 [ 0.0619; 1.0196]        5.3
+Rasanen et al.         0.4262 [-0.0794; 0.9317]        5.1
+Ratanasiripong         0.5154 [-0.1731; 1.2039]        3.7
+Shapiro et al.         1.4797 [ 0.8618; 2.0977]        4.2
+Song &amp; Lindquist       0.6126 [ 0.1683; 1.0569]        5.7
+Warnecke et al.        0.6000 [ 0.1120; 1.0880]        5.2
+
+Number of studies: k = 18
+
+                             SMD            95%-CI    t  p-value
+Random effects model (HK) 0.5771 [ 0.3782; 0.7760] 6.12 &lt; 0.0001
+Prediction interval              [-0.0572; 1.2115]              
+
+Quantifying heterogeneity:
+ tau^2 = 0.0820 [0.0295; 0.3533]; tau = 0.2863 [0.1717; 0.5944]
+ I^2 = 62.6% [37.9%; 77.5%]; H = 1.64 [1.27; 2.11]
+
+Test of heterogeneity:
+     Q d.f. p-value
+ 45.50   17  0.0002
+
+Details on meta-analytical method:
+- Inverse variance method
+- Restricted maximum-likelihood estimator for tau^2
+- Q-Profile method for confidence interval of tau^2 and tau
+- Hartung-Knapp adjustment for random effects model (df = 17)
+- Prediction interval based on t-distribution (df = 16)</code></pre>
+</div>
+</div>
+<p>Dit is wat er gerapporteerd kan worden: &gt; “De heterogeniteitsvariantie tussen studies werd geschat op <span class="math inline">\(\tau^2\)</span> = 0,08 (95%CI: 0,03-0,35), met een <span class="math inline">\(I^2\)</span>-waarde van 63% (95%CI: 38-78%). Het voorspellingsinterval varieerde van <span class="math inline">\(g\)</span> = -0,06 tot 1,21, wat aangeeft dat negatieve interventie-effecten niet kunnen worden uitgesloten voor toekomstige studies.”</p>
+<p>Om uitschieters te vinden hebben we de functie <code>find.outliers</code> gebruikt, die een object nodig heeft dat is gemaakt door de functie <code>metagen</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find.outliers</span>(m.gen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Identified outliers (random-effects model) 
+------------------------------------------ 
+"DanitzOrsillo", "Shapiro et al." 
+ 
+Results with outliers removed 
+----------------------------- 
+Review:     Third Wave Psychotherapies
+
+Number of studies: k = 16
+
+                             SMD           95%-CI    t  p-value
+Random effects model (HK) 0.4528 [0.3257; 0.5800] 7.59 &lt; 0.0001
+Prediction interval              [0.1687; 0.7369]              
+
+Quantifying heterogeneity:
+ tau^2 = 0.0139 [0.0000; 0.1032]; tau = 0.1180 [0.0000; 0.3213]
+ I^2 = 24.8% [0.0%; 58.7%]; H = 1.15 [1.00; 1.56]
+
+Test of heterogeneity:
+     Q d.f. p-value
+ 19.95   15  0.1739
+
+Details on meta-analytical method:
+- Inverse variance method
+- Restricted maximum-likelihood estimator for tau^2
+- Q-Profile method for confidence interval of tau^2 and tau
+- Hartung-Knapp adjustment for random effects model (df = 15)
+- Prediction interval based on t-distribution (df = 14)</code></pre>
+</div>
+</div>
+<p>We zien dat de <code>find.outliers</code> functie twee uitschieters detecteerde, “DanitzOrsillo” en “Shapiro et al.”. Het {dmetar} pakket bevat ook een functie genaamd <code>InfluenceAnalysis</code>, waarmee we deze verschillende invloedsdiagnoses kunnen berekenen met behulp van één functie. De functie kan worden gebruikt voor elk type meta-analyseobject dat is gemaakt door {meta} functies. We slaan de resultaten van de functie op in een object genaamd <code>m.gen.inf</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>m.gen.inf <span class="ot">&lt;-</span> <span class="fu">InfluenceAnalysis</span>(m.gen, <span class="at">random =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[===========================================================================] DONE </code></pre>
+</div>
+</div>
+<p>Dit creëert een <code>baujat</code> plot, die een grafische weergave geeft van de invloed van elke studie op de heterogeniteit van de meta-analyse.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"baujat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: ggrepel: 12 unlabeled data points (too many overlaps). Consider
+increasing max.overlaps</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="05-between_study_heterogeneity_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>De volgende plot bevat verschillende invloedsdiagnoses voor elk van onze onderzoeken. Deze kunnen worden uitgezet met deze code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"influence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="05-between_study_heterogeneity_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Het {dmetar} pakket bevat, tenslotte, ook een functie genaamd <code>InfluenceAnalysis</code>, waarmee we deze resultaten kunnen berekenen met behulp van de ‘leave-one-out’-methode. De eerste is gesorteerd op effectgrootte, de tweede op heterogeniteit.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"es"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="05-between_study_heterogeneity_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"i2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="05-between_study_heterogeneity_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -519,7 +750,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./04-pooling_effect_sizes.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pooling Effect Sizes</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Effect Sizes samenbrengen</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -1,4 +1,5 @@
 # R ontdekken
+
 ## Theorie
 
 `R` is uitgegroeid tot een van de krachtigste en meest gebruikte statistische programmeertalen ter wereld. Of je nu in de academische wereld werkt of in een bedrijf, de dingen die je in R kunt doen lijken vaak een superkracht voor anderen. Maar het is een superkracht die iedereen kan leren, mits je er wat tijd en moeite in stot. 

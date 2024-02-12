@@ -1,1 +1,202 @@
-# Pooling Effect Sizes
+# Effect Sizes samenbrengen
+
+Theory
+
+In de statistiek wordt een model gezien als een vereenvoudigde "theorie", die het proces beschrijft waarmee de waargenomen gegevens zijn gegenereerd. Vaak wordt het geschreven als een wiskundige formule om processen in de wereld om ons heen op een geïdealiseerde manier te beschrijven.
+
+Er zijn twee alternatieve modellen in de meta-analyse: het fixed-effect model en het random-effects model. Het fixed-effect model gaat ervan uit dat er één ware effectgrootte is en dat alle effectgroottes afkomstig zijn van één homogene populatie. 
+
+Het random-effects model daarentegen stelt dat de ware effectgroottes ook variëren binnen meta-analyses. Het anticipeert op aanzienlijke heterogeniteit tussen studies in de ware effecten. Het doel van het random-effects model is daarom om het gemiddelde te vinden van de ware effectgrootteverdeling die ten grondslag ligt aan onze gegevens. De variantie van de ware effectgroottes $\tau2$, ook wel heterogeniteitsvariantie tussen studies genoemd, moet worden geschat in random-effects meta-analyses. Hier zijn verschillende methoden voor, en welke het beste werkt hangt af van de context.
+
+De meest gebruikelijke manier om een gepoolde effectgrootte te berekenen is via de inverse-variantiemethode. In het `meta`-pakket is er een functie om meta-analyses uit te voeren van vooraf berekende effectgroottegegevens, evenals een reeks functies die kunnen worden gebruikt voor verschillende soorten "ruwe" uitkomstgegevens.
+
+
+Practijk
+
+Eerst kijken we hoe we een fixed-model kunnen uitvoeren met het `esc` pakket:
+
+```{r}
+# Laad dmetar, esc en tidyverse
+library(dmetar)    ## voor de data
+library(esc)       ## voor de berekening van effect groottes 
+library(tidyverse) ## voor databewerking
+
+# Laad de dataset via dmetar
+data(SuicidePrevention)
+
+# Bekijk de dataset en zie welke variabelen (kolommen) en studies (rijen) er zijn
+glimpse(SuicidePrevention)
+```
+
+Als we dat weten kunnen we de dataset analyseren:
+
+```{r} 
+# Bereken Hedges' g en de Standaard Fout (SE)
+# We slaan de studienamen op in "study".
+# We gebruiken de pmap_dfr functie om de effect grootte te berekenen voor elke rij studie.
+# Kijk goed wat we gebruiken
+SP_calc <- pmap_dfr(SuicidePrevention, 
+                    function(mean.e, sd.e, n.e, mean.c,
+                             sd.c, n.c, author, ...){
+                      esc_mean_sd(grp1m = mean.e,
+                                  grp1sd = sd.e,
+                                  grp1n = n.e,
+                                  grp2m = mean.c,
+                                  grp2sd = sd.c,
+                                  grp2n = n.c,
+                                  study = author,
+                                  es.type = "g") %>% 
+                        as.data.frame()}) 
+
+# Laten we de nieuwe dataset opnieuw bekijken
+# Je ziet dat Hedges' g ("es") en standard error ("se") erin zit
+glimpse(SP_calc)
+```
+
+We gebruiken deze resultaten om de formule van het fixed-effect model toe te passen:
+
+```{r}
+# Bereken de inverse variantie-gewichten voor elk onderzoek.
+SP_calc$w <- 1/SP_calc$se^2
+
+# Vervolgens gebruiken we de gewichten om het gecombineerde effect te berekenen
+pooled_effect <- sum(SP_calc$w*SP_calc$es)/sum(SP_calc$w)
+pooled_effect
+```
+
+De resultaten van onze berekeningen laten zien dat de gepoolde effectgrootte, uitgaande van een model met een vast effect, $g \approx -0,23$ is. Later laten we zien hoe het random model werkt.
+
+`metagen` kan worden gebruikt voor vooraf berekende effectgroottegegevens. Hier wordt het gebruikt om een meta-analyse uit te voeren van de `ThirdWave` dataset. Laten we de dataset openen en bekijken.
+
+```{r}
+library(tidyverse) # voor databewerking
+library(dmetar)    # voor de data
+library(meta)      # voor de meta-analyse
+
+data(ThirdWave)
+glimpse(ThirdWave)
+```
+
+Nu gaan we voor de analyse het random-effect model gebruken via het pakket `meta`. 
+
+`TE` bevat de $g$ waarden en `seTE` de standaardfout ervan. De `metagen` functie neemt de volgende argumenten:
+
+```{r}
+m.gen <- metagen(TE = TE,
+                 seTE = seTE,
+                 studlab = Author,
+                 data = ThirdWave,
+                 sm = "SMD",
+                 fixed = FALSE,
+                 random = TRUE,
+                 method.tau = "REML",
+                 hakn = TRUE,
+                 title = "Third Wave Psychotherapies")
+```
+
+Ons `m.gen` object bevat nu alle resultaten van de meta-analyse. Een gemakkelijke manier om een overzicht te krijgen is door de `summary` functie te gebruiken.
+
+```{r}
+summary(m.gen)
+
+```
+
+Het gepoolde effect direct weergeven is ook mogelijk. Hier dat effect via random-methode
+
+```{r}
+m.gen$TE.random
+```
+
+Hier dat effect via fixed-methode.
+
+```{r}
+m.gen$TE.fixed
+```
+
+Je kunt ook een sensitiviteis-analyse uitvoeren. Dan zet je een andere methode in om te zien of de resultaten dan hetzelfde zijn. We kunnen bijvoorbeeld de functie `update.meta` gebruiken om de methode voor het schatten van $\tau^2$ te veranderen van de standaard REML in PM (Paule-Mandel). Dit is een goed idee bijvoorbeeld als het aantal studies klein is.
+
+```{r}
+m.gen_update <- update.meta(m.gen, 
+                            method.tau = "PM")
+
+# effect
+m.gen_update$TE.random
+```
+
+Om de $\tau^2$ schatting te krijgen doe je:
+
+```{r}
+m.gen_update$tau2
+```
+
+
+Nu iets over binaire uitkomsten.  We gebruiken de functie `metabin` om een meta-analyse uit te voeren op de dataset `DepressionMortality`. Laten we de dataset openen en eerste eens bekijken.
+
+```{r}
+library(dmetar)
+library(tidyverse)
+library(meta)
+
+data(DepressionMortality)
+glimpse(DepressionMortality)
+```
+
+In dit voorbeeld wordt de `risk ratio, RR`(Risicoverhouding)) berekend (de binaire uitkomst). We gebruiken een random-effect poolingmodel en omdat we te maken hebben met binaire uitkomstgegevens, gebruiken we de Paule-Mandel-schatter voor $tau2$.
+
+
+```{r}
+m.bin <- metabin(event.e = event.e, 
+                 n.e = n.e,
+                 event.c = event.c,
+                 n.c = n.c,
+                 studlab = author,
+                 data = DepressionMortality,
+                 sm = "RR",
+                 method = "MH",
+                 MH.exact = TRUE,
+                 fixed = FALSE,
+                 random = TRUE,
+                 method.tau = "PM",
+                 hakn = TRUE,
+                 title = "Depressie en Mortaliteit")
+summary(m.bin)
+```
+
+We gebruiken een andere schattingsmethode om de resultaten nogmaals te controleren (sensitiviteits-analyse), `REML` ipv `MH`.
+
+```{r}
+m.bin_update <- update.meta(m.bin, 
+                            method.tau = "REML")
+```
+
+De resultaten zijn vrijwel hetzelfde:
+
+```{r}
+exp(m.bin_update$TE.random)
+```
+
+Hier de schatting voor $\tau^2$:
+
+```{r}
+m.bin_update$tau2
+```
+
+Laten we daarvoor `sm` overzetten naar `OR`:
+
+```{r}
+m.bin_or <- metabin(event.e = event.e, 
+                 n.e = n.e,
+                 event.c = event.c,
+                 n.c = n.c,
+                 studlab = author,
+                 data = DepressionMortality,
+                 sm = "OR",
+                 method = "MH",
+                 MH.exact = TRUE,
+                 fixed = FALSE,
+                 random = TRUE,
+                 method.tau = "PM",
+                 hakn = TRUE,
+                 title = "Depressie en Mortaliteit")
+summary(m.bin_or)
+```

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Doing Meta-Analysis with R. A Hands-On Guide - 4&nbsp; Pooling Effect Sizes</title>
+<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 4&nbsp; Effect Sizes samenbrengen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -62,6 +96,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -74,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-effect_sizes.html">Meta-Analysis in R</a></li><li class="breadcrumb-item"><a href="./04-pooling_effect_sizes.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pooling Effect Sizes</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-effect_sizes.html">Meta-Analysis in R</a></li><li class="breadcrumb-item"><a href="./04-pooling_effect_sizes.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Effect Sizes samenbrengen</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -89,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Doing Meta-Analysis with R. A Hands-On Guide</a> 
+      <a href="./">Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -123,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-discovering_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discovering R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R ontdekken</span></span></a>
   </div>
 </li>
       </ul>
@@ -146,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pooling_effect_sizes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pooling Effect Sizes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Effect Sizes samenbrengen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -264,7 +300,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pooling Effect Sizes</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Effect Sizes samenbrengen</span></h1>
 </div>
 
 
@@ -279,6 +315,385 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>Theory</p>
+<p>In de statistiek wordt een model gezien als een vereenvoudigde “theorie”, die het proces beschrijft waarmee de waargenomen gegevens zijn gegenereerd. Vaak wordt het geschreven als een wiskundige formule om processen in de wereld om ons heen op een geïdealiseerde manier te beschrijven.</p>
+<p>Er zijn twee alternatieve modellen in de meta-analyse: het fixed-effect model en het random-effects model. Het fixed-effect model gaat ervan uit dat er één ware effectgrootte is en dat alle effectgroottes afkomstig zijn van één homogene populatie.</p>
+<p>Het random-effects model daarentegen stelt dat de ware effectgroottes ook variëren binnen meta-analyses. Het anticipeert op aanzienlijke heterogeniteit tussen studies in de ware effecten. Het doel van het random-effects model is daarom om het gemiddelde te vinden van de ware effectgrootteverdeling die ten grondslag ligt aan onze gegevens. De variantie van de ware effectgroottes <span class="math inline">\(\tau2\)</span>, ook wel heterogeniteitsvariantie tussen studies genoemd, moet worden geschat in random-effects meta-analyses. Hier zijn verschillende methoden voor, en welke het beste werkt hangt af van de context.</p>
+<p>De meest gebruikelijke manier om een gepoolde effectgrootte te berekenen is via de inverse-variantiemethode. In het <code>meta</code>-pakket is er een functie om meta-analyses uit te voeren van vooraf berekende effectgroottegegevens, evenals een reeks functies die kunnen worden gebruikt voor verschillende soorten “ruwe” uitkomstgegevens.</p>
+<p>Practijk</p>
+<p>Eerst kijken we hoe we een fixed-model kunnen uitvoeren met het <code>esc</code> pakket:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Laad dmetar, esc en tidyverse</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)    <span class="do">## voor de data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Extensive documentation for the dmetar package can be found at: 
+ www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(esc)       <span class="do">## voor de berekening van effect groottes </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="do">## voor databewerking</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Laad de dataset via dmetar</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(SuicidePrevention)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Bekijk de dataset en zie welke variabelen (kolommen) en studies (rijen) er zijn</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(SuicidePrevention)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 9
+Columns: 10
+$ author    &lt;chr&gt; "Berry et al.", "DeVries et al.", "Fleming et al.", "Hunt &amp; …
+$ n.e       &lt;dbl&gt; 90, 77, 30, 64, 50, 109, 60, 40, 51
+$ mean.e    &lt;dbl&gt; 14.98, 16.21, 3.01, 19.32, 4.54, 15.11, 3.44, 7.10, 23.74
+$ sd.e      &lt;dbl&gt; 3.29, 5.35, 0.87, 6.41, 2.75, 4.63, 1.26, 0.76, 7.24
+$ n.c       &lt;dbl&gt; 95, 69, 30, 65, 50, 111, 60, 40, 56
+$ mean.c    &lt;dbl&gt; 15.54, 20.13, 3.13, 20.22, 5.61, 16.46, 3.42, 7.38, 24.91
+$ sd.c      &lt;dbl&gt; 4.41, 7.43, 1.23, 7.62, 2.66, 5.39, 1.88, 1.41, 10.65
+$ pubyear   &lt;dbl&gt; 2006, 2019, 2006, 2011, 1997, 2000, 2013, 2015, 2014
+$ age_group &lt;fct&gt; gen, older, gen, gen, gen, gen, gen, older, older
+$ control   &lt;fct&gt; WLC, no intervention, no intervention, WLC, WLC, no interven…</code></pre>
+</div>
+</div>
+<p>Als we dat weten kunnen we de dataset analyseren:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bereken Hedges' g en de Standaard Fout (SE)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We slaan de studienamen op in "study".</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># We gebruiken de pmap_dfr functie om de effect grootte te berekenen voor elke rij studie.</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Kijk goed wat we gebruiken</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>SP_calc <span class="ot">&lt;-</span> <span class="fu">pmap_dfr</span>(SuicidePrevention, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">function</span>(mean.e, sd.e, n.e, mean.c,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                             sd.c, n.c, author, ...){</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">esc_mean_sd</span>(<span class="at">grp1m =</span> mean.e,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">grp1sd =</span> sd.e,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">grp1n =</span> n.e,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">grp2m =</span> mean.c,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">grp2sd =</span> sd.c,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">grp2n =</span> n.c,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">study =</span> author,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">es.type =</span> <span class="st">"g"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">as.data.frame</span>()}) </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Laten we de nieuwe dataset opnieuw bekijken</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Je ziet dat Hedges' g ("es") en standard error ("se") erin zit</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(SP_calc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 9
+Columns: 9
+$ study       &lt;chr&gt; "Berry et al.", "DeVries et al.", "Fleming et al.", "Hunt …
+$ es          &lt;dbl&gt; -0.14279447, -0.60770928, -0.11117965, -0.12698011, -0.392…
+$ weight      &lt;dbl&gt; 46.09784, 34.77314, 14.97625, 32.18243, 24.52054, 54.50431…
+$ sample.size &lt;dbl&gt; 185, 146, 60, 129, 100, 220, 120, 80, 107
+$ se          &lt;dbl&gt; 0.1472854, 0.1695813, 0.2584036, 0.1762749, 0.2019459, 0.1…
+$ var         &lt;dbl&gt; 0.02169299, 0.02875783, 0.06677240, 0.03107286, 0.04078214…
+$ ci.lo       &lt;dbl&gt; -0.4314686, -0.9400826, -0.6176413, -0.4724727, -0.7882811…
+$ ci.hi       &lt;dbl&gt; 0.145879624, -0.275335960, 0.395282029, 0.218512440, 0.003…
+$ measure     &lt;chr&gt; "g", "g", "g", "g", "g", "g", "g", "g", "g"</code></pre>
+</div>
+</div>
+<p>We gebruiken deze resultaten om de formule van het fixed-effect model toe te passen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bereken de inverse variantie-gewichten voor elk onderzoek.</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>SP_calc<span class="sc">$</span>w <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>SP_calc<span class="sc">$</span>se<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Vervolgens gebruiken we de gewichten om het gecombineerde effect te berekenen</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>pooled_effect <span class="ot">&lt;-</span> <span class="fu">sum</span>(SP_calc<span class="sc">$</span>w<span class="sc">*</span>SP_calc<span class="sc">$</span>es)<span class="sc">/</span><span class="fu">sum</span>(SP_calc<span class="sc">$</span>w)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>pooled_effect</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.2311121</code></pre>
+</div>
+</div>
+<p>De resultaten van onze berekeningen laten zien dat de gepoolde effectgrootte, uitgaande van een model met een vast effect, <span class="math inline">\(g \approx -0,23\)</span> is. Later laten we zien hoe het random model werkt.</p>
+<p><code>metagen</code> kan worden gebruikt voor vooraf berekende effectgroottegegevens. Hier wordt het gebruikt om een meta-analyse uit te voeren van de <code>ThirdWave</code> dataset. Laten we de dataset openen en bekijken.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># voor databewerking</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)    <span class="co"># voor de data</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)      <span class="co"># voor de meta-analyse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading 'meta' package (version 6.5-0).
+Type 'help(meta)' for a brief overview.
+Readers of 'Meta-Analysis with R (Use R!)' should install
+older version of 'meta' package: https://tinyurl.com/dt4y5drs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ThirdWave)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 18
+Columns: 8
+$ Author               &lt;chr&gt; "Call et al.", "Cavanagh et al.", "DanitzOrsillo"…
+$ TE                   &lt;dbl&gt; 0.7091362, 0.3548641, 1.7911700, 0.1824552, 0.421…
+$ seTE                 &lt;dbl&gt; 0.2608202, 0.1963624, 0.3455692, 0.1177874, 0.144…
+$ RiskOfBias           &lt;chr&gt; "high", "low", "high", "low", "low", "low", "high…
+$ TypeControlGroup     &lt;chr&gt; "WLC", "WLC", "WLC", "no intervention", "informat…
+$ InterventionDuration &lt;chr&gt; "short", "short", "short", "short", "short", "sho…
+$ InterventionType     &lt;chr&gt; "mindfulness", "mindfulness", "ACT", "mindfulness…
+$ ModeOfDelivery       &lt;chr&gt; "group", "online", "group", "group", "online", "g…</code></pre>
+</div>
+</div>
+<p>Nu gaan we voor de analyse het random-effect model gebruken via het pakket <code>meta</code>.</p>
+<p><code>TE</code> bevat de <span class="math inline">\(g\)</span> waarden en <code>seTE</code> de standaardfout ervan. De <code>metagen</code> functie neemt de volgende argumenten:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">metagen</span>(<span class="at">TE =</span> TE,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">seTE =</span> seTE,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> Author,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> ThirdWave,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"REML"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Third Wave Psychotherapies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ons <code>m.gen</code> object bevat nu alle resultaten van de meta-analyse. Een gemakkelijke manier om een overzicht te krijgen is door de <code>summary</code> functie te gebruiken.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.gen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Review:     Third Wave Psychotherapies
+
+                          SMD            95%-CI %W(random)
+Call et al.            0.7091 [ 0.1979; 1.2203]        5.0
+Cavanagh et al.        0.3549 [-0.0300; 0.7397]        6.3
+DanitzOrsillo          1.7912 [ 1.1139; 2.4685]        3.8
+de Vibe et al.         0.1825 [-0.0484; 0.4133]        7.9
+Frazier et al.         0.4219 [ 0.1380; 0.7057]        7.3
+Frogeli et al.         0.6300 [ 0.2458; 1.0142]        6.3
+Gallego et al.         0.7249 [ 0.2846; 1.1652]        5.7
+Hazlett-Stevens &amp; Oren 0.5287 [ 0.1162; 0.9412]        6.0
+Hintz et al.           0.2840 [-0.0453; 0.6133]        6.9
+Kang et al.            1.2751 [ 0.6142; 1.9360]        3.9
+Kuhlmann et al.        0.1036 [-0.2781; 0.4853]        6.3
+Lever Taylor et al.    0.3884 [-0.0639; 0.8407]        5.6
+Phang et al.           0.5407 [ 0.0619; 1.0196]        5.3
+Rasanen et al.         0.4262 [-0.0794; 0.9317]        5.1
+Ratanasiripong         0.5154 [-0.1731; 1.2039]        3.7
+Shapiro et al.         1.4797 [ 0.8618; 2.0977]        4.2
+Song &amp; Lindquist       0.6126 [ 0.1683; 1.0569]        5.7
+Warnecke et al.        0.6000 [ 0.1120; 1.0880]        5.2
+
+Number of studies: k = 18
+
+                             SMD           95%-CI    t  p-value
+Random effects model (HK) 0.5771 [0.3782; 0.7760] 6.12 &lt; 0.0001
+
+Quantifying heterogeneity:
+ tau^2 = 0.0820 [0.0295; 0.3533]; tau = 0.2863 [0.1717; 0.5944]
+ I^2 = 62.6% [37.9%; 77.5%]; H = 1.64 [1.27; 2.11]
+
+Test of heterogeneity:
+     Q d.f. p-value
+ 45.50   17  0.0002
+
+Details on meta-analytical method:
+- Inverse variance method
+- Restricted maximum-likelihood estimator for tau^2
+- Q-Profile method for confidence interval of tau^2 and tau
+- Hartung-Knapp adjustment for random effects model (df = 17)</code></pre>
+</div>
+</div>
+<p>Het gepoolde effect direct weergeven is ook mogelijk. Hier dat effect via random-methode</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>m.gen<span class="sc">$</span>TE.random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5771158</code></pre>
+</div>
+</div>
+<p>Hier dat effect via fixed-methode.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>m.gen<span class="sc">$</span>TE.fixed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4805045</code></pre>
+</div>
+</div>
+<p>Je kunt ook een sensitiviteis-analyse uitvoeren. Dan zet je een andere methode in om te zien of de resultaten dan hetzelfde zijn. We kunnen bijvoorbeeld de functie <code>update.meta</code> gebruiken om de methode voor het schatten van <span class="math inline">\(\tau^2\)</span> te veranderen van de standaard REML in PM (Paule-Mandel). Dit is een goed idee bijvoorbeeld als het aantal studies klein is.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>m.gen_update <span class="ot">&lt;-</span> <span class="fu">update.meta</span>(m.gen, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">method.tau =</span> <span class="st">"PM"</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># effect</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>m.gen_update<span class="sc">$</span>TE.random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5873544</code></pre>
+</div>
+</div>
+<p>Om de <span class="math inline">\(\tau^2\)</span> schatting te krijgen doe je:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>m.gen_update<span class="sc">$</span>tau2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1104957</code></pre>
+</div>
+</div>
+<p>Nu iets over binaire uitkomsten. We gebruiken de functie <code>metabin</code> om een meta-analyse uit te voeren op de dataset <code>DepressionMortality</code>. Laten we de dataset openen en eerste eens bekijken.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(DepressionMortality)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(DepressionMortality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 18
+Columns: 6
+$ author  &lt;chr&gt; "Aaroma et al., 1994", "Black et al., 1998", "Bruce et al., 19…
+$ event.e &lt;dbl&gt; 25, 65, 5, 26, 32, 1, 24, 15, 15, 173, 37, 41, 29, 61, 15, 21,…
+$ n.e     &lt;dbl&gt; 215, 588, 46, 67, 407, 44, 60, 61, 29, 1015, 105, 120, 258, 38…
+$ event.c &lt;dbl&gt; 171, 120, 107, 1168, 269, 87, 200, 437, 227, 250, 66, 9, 24, 3…
+$ n.c     &lt;dbl&gt; 3088, 1901, 2479, 3493, 6256, 1520, 882, 2603, 853, 3375, 409,…
+$ country &lt;chr&gt; "Finland", "USA", "USA", "USA", "Sweden", "USA", "Canada", "Ne…</code></pre>
+</div>
+</div>
+<p>In dit voorbeeld wordt de <code>risk ratio, RR</code>(Risicoverhouding)) berekend (de binaire uitkomst). We gebruiken een random-effect poolingmodel en omdat we te maken hebben met binaire uitkomstgegevens, gebruiken we de Paule-Mandel-schatter voor <span class="math inline">\(tau2\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>m.bin <span class="ot">&lt;-</span> <span class="fu">metabin</span>(<span class="at">event.e =</span> event.e, </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n.e =</span> n.e,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">event.c =</span> event.c,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n.c =</span> n.c,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> author,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> DepressionMortality,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"RR"</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method =</span> <span class="st">"MH"</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">MH.exact =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"PM"</span>,</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Depressie en Mortaliteit"</span>)</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.bin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Review:     Depressie en Mortaliteit
+
+                          RR            95%-CI %W(random)
+Aaroma et al., 1994   2.0998 [1.4128;  3.1208]        6.0
+Black et al., 1998    1.7512 [1.3139;  2.3341]        6.6
+Bruce et al., 1989    2.5183 [1.0785;  5.8802]        3.7
+Bruce et al., 1994    1.1605 [0.8560;  1.5733]        6.5
+Enzell et al., 1984   1.8285 [1.2853;  2.6014]        6.3
+Fredman et al., 1989  0.3971 [0.0566;  2.7861]        1.2
+Murphy et al., 1987   1.7640 [1.2644;  2.4610]        6.4
+Penninx et al., 1999  1.4647 [0.9361;  2.2919]        5.8
+Pulska et al., 1998   1.9436 [1.3441;  2.8107]        6.2
+Roberts et al., 1990  2.3010 [1.9206;  2.7567]        7.0
+Saz et al., 1999      2.1837 [1.5533;  3.0700]        6.3
+Sharma et al., 1998   2.0500 [1.0744;  3.9114]        4.7
+Takeida et al., 1997  6.9784 [4.1303; 11.7902]        5.3
+Takeida et al., 1999  5.8124 [3.8816;  8.7035]        6.0
+Thomas et al., 1992   1.3303 [0.7780;  2.2745]        5.3
+Thomas et al., 1992   1.7722 [1.1073;  2.8363]        5.6
+Weissman et al., 1986 1.2500 [0.6678;  2.3398]        4.8
+Zheng et al., 1997    1.9803 [1.4001;  2.8011]        6.3
+
+Number of studies: k = 18
+Number of observations: o = 94770
+Number of events: e = 5439
+
+                         RR           95%-CI    t  p-value
+Random effects model 2.0217 [1.5786; 2.5892] 6.00 &lt; 0.0001
+
+Quantifying heterogeneity:
+ tau^2 = 0.1865 [0.0739; 0.5568]; tau = 0.4319 [0.2718; 0.7462]
+ I^2 = 77.2% [64.3%; 85.4%]; H = 2.09 [1.67; 2.62]
+
+Test of heterogeneity:
+     Q d.f.  p-value
+ 74.49   17 &lt; 0.0001
+
+Details on meta-analytical method:
+- Inverse variance method
+- Paule-Mandel estimator for tau^2
+- Q-Profile method for confidence interval of tau^2 and tau
+- Hartung-Knapp adjustment for random effects model (df = 17)</code></pre>
+</div>
+</div>
+<p>We gebruiken een andere schattingsmethode om de resultaten nogmaals te controleren (sensitiviteits-analyse), <code>REML</code> ipv <code>MH</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>m.bin_update <span class="ot">&lt;-</span> <span class="fu">update.meta</span>(m.bin, </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">method.tau =</span> <span class="st">"REML"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>De resultaten zijn vrijwel hetzelfde:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(m.bin_update<span class="sc">$</span>TE.random)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.02365</code></pre>
+</div>
+</div>
+<p>Hier de schatting voor <span class="math inline">\(\tau^2\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>m.bin_update<span class="sc">$</span>tau2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1647315</code></pre>
+</div>
+</div>
+<p>Laten we daarvoor <code>sm</code> overzetten naar <code>OR</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>m.bin_or <span class="ot">&lt;-</span> <span class="fu">metabin</span>(<span class="at">event.e =</span> event.e, </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n.e =</span> n.e,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">event.c =</span> event.c,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n.c =</span> n.c,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> author,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> DepressionMortality,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"OR"</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method =</span> <span class="st">"MH"</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">MH.exact =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"PM"</span>,</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Depressie en Mortaliteit"</span>)</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.bin_or)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Review:     Depressie en Mortaliteit
+
+                          OR            95%-CI %W(random)
+Aaroma et al., 1994   2.2445 [1.4389;  3.5011]        6.3
+Black et al., 1998    1.8446 [1.3432;  2.5331]        7.0
+Bruce et al., 1989    2.7034 [1.0472;  6.9793]        3.7
+Bruce et al., 1994    1.2623 [0.7684;  2.0737]        6.0
+Enzell et al., 1984   1.8992 [1.2974;  2.7802]        6.7
+Fredman et al., 1989  0.3831 [0.0521;  2.8146]        1.3
+Murphy et al., 1987   2.2733 [1.3248;  3.9011]        5.8
+Penninx et al., 1999  1.6163 [0.8944;  2.9208]        5.5
+Pulska et al., 1998   2.9547 [1.4041;  6.2177]        4.7
+Roberts et al., 1990  2.5683 [2.0855;  3.1629]        7.5
+Saz et al., 1999      2.8278 [1.7510;  4.5666]        6.1
+Sharma et al., 1998   2.5949 [1.1555;  5.8275]        4.3
+Takeida et al., 1997  7.7354 [4.4252; 13.5219]        5.7
+Takeida et al., 1999  6.7101 [4.3351; 10.3862]        6.4
+Thomas et al., 1992   1.3555 [0.7623;  2.4104]        5.6
+Thomas et al., 1992   1.8472 [1.1082;  3.0791]        6.0
+Weissman et al., 1986 1.3158 [0.6013;  2.8793]        4.5
+Zheng et al., 1997    2.0324 [1.4110;  2.9275]        6.8
+
+Number of studies: k = 18
+Number of observations: o = 94770
+Number of events: e = 5439
+
+                         OR           95%-CI    t  p-value
+Random effects model 2.2901 [1.7512; 2.9949] 6.52 &lt; 0.0001
+
+Quantifying heterogeneity:
+ tau^2 = 0.2032 [0.0744; 0.6314]; tau = 0.4508 [0.2728; 0.7946]
+ I^2 = 72.9% [56.7%; 83.0%]; H = 1.92 [1.52; 2.43]
+
+Test of heterogeneity:
+     Q d.f.  p-value
+ 62.73   17 &lt; 0.0001
+
+Details on meta-analytical method:
+- Inverse variance method
+- Paule-Mandel estimator for tau^2
+- Q-Profile method for confidence interval of tau^2 and tau
+- Hartung-Knapp adjustment for random effects model (df = 17)</code></pre>
+</div>
+</div>
 
 
 
