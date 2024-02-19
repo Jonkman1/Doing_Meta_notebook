@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 5&nbsp; Between-Study-Herterogeneity</title>
+<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 5&nbsp; Heterogeniteit tussen studies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-effect_sizes.html">Meta-Analysis in R</a></li><li class="breadcrumb-item"><a href="./05-between_study_heterogeneity.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Between-Study-Herterogeneity</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-effect_sizes.html">Meta-Analysis in R</a></li><li class="breadcrumb-item"><a href="./05-between_study_heterogeneity.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Heterogeniteit tussen studies</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -188,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-between_study_heterogeneity.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Between-Study-Herterogeneity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Heterogeniteit tussen studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -298,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#theorie" id="toc-theorie" class="nav-link active" data-scroll-target="#theorie"><span class="header-section-number">5.1</span> Theorie</a></li>
-  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice"><span class="header-section-number">5.2</span> Practice</a></li>
+  <li><a href="#practijk" id="toc-practijk" class="nav-link" data-scroll-target="#practijk"><span class="header-section-number">5.2</span> Practijk</a></li>
   </ul>
 </nav>
     </div>
@@ -307,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Between-Study-Herterogeneity</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Heterogeniteit tussen studies</span></h1>
 </div>
 
 
@@ -329,8 +329,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Een statistische test van <span class="math inline">\(Q\)</span> hangt echter sterk af van het type gegevens dat we hebben. We moeten niet alleen op <span class="math inline">\(Q\)</span> vertrouwen om de mate van heterogeniteit te beoordelen. Er zijn andere maten, zoals <span class="math inline">\(I^2\)</span>, <span class="math inline">\(H^2\)</span>, <span class="math inline">\(tau\)</span> of voorspellingsintervallen, die aanvullend gebruikt kunnen worden om iets over de tussen-studie-heterogeniteit te zeggen.</p>
 <p>Het gemiddelde effect in een meta-analyse kan vertekend zijn als er uitschieters in onze gegevens zitten. Uitschieters hebben niet altijd een grote invloed op de resultaten van een meta-analyse. Maar als ze dat wel doen, spreken we van invloedrijke gevallen. Er zijn verschillende methoden om uitschieters en invloedrijke gevallen te identificeren. Als dergelijke studies die eruit schieten worden ontdekt, is het raadzaam om de resultaten van de meta-analyse opnieuw te berekenen zonder deze studies om te zien of dit de interpretatie van onze resultaten verandert.</p>
 </section>
-<section id="practice" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="practice"><span class="header-section-number">5.2</span> Practice</h2>
+<section id="practijk" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="practijk"><span class="header-section-number">5.2</span> Practijk</h2>
 <p>Ook hier de onderstaande pakketten laden, het databestand <code>ThirdWave</code> openen en dit databestand goed bekijken.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># needed for 'glimpse'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -438,7 +438,8 @@ Details on meta-analytical method:
 - Prediction interval based on t-distribution (df = 16)</code></pre>
 </div>
 </div>
-<p>Dit is wat er gerapporteerd kan worden: &gt; “De heterogeniteitsvariantie tussen studies werd geschat op <span class="math inline">\(\tau^2\)</span> = 0,08 (95%CI: 0,03-0,35), met een <span class="math inline">\(I^2\)</span>-waarde van 63% (95%CI: 38-78%). Het voorspellingsinterval varieerde van <span class="math inline">\(g\)</span> = -0,06 tot 1,21, wat aangeeft dat negatieve interventie-effecten niet kunnen worden uitgesloten voor toekomstige studies.”</p>
+<p>Dit is wat er gerapporteerd kan worden:<br>
+&gt; “De heterogeniteitsvariantie tussen studies werd geschat op <span class="math inline">\(\tau^2\)</span> = 0,08 (95%CI: 0,03-0,35), met een <span class="math inline">\(I^2\)</span>-waarde van 63% (95%CI: 38-78%). Het voorspellingsinterval varieerde van <span class="math inline">\(g\)</span> = -0,06 tot 1,21, wat aangeeft dat negatieve interventie-effecten niet kunnen worden uitgesloten voor toekomstige studies.”</p>
 <p>Om uitschieters te vinden hebben we de functie <code>find.outliers</code> gebruikt, die een object nodig heeft dat is gemaakt door de functie <code>metagen</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find.outliers</span>(m.gen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
