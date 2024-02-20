@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -264,6 +298,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#theorie" id="toc-theorie" class="nav-link active" data-scroll-target="#theorie"><span class="header-section-number">6.1</span> Theorie:</a></li>
+  <li><a href="#praktijk" id="toc-praktijk" class="nav-link" data-scroll-target="#praktijk"><span class="header-section-number">6.2</span> Praktijk:</a></li>
   </ul>
 </nav>
     </div>
@@ -290,7 +325,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="theorie" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="theorie"><span class="header-section-number">6.1</span> Theorie:</h2>
 <p>Het is gebruikelijk om de resultaten van meta-analyses te visualiseren door middel van forest plots. Forest plots zijn op te vatten als een grafische weergave van de effectgrootte en het betrouwbaarheidsinterval van individuele studies en tonen ook het berekende totale effect. Ze laten het geobserveerde effect zien, het betrouwbaarheidsinterval en de gewichtsverdeling van elke studie. Ze laten ook het gepoolde effect zien dat berekend is over de studies.</p>
-<p>Onderaan het <em>Voorbeeld van een forest plot</em> geeft een ruit het gemiddelde effect weer. De lengte van de ruit symboliseert het betrouwbaarheidsinterval van het gepoolde resultaat op de x-as. Meestal bevat een forest plot ook een verticale referentielijn die het punt op de x-as aangeeft dat gelijk is aan geen effect. In forest plots kun je ook iets laten zien over de heterogenities (zoals <span class="math inline">\(I^2\)</span> of <span class="math inline">\(\tau^2\)</span> weer te geven.</p>
+<p>In het <em>Voorbeeld van een forest plot</em> hieronder geeft een ruit het gemiddelde effect weer. De lengte van de ruit symboliseert het betrouwbaarheidsinterval van het gepoolde resultaat op de x-as. Meestal bevat een forest plot ook een verticale referentielijn die het punt op de x-as aangeeft dat gelijk is aan geen effect. In forest plots kun je ook iets laten zien over de heterogenities (zoals <span class="math inline">\(I^2\)</span> of <span class="math inline">\(\tau^2\)</span> weer te geven.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/Screenshot3.png" class="img-fluid figure-img"></p>
@@ -298,7 +333,107 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 <p>Het is ook mogelijk om andere soorten informatie aan een forest plot toe te voegen, bijvoorbeeld de kwaliteitsbeoordeling die elke studie kreeg. Forest plots kunnen alleen resultaten weergeven die uitgaan van een vaste significantiedrempel, meestal <span class="math inline">\(p&lt;0,05\)</span>. Om te visualiseren hoe resultaten veranderen bij verschillende significantiedrempels, kunnen daarnaast draperieplots worden gegenereerd.</p>
+</section>
+<section id="praktijk" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="praktijk"><span class="header-section-number">6.2</span> Praktijk:</h2>
 <p>Het <code>meta</code>-pakket in R is een veelgebruikte tool voor het maken van forest plots. Het heeft veel functies en de opmaak van de plots kan worden aangepast aan de wensen van de gebruiker.</p>
+<p>We beginnen met het databestand zoals eerder omhoog gehaald.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># voor databewerking</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)    <span class="co"># voor de data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Extensive documentation for the dmetar package can be found at: 
+ www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)      <span class="co"># voor de meta-analyse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading 'meta' package (version 6.5-0).
+Type 'help(meta)' for a brief overview.
+Readers of 'Meta-Analysis with R (Use R!)' should install
+older version of 'meta' package: https://tinyurl.com/dt4y5drs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ThirdWave)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 18
+Columns: 8
+$ Author               &lt;chr&gt; "Call et al.", "Cavanagh et al.", "DanitzOrsillo"…
+$ TE                   &lt;dbl&gt; 0.7091362, 0.3548641, 1.7911700, 0.1824552, 0.421…
+$ seTE                 &lt;dbl&gt; 0.2608202, 0.1963624, 0.3455692, 0.1177874, 0.144…
+$ RiskOfBias           &lt;chr&gt; "high", "low", "high", "low", "low", "low", "high…
+$ TypeControlGroup     &lt;chr&gt; "WLC", "WLC", "WLC", "no intervention", "informat…
+$ InterventionDuration &lt;chr&gt; "short", "short", "short", "short", "short", "sho…
+$ InterventionType     &lt;chr&gt; "mindfulness", "mindfulness", "ACT", "mindfulness…
+$ ModeOfDelivery       &lt;chr&gt; "group", "online", "group", "group", "online", "g…</code></pre>
+</div>
+</div>
+<p><code>m.gen</code> bevat de resultaten van de meta-analyse. We kunnen de resultaten van de meta-analyse visualiseren met de <code>forest()</code>-functie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">metagen</span>(<span class="at">TE =</span> TE,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">seTE =</span> seTE,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> Author,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> ThirdWave,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"REML"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Third Wave Psychotherapies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We kunnen een forest plot maken voor elk type {meta} meta-analyse object (bijv. resultaten van m<code>etagen</code>, <code>metacont</code>, of <code>metabin</code>) met behulp van de <code>forest.meta</code>-functie. We hoeven alleen maar forest.meta te voorzien van ons {meta} object en er wordt een plot gemaakt.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest.meta</span>(m.gen, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">sortvar =</span> TE,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">prediction =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">print.tau2 =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">leftlabs =</span> <span class="fu">c</span>(<span class="st">"Author"</span>, <span class="st">"g"</span>, <span class="st">"SE"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="06-forest_plots_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Er zijn allerlei argumenten in dit pakket om de forest plots verder aan te passen. Zo kunnen we de plot verbeteren door een kolom toe te voegen die het bias-risico van elke studie weergeeft. De dataset <code>ThirdWave</code>, die we gebruikten om <code>m.gen</code> te genereren, bevat een kolom met de naam <code>RiskOfBias</code>, waarin de beoordeling van het risico van vertekening van elke studie is opgeslagen.</p>
+<p>We kunnen het argument leftcols gebruiken om de kolom aan de plot toe te voegen. Dit resulteert in de volgende code en de informatie van elke studie is toegevoegd.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest.meta</span>(m.gen, </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">sortvar =</span> TE,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">prediction =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">print.tau2 =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">leftcols =</span> <span class="fu">c</span>(<span class="st">"studlab"</span>, <span class="st">"TE"</span>, <span class="st">"seTE"</span>, <span class="st">"RiskOfBias"</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">leftlabs =</span> <span class="fu">c</span>(<span class="st">"Author"</span>, <span class="st">"g"</span>, <span class="st">"SE"</span>, <span class="st">"Risk of Bias"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="06-forest_plots_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Er zijn ook twee voorgeprogrammeerde lay-outs voor forest plots:die van JAMA en van Cochrane. We kunnen de lay-out van de plot aanpassen met behulp van de <code>layout</code>-functie. Hier bijvoorbeeld de JAMA-lay-out.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest.meta</span>(m.gen, <span class="at">layout =</span> <span class="st">"JAMA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="06-forest_plots_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Je kunt de forest plots op verschillende manieren opslaan (bijvoorbeeld PDF, PNG, SVG). Hier slaan we de JAMA forest plot op als een pdf in onze img-folder.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">"img/forest_plot.pdf"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">forest.meta</span>(m.gen, <span class="at">layout =</span> <span class="st">"JAMA"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>quartz_off_screen 
+                2 </code></pre>
+</div>
+</div>
+<p>Behalve de forest plot zijn er ook nog andere manieren op de resultaten te visualiseren (bv. draperie plots).</p>
 
 
 </section>

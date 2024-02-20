@@ -3,10 +3,79 @@
 ## Theorie:
 Het is gebruikelijk om de resultaten van meta-analyses te visualiseren door middel van forest plots. Forest plots zijn op te vatten als een grafische weergave van de effectgrootte en het betrouwbaarheidsinterval van individuele studies en tonen ook het berekende totale effect. Ze laten het geobserveerde effect zien, het betrouwbaarheidsinterval en de gewichtsverdeling van elke studie. Ze laten ook het gepoolde effect zien dat berekend is over de studies.
 
-Onderaan het *Voorbeeld van een forest plot* geeft een ruit het gemiddelde effect weer. De lengte van de ruit symboliseert het betrouwbaarheidsinterval van het gepoolde resultaat op de x-as. Meestal bevat een forest plot ook een verticale referentielijn die het punt op de x-as aangeeft dat gelijk is aan geen effect. In forest plots kun je ook iets laten zien over de heterogenities (zoals $I^2$ of $\tau^2$ weer te geven.
+In het *Voorbeeld van een forest plot* hieronder geeft een ruit het gemiddelde effect weer. De lengte van de ruit symboliseert het betrouwbaarheidsinterval van het gepoolde resultaat op de x-as. Meestal bevat een forest plot ook een verticale referentielijn die het punt op de x-as aangeeft dat gelijk is aan geen effect. In forest plots kun je ook iets laten zien over de heterogenities (zoals $I^2$ of $\tau^2$ weer te geven.
 
 ![Voorbeeld van een forest plot](img/Screenshot3.png)
 
 Het is ook mogelijk om andere soorten informatie aan een forest plot toe te voegen, bijvoorbeeld de kwaliteitsbeoordeling die elke studie kreeg. Forest plots kunnen alleen resultaten weergeven die uitgaan van een vaste significantiedrempel, meestal $p<0,05$. Om te visualiseren hoe resultaten veranderen bij verschillende significantiedrempels, kunnen daarnaast draperieplots worden gegenereerd.
 
+
+## Praktijk:
 Het `meta`-pakket in R is een veelgebruikte tool voor het maken van forest plots. Het heeft veel functies en de opmaak van de plots kan worden aangepast aan de wensen van de gebruiker. 
+
+We beginnen met het databestand zoals eerder omhoog gehaald.
+
+```{r}
+library(tidyverse) # voor databewerking
+library(dmetar)    # voor de data
+library(meta)      # voor de meta-analyse
+
+data(ThirdWave)
+glimpse(ThirdWave)
+```
+
+`m.gen` bevat de resultaten van de meta-analyse. We kunnen de resultaten van de meta-analyse visualiseren met de `forest()`-functie. 
+
+```{r}
+m.gen <- metagen(TE = TE,
+                 seTE = seTE,
+                 studlab = Author,
+                 data = ThirdWave,
+                 sm = "SMD",
+                 fixed = FALSE,
+                 random = TRUE,
+                 method.tau = "REML",
+                 hakn = TRUE,
+                 title = "Third Wave Psychotherapies")
+```
+
+We kunnen een forest plot maken voor elk type {meta} meta-analyse object (bijv. resultaten van m`etagen`, `metacont`, of `metabin`) met behulp van de `forest.meta`-functie. We hoeven alleen maar forest.meta te voorzien van ons {meta} object en er wordt een plot gemaakt.
+
+```{r}
+forest.meta(m.gen, 
+            sortvar = TE,
+            prediction = TRUE, 
+            print.tau2 = FALSE,
+            leftlabs = c("Author", "g", "SE"))
+```
+
+Er zijn allerlei argumenten in dit pakket om de forest plots verder aan te passen. Zo kunnen we de plot verbeteren door een kolom toe te voegen die het bias-risico van elke studie weergeeft. De dataset `ThirdWave`, die we gebruikten om `m.gen` te genereren, bevat een kolom met de naam `RiskOfBias`, waarin de beoordeling van het risico van vertekening van elke studie is opgeslagen.
+
+We kunnen het argument leftcols gebruiken om de kolom aan de plot toe te voegen. Dit resulteert in de volgende code en de informatie van elke studie is toegevoegd.
+
+```{r}
+forest.meta(m.gen, 
+            sortvar = TE,
+            prediction = TRUE, 
+            print.tau2 = FALSE,
+            leftcols = c("studlab", "TE", "seTE", "RiskOfBias"),
+            leftlabs = c("Author", "g", "SE", "Risk of Bias"))
+```
+
+Er zijn ook twee voorgeprogrammeerde lay-outs voor forest plots:die van JAMA en van Cochrane. We kunnen de lay-out van de plot aanpassen met behulp van de `layout`-functie. Hier bijvoorbeeld de JAMA-lay-out.
+
+```{r}
+forest.meta(m.gen, layout = "JAMA")
+```
+
+Je kunt de forest plots op verschillende manieren opslaan (bijvoorbeeld PDF, PNG, SVG). Hier slaan we de JAMA forest plot op als een pdf in onze img-folder.
+
+```{r}
+pdf("img/forest_plot.pdf")
+forest.meta(m.gen, layout = "JAMA")
+dev.off()
+```
+
+Behalve de forest plot zijn er ook nog andere manieren op de resultaten te visualiseren (bv. draperie plots). 
+
+```{r}
