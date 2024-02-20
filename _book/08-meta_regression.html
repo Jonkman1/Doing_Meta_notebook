@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Doing Meta-Analysis with R. A Hands-On Guide - 8&nbsp; Meta-Regression</title>
+<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 8&nbsp; Meta-Regressie</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,6 +62,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -74,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-effect_sizes.html">Meta-Analysis in R</a></li><li class="breadcrumb-item"><a href="./08-meta_regression.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regression</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-effect_sizes.html">Meta-Analysis in R</a></li><li class="breadcrumb-item"><a href="./08-meta_regression.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regressie</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -89,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Doing Meta-Analysis with R. A Hands-On Guide</a> 
+      <a href="./">Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -123,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-discovering_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discovering R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R ontdekken</span></span></a>
   </div>
 </li>
       </ul>
@@ -146,31 +148,31 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pooling_effect_sizes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pooling Effect Sizes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Effect Sizes samenbrengen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-between_study_heterogeneity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Between-Study-Herterogeneity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Heterogeniteit tussen studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-forest_plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Forest Plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">De forest Plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-subgroup_analyses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroup Analyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroep Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-meta_regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regressie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -264,7 +266,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regression</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regressie</span></h1>
 </div>
 
 
@@ -279,6 +281,8 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>In meta-regressie passen we conventionele regressietechnieken aan op gegevens op studieniveau. Subgroepanalyses kunnen worden gezien als een speciaal geval van meta-regressie met categorische voorspellers en een gemeenschappelijke schatting van <span class="math inline">\(\tau^2\)</span>. Het doel van een meta-regressiemodel is om (delen van) de ware verschillen in effectgrootte in onze data te <strong>verklaren</strong> (d.w.z. de heterogeniteitsvariantie tussen studies, <span class="math inline">\(\tau^2\)</span>). Als een model goed bij de gegevens past, moet de afwijking van de ware effecten van de regressielijn kleiner zijn dan hun oorspronkelijke afwijking van het gepoolde effect. Als dit het geval is, zal de onverklaarde of residuele heterogeniteit klein zijn. Dit wordt weergegeven door de <code>R2∗index</code>, die ons vertelt welk percentage van de heterogeniteitsvariatie door ons model wordt verklaard.</p>
+<p>Bij meervoudige meta-regressie worden twee of meer voorspellers gebruikt in hetzelfde meta-regressiemodel. Het is ook mogelijk om te testen of de voorspellingen van een variabele veranderen voor verschillende waarden van een andere variabele, door interactietermen te introduceren. Hoewel (meervoudige) meta-regressie erg veelzijdig is, is het niet zonder beperkingen. Meervoudige meta-regressie maakt het erg gemakkelijk om modellen te overfitten, wat betekent dat willekeurige ruis in plaats van echte relaties gemodelleerd worden. Multi-collineariteit van voorspellers kan ook een bedreiging vormen voor de geldigheid van ons model. Er zijn verschillende manieren om ervoor te zorgen dat ons meta-regressiemodel robuust is. We kunnen bijvoorbeeld alleen modellen passen die gebaseerd zijn op een vooraf gedefinieerde theoretische rationale, of permutatietesten gebruiken. Multi-model inferentie kan worden gebruikt als een verkennende aanpak. Deze methode kan ons wijzen op mogelijk belangrijke voorspellers en kan worden gebruikt om hypotheses af te leiden die in toekomstig onderzoek moeten worden getest.</p>
 
 
 
@@ -519,7 +523,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./07-subgroup_analyses.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroup Analyse</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroep Analyse</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

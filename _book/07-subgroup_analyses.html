@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 7&nbsp; Subgroup Analyse</title>
+<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 7&nbsp; Subgroep Analyse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -62,6 +96,11 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -74,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-effect_sizes.html">Meta-Analysis in R</a></li><li class="breadcrumb-item"><a href="./07-subgroup_analyses.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroup Analyse</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-effect_sizes.html">Meta-Analysis in R</a></li><li class="breadcrumb-item"><a href="./07-subgroup_analyses.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroep Analyse</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -164,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-subgroup_analyses.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroup Analyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroep Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -262,6 +301,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#theorie" id="toc-theorie" class="nav-link active" data-scroll-target="#theorie"><span class="header-section-number">7.1</span> Theorie</a></li>
+  <li><a href="#praktijk" id="toc-praktijk" class="nav-link" data-scroll-target="#praktijk"><span class="header-section-number">7.2</span> Praktijk</a></li>
   </ul>
 </nav>
     </div>
@@ -270,7 +310,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroup Analyse</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroep Analyse</span></h1>
 </div>
 
 
@@ -287,9 +327,203 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="theorie" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="theorie"><span class="header-section-number">7.1</span> Theorie</h2>
-<p>Although there are various ways to assess the heterogeneity of a meta-analysis, these approaches do not tell us why we find excess variability in our data. Subgroup analysis allows us to test hypotheses on why some studies have higher or lower true effect sizes than others.</p>
-<p>For subgroup analyses, we usually assume a fixed-effects (plural) model. Studies within subgroups are pooled, in most cases, using the random-effects model. Subsequently, a Q-test based on the overall subgroup results is used to determine if the groups differ significantly. The subgroup analysis model is called a “fixed-effects” model because the different categories themselves are assumed to be fixed. The subgroup levels are not seen as random draws from a universe of possible categories. They represent the only values that the subgroup variable can take.</p>
-<p>When calculating a subgroup analysis, we have to decide whether separate or common estimates of the between-study heterogeneity should be used to pool the results within subgroups. Subgroup analyses are not a panacea. They often lack the statistical power needed to detect subgroup differences. Therefore, a non-significant test for subgroup differences does not automatically mean that the subgroups produce equivalent results.</p>
+<p>Hoewel er verschillende manieren zijn om de heterogeniteit van een meta-analyse te beoordelen, vertellen die ons niet waarom we een overmatige variabiliteit in onze gegevens vinden. Subgroepanalyse stelt ons in staat om hypotheses te testen over waarom sommige onderzoeken een hogere of lagere effectgrootte hebben dan andere. We moeten verschillende studiekenmerken definiëren die de waargenomen effectgrootte kunnen beïnvloeden en elke studie dienovereenkomstig coderen.</p>
+<p>Er zijn talloze redenen waarom effectgroottes kunnen verschillen, maar we moeten ons beperken tot de redenen die van belang zijn in de context van onze analyse. Het idee achter subgroepanalyses is dat meta-analyse niet alleen gaat over het berekenen van een gemiddelde effectgrootte, maar dat het ook een hulpmiddel kan zijn om variatie in ons bewijs te onderzoeken. In subgroepanalyses zien we heterogeniteit niet alleen als hinderlijk, maar als interessante variatie die al dan niet verklaarbaar is door een wetenschappelijke hypothese. In het beste geval kan dit ons begrip van de wereld om ons heen vergroten, of op zijn minst praktische inzichten opleveren die richting geven aan toekomstige besluitvorming.</p>
+<p>Voor subgroepanalyses gaan we meestal uit van een fixed-effects model. Studies binnen subgroepen worden in de meeste gevallen gepoold met behulp van het random-effects model. Vervolgens wordt een <span class="math inline">\(Q\)</span>-toets op basis van de algemene subgroepresultaten gebruikt om te bepalen of de groepen significant verschillen. Het subgroepanalysemodel wordt een “fixed-effects” model genoemd omdat de verschillende categorieën zelf als vast worden verondersteld. Dit betekent dat alle subgroepen worden verondersteld een gemeenschappelijke schatting van de heterogeniteit tussen de studies te delen.Ze vertegenwoordigen de enige waarden die de subgroepvariabele kan aannemen. Enkele voorbeelden van subgroepanalyses zijn: leeftijdsgroep, culturele achtergrond,controle-/interventiegroep, instrument om de uitkomst te meten, studiekwaliteit, soort, setting.</p>
+<p>Bij het berekenen van een subgroepanalyse moeten we beslissen of afzonderlijke of gemeenschappelijke schattingen van de heterogeniteit tussen studies moeten worden gebruikt om de resultaten binnen subgroepen te poolen. Subgroepanalyses zijn geen wondermiddel en het belangrijk rekening te houden met de beperkingen en valkuilen van subgroepanalyses. Ze missen vaak de statistische power die nodig is om subgroepverschillen te detecteren. Daarom betekent een niet-significante test voor subgroepverschillen niet automatisch dat de subgroepen gelijkwaardige resultaten opleveren.</p>
+</section>
+<section id="praktijk" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="praktijk"><span class="header-section-number">7.2</span> Praktijk</h2>
+<p>Het uitvoeren van een subgroepanalyse met behulp van het {meta} pakket is relatief eenvoudig. In elke meta-analysefunctie in {meta} kan het argument subgroep worden gespecificeerd. Dit vertelt de functie welke effectgrootte in welke subgroep valt en voert een subgroepanalyse uit. Het argument subgroep accepteert diverse soorten variabelen. Het enige waar we op moeten letten is dat studies in dezelfde subgroep absoluut identieke labels hebben.</p>
+<p>Laten we het databestand <code>ThirdWave</code> gebruiken om een subgroepanalyse uit te voeren en kjken naar de kolommen <code>author</code> en <code>RiskofBias</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># voor databewerking</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)    <span class="co"># voor de data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Extensive documentation for the dmetar package can be found at: 
+ www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)      <span class="co"># voor de meta-analyse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading 'meta' package (version 6.5-0).
+Type 'help(meta)' for a brief overview.
+Readers of 'Meta-Analysis with R (Use R!)' should install
+older version of 'meta' package: https://tinyurl.com/dt4y5drs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ThirdWave[,<span class="fu">c</span>(<span class="st">"Author"</span>, <span class="st">"RiskOfBias"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           Author RiskOfBias
+1     Call et al.       high
+2 Cavanagh et al.        low
+3   DanitzOrsillo       high
+4  de Vibe et al.        low
+5  Frazier et al.        low
+6  Frogeli et al.        low</code></pre>
+</div>
+</div>
+<p>Laten we eerst m.gen aanmaken en vervolgens de subgroepanalyse uitvoeren.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">metagen</span>(<span class="at">TE =</span> TE,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">seTE =</span> seTE,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> Author,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> ThirdWave,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"REML"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Third Wave Psychotherapies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update.meta</span>(m.gen, </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">subgroup =</span> RiskOfBias, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">tau.common =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Review:     Third Wave Psychotherapies
+
+Number of studies: k = 18
+
+                             SMD           95%-CI    t  p-value
+Random effects model (HK) 0.5771 [0.3782; 0.7760] 6.12 &lt; 0.0001
+
+Quantifying heterogeneity:
+ tau^2 = 0.0820 [0.0295; 0.3533]; tau = 0.2863 [0.1717; 0.5944]
+ I^2 = 62.6% [37.9%; 77.5%]; H = 1.64 [1.27; 2.11]
+
+Test of heterogeneity:
+     Q d.f. p-value
+ 45.50   17  0.0002
+
+Results for subgroups (random effects model (HK)):
+                    k    SMD           95%-CI  tau^2    tau     Q   I^2
+RiskOfBias = high   7 0.8126 [0.2835; 1.3417] 0.2423 0.4922 25.89 76.8%
+RiskOfBias = low   11 0.4300 [0.2770; 0.5830] 0.0099 0.0997 13.42 25.5%
+
+Test for subgroup differences (random effects model (HK)):
+                  Q d.f. p-value
+Between groups 2.84    1  0.0917
+
+Details on meta-analytical method:
+- Inverse variance method
+- Restricted maximum-likelihood estimator for tau^2
+- Q-Profile method for confidence interval of tau^2 and tau
+- Hartung-Knapp adjustment for random effects model (df = 17)</code></pre>
+</div>
+</div>
+<p>In de uitvoer zien we een nieuw gedeelte genaamd <em>Results for subgroups</em>. Dit deel van de uitvoer toont de gepoolde effectgrootte afzonderlijk voor elke subgroep. We zien dat er k=7 studies zijn met een hoog risico op vertekening en 11 met een laag risico op vertekening. De geschatte heterogeniteit tussen studies verschilt aanzienlijk, met <span class="math inline">\(I^2\)</span>=77% in studies met een hoog risico op vertekening, maar slechts 26% in studies met een laag risico. Met <span class="math inline">\(g\)</span>=0,43 is de effectschatting in studies met een laag vertekeningsrisico kleiner dan in studies met een hoog vertekeningsrisico. Dit is een veel voorkomende bevinding, omdat vertekende studies de effecten van een behandeling eerder overschatten.</p>
+<p>Maar is het verschil statistisch significant? We kunnen dit controleren door te kijken naar de resultaten van de <em>Test for subgroup differences</em>. Dit toont ons de <span class="math inline">\(Q\)</span>-test, die in ons voorbeeld met 2 subgroepen gebaseerd is op één vrijheidsgraad. De <span class="math inline">\(p\)</span>-waarde van de test is 0,09, wat groter is dan de conventionele significantiedrempel, maar nog steeds een verschil op trendniveau aangeeft.We kunnen de resultaten ook controleren als we uitgaan van een gemeenschappelijke <span class="math inline">\(\tau^2\)</span>-schatting in beide subgroepen. We hoeven alleen <code>tau.common</code> op <code>TRUE</code> te zetten.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update.meta</span>(m.gen, <span class="at">subgroup =</span> RiskOfBias, <span class="at">tau.common =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Review:     Third Wave Psychotherapies
+
+Number of studies: k = 18
+
+                             SMD           95%-CI    t  p-value
+Random effects model (HK) 0.5771 [0.3782; 0.7760] 6.12 &lt; 0.0001
+
+Quantifying heterogeneity:
+ tau^2 = 0.0820 [0.0295; 0.3533]; tau = 0.2863 [0.1717; 0.5944]
+ I^2 = 62.6% [37.9%; 77.5%]; H = 1.64 [1.27; 2.11]
+
+Quantifying residual heterogeneity:
+ tau^2 = 0.0691 [0.0208; 0.3268]; tau = 0.2630 [0.1441; 0.5717]
+ I^2 = 59.3% [30.6%; 76.1%]; H = 1.57 [1.20; 2.05]
+
+Test of heterogeneity:
+     Q d.f. p-value
+ 45.50   17  0.0002
+
+Results for subgroups (random effects model (HK)):
+                    k    SMD           95%-CI  tau^2    tau     Q   I^2
+RiskOfBias = high   7 0.7691 [0.2533; 1.2848] 0.0691 0.2630 25.89 76.8%
+RiskOfBias = low   11 0.4698 [0.3015; 0.6382] 0.0691 0.2630 13.42 25.5%
+
+Test for subgroup differences (random effects model (HK)):
+                   Q d.f. p-value
+Between groups  1.79    1  0.1814
+Within groups  39.31   16  0.0010
+
+Details on meta-analytical method:
+- Inverse variance method
+- Restricted maximum-likelihood estimator for tau^2
+  (assuming common tau^2 in subgroups)
+- Q-Profile method for confidence interval of tau^2 and tau
+- Hartung-Knapp adjustment for random effects model (df = 17)</code></pre>
+</div>
+</div>
+<p>We zien dat de geschatte heterogeniteitsvariantie tussen studies <span class="math inline">\(\tau^2\)</span>= 0,069 is, en identiek in beide subgroepen. We hebben twee <span class="math inline">\(Q\)</span>-tests: één tussen groepen (de eigenlijke subgroeptoets) en één voor de heterogeniteit binnen de subgroepen. Net als in een normale meta-analyse geeft dit laatste simpelweg aan dat er een overmatige variabiliteit is in de subgroepen (<span class="math inline">\(p\)</span>= 0,001). De test van subgroepverschillen geeft opnieuw aan dat er geen significant verschil is tussen studies met een laag versus hoog risico op vertekening (p= 0,181).</p>
+<p>De resultaten van subgroepanalyses worden meestal gerapporteerd in een tabel met het geschatte effect en de heterogeniteit in elke subgroep, evenals de p-waarde van de test voor subgroepverschillen.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'kableExtra'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    group_rows</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="table table-condensed table-striped table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$g$</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">95\%CI</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$p$</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$I^2$</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">95\%CI</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">$p$<sub>subgroup</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Risk of Bias</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">0.092</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">- High</td>
+<td style="text-align: left;">0.81</td>
+<td style="text-align: left;">0.28-1.34</td>
+<td style="text-align: left;">0.009</td>
+<td style="text-align: left;">0.77</td>
+<td style="text-align: left;">0.51-0.89</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">- Low</td>
+<td style="text-align: left;">0.43</td>
+<td style="text-align: left;">0.28-0.58</td>
+<td style="text-align: left;">$&lt;$ 0.001</td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;">0.00-0.63</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
 
 
 </section>

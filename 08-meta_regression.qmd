@@ -1,1 +1,10 @@
-# Meta-Regression
+# Meta-Regressie
+
+In meta-regressie passen we conventionele regressietechnieken aan op gegevens op studieniveau. Subgroepanalyses kunnen worden gezien als een speciaal geval van meta-regressie met categorische voorspellers en een gemeenschappelijke schatting van $\tau^2$. Het doel van een meta-regressiemodel is om (delen van) de ware verschillen in effectgrootte in onze data te **verklaren** (d.w.z. de heterogeniteitsvariantie tussen studies, $\tau^2$). Als een model goed bij de gegevens past, moet de afwijking van de ware effecten van de regressielijn kleiner zijn dan hun oorspronkelijke afwijking van het gepoolde effect. Als dit het geval is, zal de onverklaarde of residuele heterogeniteit klein zijn. Dit wordt weergegeven door de `R2∗index`, die ons vertelt welk percentage van de heterogeniteitsvariatie door ons model wordt verklaard.
+
+Bij meervoudige meta-regressie worden twee of meer voorspellers gebruikt in hetzelfde meta-regressiemodel. Het is ook mogelijk om te testen of de voorspellingen van een variabele veranderen voor verschillende waarden van een andere variabele, door interactietermen te introduceren. Hoewel (meervoudige) meta-regressie erg veelzijdig is, is het niet zonder beperkingen. Meervoudige meta-regressie maakt het erg gemakkelijk om modellen te overfitten, wat betekent dat willekeurige ruis in plaats van echte relaties gemodelleerd worden. Multi-collineariteit van voorspellers kan ook een bedreiging vormen voor de geldigheid van ons model.
+Er zijn verschillende manieren om ervoor te zorgen dat ons meta-regressiemodel robuust is. We kunnen bijvoorbeeld alleen modellen passen die gebaseerd zijn op een vooraf gedefinieerde theoretische rationale, of permutatietesten gebruiken. Multi-model inferentie kan worden gebruikt als een verkennende aanpak. Deze methode kan ons wijzen op mogelijk belangrijke voorspellers en kan worden gebruikt om hypotheses af te leiden die in toekomstig onderzoek moeten worden getest.
+
+
+
+
