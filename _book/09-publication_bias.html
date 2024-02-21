@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 9&nbsp; Publication Bias</title>
+<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 9&nbsp; Publicatie Bias</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,6 +62,11 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -74,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-effect_sizes.html">Meta-Analysis in R</a></li><li class="breadcrumb-item"><a href="./09-publication_bias.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Publication Bias</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-effect_sizes.html">Meta-Analysis in R</a></li><li class="breadcrumb-item"><a href="./09-publication_bias.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Publicatie Bias</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -170,13 +175,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-meta_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regressie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-publication_bias.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Publication Bias</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Publicatie Bias</span></span></a>
   </div>
 </li>
       </ul>
@@ -264,7 +269,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Publication Bias</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Publicatie Bias</span></h1>
 </div>
 
 
@@ -279,6 +284,54 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>Publicatiebias treedt op wanneer sommige studies systematisch ontbreken in de gepubliceerde literatuur, en dus ook in onze meta-analyse. Strikt genomen is er sprake van publicatiebias als de waarschijnlijkheid dat een studie gepubliceerd wordt afhangt van de resultaten. Er is echter ook een reeks andere vertekeningen in de rapportage. Deze vertekeningen beïnvloeden ook hoe waarschijnlijk het is dat een bevinding in onze meta-analyse terechtkomt. Voorbeelden zijn citatiebias, taalbias of uitkomstbias. Het is ook mogelijk dat gepubliceerd bewijs vertekend is, bijvoorbeeld door twijfelachtige onderzoekspraktijken. Twee veelvoorkomende van dat soort praktijken zijn <span class="math inline">\(p\)</span>-hacking en HARKing, en beide kunnen het risico op overschatting van effecten in een meta-analyse vergroten.</p>
+<p>Veel methoden voor publicatiebias zijn gebaseerd op het idee van kleine-studie-effecten. Deze benaderingen gaan ervan uit dat alleen kleine studies met een verrassend hoge effectgrootte significante resultaten behalen en daarom worden geselecteerd voor publicatie. Dit leidt tot een asymmetrische funnel plot, wat een teken kan zijn van publicatiebias. Maar dat hoeft niet zo te zijn. Er zijn ook verschillende “goedaardige” oorzaken van effecten van kleine studies mogelijk. Een relatief nieuwe methode, p-curve, is gebaseerd op het idee dat we kunnen controleren op bewijskracht door alleen maar te kijken naar het patroon van significante (p&lt;0,05) effecten in onze gegevens. Deze methode kan worden gebruikt om te testen op zowel de aan- als afwezigheid van een echt effect en kan de grootte ervan schatten.</p>
+<p>Er is geen bewijs dat een bepaalde publicatiebias beter veel beter is dan een ander. Maar wat moet je dan kiezen? Om dit probleem aan te pakken, raden we aan om altijd meerdere methoden te gebruiken bij het evalueren van publicatiebias. Hieronder vind je een overzicht van de meest gebruikte methoden met de voor- en nadelen erbij.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-condensed table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Methoden om de ware effectgrootte te schatten, gecorrigeerd voor publicatiebias: Overzicht van voor- en nadelen.</caption>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold;"></th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold;">Voordelen</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; font-weight: bold;">Nadelen</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; width: 2cm; font-weight: bold;">Duval &amp; Tweedie Trim-and-Fill</td>
+<td style="text-align: left; width: 4cm;">Very heavily used in practice. Can be interpreted by many researchers.</td>
+<td style="text-align: left; width: 5cm;">Often fails to correct the effect size enough, for example when the true effect is zero. Not robust when the heterogeneity is very large; often outperformed by other methods.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; width: 2cm; font-weight: bold;">PET-PEESE</td>
+<td style="text-align: left; width: 4cm;">Based on a simple and intuitive model. Easy to implement and interpret.</td>
+<td style="text-align: left; width: 5cm;">Sometimes massively over- or underestimates the effect. Weak performance for meta-analyses with few studies, low sample sizes, and high heterogeneity.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; width: 2cm; font-weight: bold;">Limit Meta-Analysis</td>
+<td style="text-align: left; width: 4cm;">Similar approach as PET-PEESE, but explicitly models between-study heterogeneity.</td>
+<td style="text-align: left; width: 5cm;">Performance is less well studied than the one of other methods. May fail when the number of studies is very low (&lt;10) and heterogeneity very high.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; width: 2cm; font-weight: bold;">P-Curve</td>
+<td style="text-align: left; width: 4cm;">Has been shown to outperform other methods (particularly trim-and-fill) when its assumptions are met.</td>
+<td style="text-align: left; width: 5cm;">Works under the assumption of no heterogeneity, which is unlikely in practice. Requires a minimum number of significant effect sizes. Less easy to interpret and communicate.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; width: 2cm; font-weight: bold;">Selection Models</td>
+<td style="text-align: left; width: 4cm;">Can potentially model any kind of assumed selection process. The three-parameter selection model has shown good performance in simulation studies.</td>
+<td style="text-align: left; width: 5cm;">Only valid when the selection model describes the publication bias process adequately. Assume that other small-study effects are not relevant. Can be difficult to interpret and requires background knowledge.</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Het is vaak moeilijk, zo niet onmogelijk, om te weten welke aanpak het meest geschikt is voor onze gegevens en of de resultaten betrouwbaar zijn. Zoals we al eerder zeiden, zal de exacte mate waarin selectieve rapportage onze resultaten heeft beïnvloed altijd onbekend zijn. Maar door verschillende publicatiebias technieken toe te passen, kunnen we iets produceren dat lijkt op een reeks geloofwaardige ware effecten.</p>
+<p>Selectiemodellen zijn een zeer veelzijdige methode en kunnen worden gebruikt om verschillende publicatiebiasprocessen te modelleren. Ze geven echter alleen geldige resultaten als het veronderstelde model adequaat is en vereisen vaak een zeer groot aantal onderzoeken. Een zeer eenvoudig selectiemodel, het drieparametermodel, kan ook worden gebruikt voor kleinere datasets. Geen enkele publicatiebiasmethode presteert consistent beter dan alle andere. Het is daarom raadzaam om altijd meerdere technieken toe te passen en de gecorrigeerde effectgrootte voorzichtig te interpreteren. Grondig zoeken naar ongepubliceerd bewijs vermindert het risico van publicatiebias veel beter dan de huidige statistische benaderingen.</p>
 
 
 
@@ -519,7 +572,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./08-meta_regression.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regression</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regressie</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
