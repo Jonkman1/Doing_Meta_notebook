@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Doing Meta-Analysis with R. A Hands-On Guide - 12&nbsp; Network Meta-Analysis</title>
+<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 12&nbsp; Network Meta-Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -62,6 +96,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -89,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Doing Meta-Analysis with R. A Hands-On Guide</a> 
+      <a href="./">Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -123,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-discovering_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discovering R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R ontdekken</span></span></a>
   </div>
 </li>
       </ul>
@@ -146,37 +182,37 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pooling_effect_sizes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pooling Effect Sizes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Effect Sizes samenbrengen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-between_study_heterogeneity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Between-Study-Herterogeneity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Heterogeniteit tussen studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-forest_plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Forest Plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">De forest Plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-subgroup_analyses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroup Analyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroep Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-meta_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regressie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-publication_bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Publication Bias</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Publicatie Bias</span></span></a>
   </div>
 </li>
       </ul>
@@ -257,7 +293,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#theorie" id="toc-theorie" class="nav-link active" data-scroll-target="#theorie"><span class="header-section-number">12.1</span> Theorie</a></li>
+  <li><a href="#praktijk" id="toc-praktijk" class="nav-link" data-scroll-target="#praktijk"><span class="header-section-number">12.2</span> Praktijk</a>
+  <ul class="collapse">
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">12.2.1</span> Data preparation</a></li>
+  <li><a href="#netwerk-visualisatie" id="toc-netwerk-visualisatie" class="nav-link" data-scroll-target="#netwerk-visualisatie"><span class="header-section-number">12.2.2</span> Netwerk visualisatie</a></li>
+  <li><a href="#model-samenstelling" id="toc-model-samenstelling" class="nav-link" data-scroll-target="#model-samenstelling"><span class="header-section-number">12.2.3</span> Model samenstelling</a></li>
+  <li><a href="#mcmc-sampling-en-convergentie" id="toc-mcmc-sampling-en-convergentie" class="nav-link" data-scroll-target="#mcmc-sampling-en-convergentie"><span class="header-section-number">12.2.4</span> MCMC sampling en convergentie</a></li>
+  <li><a href="#netwerk-meta-regressie" id="toc-netwerk-meta-regressie" class="nav-link" data-scroll-target="#netwerk-meta-regressie"><span class="header-section-number">12.2.5</span> Netwerk meta-regressie</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -279,8 +329,592 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="theorie" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="theorie"><span class="header-section-number">12.1</span> Theorie</h2>
+<p>Netwerkmeta-analyse is een nuttig hulpmiddel om de relatieve effectiviteit van verschillende behandelingen of interventies gezamenlijk in te schatten. Netwerk meta-analyse staat ook bekend als <strong>mixed-treatment comparison meta-analyse</strong>. Dit komt omdat het meerdere directe en indirecte behandelingsvergelijkingen integreert in één model, dat kan worden geformaliseerd als een “netwerk” van vergelijkingen. Netwerk meta-analyse is een “hot” onderzoeksonderwerp. In de afgelopen tien jaar is het steeds meer opgepikt door toegepaste onderzoekers in de biomedische sector en andere disciplines. Deze methode gaat echter ook gepaard met extra uitdagingen en valkuilen, vooral met betrekking tot heterogeniteit en zogenaamde <strong>netwerkinconsistentie</strong>.</p>
+<p>Netwerk meta-analyse heeft enkele voordelen: - Het stelt ons in staat om alle beschikbare informatie van een reeks gerelateerde onderzoeken samen te voegen in één analyse. Bedenk hoe we in conventionele meta-analyses gewoonlijk omgaan met onderzoeken waarin verschillende behandelingen worden vergeleken met, laten we zeggen, een placebo. We zouden dan elke vergelijking moeten samenvoegen (bijv. behandeling A vergeleken met placebo, behandeling B vergeleken met placebo, behandeling A vergeleken met behandeling B, enz) in een aparte meta-analyse.</p>
+<ul>
+<li><p>Netwerkmeta-analyse kan indirect bewijs in een netwerk opnemen, wat niet mogelijk is in conventionele meta-analyse. In paarsgewijze meta-analyses kunnen we alleen direct bewijs samenvoegen van vergelijkingen die daadwerkelijk in een trial waren opgenomen.</p></li>
+<li><p>Als aan alle aannames is voldaan en als de resultaten voldoende overtuigend zijn, kunnen we uit netwerkmeta-analyses afleiden welk type behandeling de voorkeur verdient voor de onderzochte doelpopulatie.</p></li>
+</ul>
+<p>Om de behandelingseffecten te schatten, combineert netwerk meta-analyse dus zowel direct (d.w.z. waargenomen) als indirect bewijs. Dit is echter gebaseerd op de aanname van transitiviteit. Er is sprake van transitiviteit als we direct bewijs van twee vergelijkingen kunnen combineren om daaruit geldig indirect bewijs af te leiden over een derde vergelijking (van bv vergelijkingen <span class="math inline">\(A-B\)</span> en <span class="math inline">\(C-B\)</span> om indirect bewijs te leveren over een gerelateerde vergelijking als bv <span class="math inline">\(A-C\)</span>). De statistische manifestatie van transitiviteit is <strong>consistentie</strong>, het tegenovergestelde daarvan is <strong>inconsistentie</strong>. Van consistentie is sprake wanneer het werkelijke effect van een vergelijking op basis van direct bewijs overeenkomt met het effect op basis van indirect bewijs, inconsistentie ontstaat wanneer dat niet het geval is.</p>
+<p>Er zijn verschillende netwerk meta-analyse modellen beschikbaar. Sommige methoden, zoals <strong>nodesplitting</strong> of <strong>net heat plots</strong>, kunnen worden gebruikt om inconsistenties in ons netwerk te identificeren. Als er inconsistenties worden gevonden, bedreigt dit de geldigheid van onze resultaten als geheel. In dergelijke gevallen moet het hele netwerk worden gecontroleerd op kenmerken die systematische verschillen tussen studies/ontwerpen kunnen hebben veroorzaakt. Netwerk meta-analyse kan met een frequentistische of een Bayesiaanse aanpak worden uitgevoerd. In de praktijk heeft elk van deze methoden zijn eigen sterke punten, maar de algemene resultaten lijken meestal erg op elkaar.</p>
+<p>In netwerkmeta-analyses op basis van een Bayesiaans hiërarchisch model kunnen we ook studiecovariaten toevoegen die verschillen in effectgrootte voorspellen. Dit resulteert in een netwerk meta-regressiemodel.</p>
+<p>Indices zoals de SUCRA of P-score kunnen worden gebruikt om te onderzoeken welk type behandeling het meest effectief is in ons netwerk. Het is echter ook belangrijk om onzekerheid te integreren in ons besluitvormingsproces.</p>
+<p>Waarschijnlijkheidsintervallen van verschillende behandelingen overlappen elkaar vaak, waardoor het minder duidelijk is of één vorm echt superieur is aan alle andere.</p>
+</section>
+<section id="praktijk" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="praktijk"><span class="header-section-number">12.2</span> Praktijk</h2>
+<p>Het {gemtc} pakket is afhankelijk van {rjags}, dat kan worden gebruikt voor de Gibbs sampling procedure. Daarvoor moet je wel <strong>JAGS</strong> hebben geinstalleerd op je computer. Daarna kun je {rjags} binnenhalen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gemtc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: coda</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjags)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linked to JAGS 4.3.0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loaded modules: basemod,bugs</code></pre>
+</div>
+</div>
+<section id="data-preparation" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">12.2.1</span> Data preparation</h3>
+<p>De <code>TherapyFormatsGeMTC</code> dataset is eigenlijk een list met twee elementen, waarvan er één data heet. Dit element is het dataframe dat we nodig hebben om het model te draaien. Laten we er eens naar kijken.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Extensive documentation for the dmetar package can be found at: 
+ www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dmetar'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:gemtc':
+
+    sucra</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(TherapyFormatsGeMTC)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TherapyFormatsGeMTC<span class="sc">$</span>data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         study   diff std.err treatment
+1 Ausbun, 1997  0.092   0.195       ind
+2 Ausbun, 1997     NA      NA       grp
+3 Crable, 1986 -0.675   0.350       ind
+4 Crable, 1986     NA      NA       grp
+5 Thiede, 2011 -0.107   0.198       ind
+6 Thiede, 2011     NA      NA       grp</code></pre>
+</div>
+</div>
+<ul>
+<li><strong>study</strong>: de studie waaruit de data afkomstig is;</li>
+<li><strong>diff</strong>: de effectsize (SMD) van de vergelijking;<br>
+</li>
+<li><strong>std.err</strong>: de standaardfout van de effectsize;<br>
+</li>
+<li><strong>treatment</strong>: label voor soort behandeling.</li>
+</ul>
+</section>
+<section id="netwerk-visualisatie" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="netwerk-visualisatie"><span class="header-section-number">12.2.2</span> Netwerk visualisatie</h3>
+<p>Nu we de data hebben, zetten we de <code>mtc.network</code> functie aan. Het optionele treatments argument kan gebruikt worden om {gemtc} te voorzien van de werkelijke namen van alle behandelingen die in het netwerk zijn opgenomen. Deze informatie moet worden klaargezet in een dataframe met een <code>id</code>- en een <code>description</code>-kolom. We hebben zo’n dataframe gemaakt en opgeslagen als <code>treat.codes</code> in <code>TherapyFormatsGeMTC</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>TherapyFormatsGeMTC<span class="sc">$</span>treat.codes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   id        description
+1 ind         Individual
+2 grp              Group
+3 gsh   Guided Self-Help
+4 tel          Telephone
+5 wlc           Waitlist
+6 cau      Care As Usual
+7 ush Unguided Self-Help</code></pre>
+</div>
+</div>
+<p>We gebruiken dit dataframe en onze effectsize-gegevens in <code>TherapyFormatsGeMTC</code> om ons <code>mtc.network-object</code> te maken. We slaan het op onder de naam <code>network</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>network <span class="ot">&lt;-</span> <span class="fu">mtc.network</span>(<span class="at">data.re  =</span> TherapyFormatsGeMTC<span class="sc">$</span>data,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">treatments =</span> TherapyFormatsGeMTC<span class="sc">$</span>treat.codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Door het resulterende object in de <code>summary</code>-functie te stoppen, krijgen we al wat interessante informatie over ons netwerk.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Description
+[1] "MTC dataset: Network"
+
+$`Studies per treatment`
+ind grp gsh tel wlc cau ush 
+ 62  52  57  11  83  74  26 
+
+$`Number of n-arm studies`
+2-arm 3-arm 
+  181     1 
+
+$`Studies per treatment comparison`
+    t1  t2 nr
+1  ind tel  4
+2  ind wlc 18
+3  grp ind  7
+4  grp gsh  5
+5  grp wlc 18
+6  grp ush  1
+7  gsh ind  4
+8  gsh wlc 36
+9  gsh ush  5
+10 tel wlc  1
+11 cau ind 30
+12 cau grp 21
+13 cau gsh  8
+14 cau tel  6
+15 cau ush  9
+16 ush wlc 11</code></pre>
+</div>
+</div>
+<p>We kunnen nu ook de <code>plot</code>-functie gebruiken om een netwerkplot te genereren. De dikte van de randen komt overeen met het aantal studies dat we hebben opgenomen voor die vergelijking.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network, </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">use.description =</span> <span class="cn">TRUE</span>) <span class="co"># Use full treatment names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Met het {igraph} pakket kunnen we de netwerkplot ook aanpassen. Kijk voor meer informatie over de mogelijke aanpassingen naar de documentatie van <a href="https://igraph.org/r/doc/plot.common.html">igraph</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'igraph'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    decompose, spectrum</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:base':
+
+    union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network, </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">use.description =</span> <span class="cn">TRUE</span>,            <span class="co"># Use full treatment names</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">"white"</span>,            <span class="co"># node color</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">"gray10"</span>,     <span class="co"># treatment label color</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">"sphere"</span>,           <span class="co"># shape of the node</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.family =</span> <span class="st">"Helvetica"</span>, <span class="co"># label font</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">20</span>,                  <span class="co"># size of the node</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.dist =</span> <span class="dv">2</span>,             <span class="co"># distance label-node center</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">1.5</span>,            <span class="co"># node label size</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.2</span>,                 <span class="co"># edge curvature</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout.fruchterman.reingold)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="model-samenstelling" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="model-samenstelling"><span class="header-section-number">12.2.3</span> Model samenstelling</h3>
+<p>Nu we ons netwerk hebben, kunnen we een model samenstellen. We gebruiken de <code>mtc.model</code>-functie om een model te maken. We geven ons netwerk, de likelihood, link, linearModel en het aantal chains mee.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We give our compiled model the name `model`.</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">mtc.model</span>(network,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">likelihood =</span> <span class="st">"normal"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">link =</span> <span class="st">"identity"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">linearModel =</span> <span class="st">"random"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n.chain =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="mcmc-sampling-en-convergentie" class="level3" data-number="12.2.4">
+<h3 data-number="12.2.4" class="anchored" data-anchor-id="mcmc-sampling-en-convergentie"><span class="header-section-number">12.2.4</span> MCMC sampling en convergentie</h3>
+<p>Modellen kunnen we op verschillende manieren specificeren. Laten we twee modellen definieren.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mcmc1 <span class="ot">&lt;-</span> <span class="fu">mtc.run</span>(model, <span class="at">n.adapt =</span> <span class="dv">50</span>, <span class="at">n.iter =</span> <span class="dv">1000</span>, <span class="at">thin =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 182
+   Unobserved stochastic nodes: 190
+   Total graph size: 2606
+
+Initializing model</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in rjags::jags.model(file.model, data = syntax[["data"]], inits =
+syntax[["inits"]], : Adaptation incomplete</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>NOTE: Stopping adaptation</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mcmc2 <span class="ot">&lt;-</span> <span class="fu">mtc.run</span>(model, <span class="at">n.adapt =</span> <span class="dv">5000</span>, <span class="at">n.iter =</span> <span class="fl">1e5</span>, <span class="at">thin =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 182
+   Unobserved stochastic nodes: 190
+   Total graph size: 2606
+
+Initializing model</code></pre>
+</div>
+</div>
+<p>Om te zien of de modellen zijn geconvergeerd, plotten we ze. Op basis van trace en met name densityplots zie je dat het tweede model er betrouwbaarder uitziet.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output-display">
+<p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-10-4.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Voor diagnostiek kun je ook nog Gelman-plots draaien. Waarden moeten dicht bij 1 liggen. Dat is bij beiden het geval ook al toont het tweede model een betere convergentie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.plot</span>(mcmc1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.plot</span>(mcmc2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>De waarde kun je ook direct opvragen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.diag</span>(mcmc1)<span class="sc">$</span>mpsrf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.035278</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.diag</span>(mcmc2)<span class="sc">$</span>mpsrf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.000577</code></pre>
+</div>
+</div>
+</section>
+<section id="netwerk-meta-regressie" class="level3" data-number="12.2.5">
+<h3 data-number="12.2.5" class="anchored" data-anchor-id="netwerk-meta-regressie"><span class="header-section-number">12.2.5</span> Netwerk meta-regressie</h3>
+<p>Een groot voordeel van het {gemtc} pakket is dat je er een netwerk meta-regressie mee kan uitvoeren. Stel dat we willen evalueren of het risico op bias van een studie invloed heeft op de effecten in onze netwerkmeta-analyse. Het zou bijvoorbeeld kunnen dat studies met een hoog biasrisico over het algemeen hogere effecten rapporteren in vergelijking met de controlegroep of alternatieve behandelingen. Door het biasrisico als voorspeller op te nemen in ons model, kunnen we controleren op een dergelijke associatie en de invloed ervan op onze resultaten beoordelen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>TherapyFormatsGeMTC<span class="sc">$</span>study.info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       study rob
+1             Campbell, 2000   1
+2             Reynolds, 1989   1
+3            Carpenter, 1994   0
+4             Shrednik, 2000   1
+5               Lesley, 1999   1
+6                Wyatt, 2003   0
+7                Lemon, 2005   1
+8                James, 2012   0
+9              Graesch, 2000   0
+10               Lange, 1993   1
+11         Marinkovich, 2003   1
+12              Wuertz, 2016   1
+13              Hughey, 2012   1
+14               Dobbs, 2000   1
+15               Quick, 2006   1
+16             Harbert, 1999   1
+17              Nelson, 1987   1
+18          Watkins Jr, 2004   1
+19              Ristau, 1992   1
+20            Schlegel, 1989   1
+21            Wierenga, 2004   1
+22               Laird, 2008   1
+23               Riley, 2002   1
+24            Germuska, 1996   0
+25            Schulker, 2009   1
+26             Barrett, 2005   1
+27                Neil, 2015   1
+28             Congour, 1996   1
+29               Hurla, 1985   1
+30            Hanrahan, 1999   1
+31            Koslosky, 1991   1
+32             Runnels, 2004   1
+33               Orman, 2012   0
+34              Dewitt, 1995   1
+35                Fair, 2003   0
+36            Schlaver, 2004   1
+37                King, 1990   1
+38              Snider, 1998   1
+39               Craft, 2014   1
+40           Ceurvorst, 2011   1
+41             Roberts, 1996   1
+42             Carrell, 2008   0
+43         Muhlenbruck, 1998   1
+44              Kramer, 2007   1
+45              Barker, 1997   0
+46             Johnson, 1989   1
+47               Shorb, 1998   0
+48             Scholer, 2017   1
+49             Maurath, 1994   0
+50               Leach, 2014   1
+51             Roberts, 1997   1
+52          De Venecia, 2011   1
+53                Shea, 2011   1
+54           Gilleland, 1989   1
+55              Murray, 1996   1
+56             Menzies, 2003   0
+57            Chambers, 2010   1
+58              Mickey, 1989   1
+59               Hiatt, 1985   1
+60             Breiman, 2001   1
+61              Parker, 2002   1
+62            Erickson, 1998   1
+63              Ancmon, 2001   0
+64            Fladland, 1997   1
+65               Crane, 1984   1
+66         Christenson, 2018   1
+67               Plewe, 1991   1
+68           Fergerson, 2014   1
+69             Frenzel, 2006   0
+70              Walker, 1990   1
+71              Crable, 1986   1
+72               Gilly, 2014   1
+73              Austin, 1988   1
+74            Whitaker, 2017   1
+75             Breiman, 2001   1
+76               Brown, 1985   1
+77                Dahl, 2002   0
+78               Clear, 1989   1
+79          Oberholser, 2008   1
+80        Debenedictis, 1993   0
+81              Martin, 2017   1
+82              Hassan, 2011   1
+83       Knickerbocker, 1987   1
+84                Cook, 2013   0
+85             Ciccone, 1997   0
+86          Summerhays, 1987   0
+87               Silva, 1986   1
+88            Thompson, 2003   0
+89               Pauly, 2003   0
+90            Schwartz, 2012   0
+91             Englund, 2017   0
+92              Horton, 1985   0
+93               Scott, 1993   0
+94              Staley, 1992   1
+95               Allen, 2003   0
+96          Vahlenkamp, 2006   1
+97             Blevins, 2003   0
+98             Huebner, 1997   0
+99             Mcmanus, 1987   0
+100            Fotenos, 1994   0
+101            Delaney, 1995   0
+102                Fay, 2002   0
+103                Mai, 2003   0
+104             Nelson, 2006   0
+105              Reeve, 2013   0
+106          Eisenberg, 1995   0
+107            Woodard, 2013   0
+108            Roberts, 2017   0
+109            Jeffers, 1996   0
+110        Rusciolelli, 2000   0
+111             Miller, 1989   0
+112              Ayers, 2008   0
+113             Wagner, 1994   0
+114             Nguyen, 1996   1
+115             Weimer, 1999   0
+116              Isles, 2003   0
+117              Ralph, 1989   0
+118              Brown, 2017   0
+119             Burges, 1993   0
+120           Williams, 1989   0
+121             Pylkka, 2008   0
+122            Kilgore, 2003   1
+123           Tenbarge, 2000   1
+124             Carvey, 2008   0
+125            Mcmahon, 1998   0
+126            Metzger, 1988   0
+127            Warwick, 1986   0
+128              Lopez, 2011   0
+129             Burgan, 2012   0
+130             Gruber, 2013   0
+131              Meraz, 2014   0
+132                Ono, 1985   0
+133             Gleave, 2004   0
+134            Whiting, 1990   0
+135            Ebberts, 1992   0
+136           Thompson, 1998   0
+137              Jones, 2013   0
+138              Kurth, 1992   0
+139            Maranto, 1997   0
+140           Sheppard, 1994   0
+141               Belk, 1986   0
+142             Harder, 2005   0
+143            Hopkins, 2003   0
+144           Gilstrap, 2015   1
+145 Quinonez Dominguez, 1993   1
+146       Hetherington, 2003   0
+147           Bengston, 2004   0
+148                Joy, 2002   0
+149           Robinson, 2015   0
+150           Amsberry, 2010   0
+151             Thiede, 2011   1
+152            Bonertz, 2015   1
+153            Sheehan, 2013   0
+154              White, 2006   0
+155             Lucero, 2001   1
+156            Edwards, 2010   0
+157            Godinez, 2005   0
+158               Hall, 1997   0
+159          Underwood, 2008   0
+160          Ledbetter, 1984   0
+161              Hayko, 1999   0
+162        Chamberlain, 2011   0
+163           Fourroux, 1999   0
+164            Leonard, 2010   0
+165              Narum, 1986   1
+166  Villalobos-Valles, 2006   0
+167               Duba, 1990   0
+168             Ausbun, 1997   0
+169             Durgan, 1998   0
+170              Aaron, 2004   0
+171              Heath, 1998   0
+172             Vaclav, 1984   0
+173            Rodgers, 1993   0
+174             Watson, 1997   0
+175           Tamburri, 2001   0
+176       Homrighausen, 2002   0
+177          Buchholtz, 2010   0
+178              Cowan, 2010   1
+179               Bond, 1988   0
+180              Edgar, 2015   0
+181           Sherratt, 2000   0
+182 Santistevan-Gettel, 2012   0
+183             Graham, 1986   0</code></pre>
+</div>
+</div>
+<p>De dataset bevat twee kolommen: <code>study</code>, de naam van de studie die is opgenomen in ons netwerk en <code>rob</code>, het biasrisico (o voor laag en 1 voor hoog biasrisico).</p>
+<p>Met dataframe <code>study.info</code> kunnen we nu een meta-regressienetwerk maken met <code>mtc.network</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>network.mr <span class="ot">&lt;-</span> <span class="fu">mtc.network</span>(<span class="at">data.re =</span> TherapyFormatsGeMTC<span class="sc">$</span>data,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">studies =</span> TherapyFormatsGeMTC<span class="sc">$</span>study.info,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">treatments =</span> TherapyFormatsGeMTC<span class="sc">$</span>treat.codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Nu moeten we de <strong>regressor</strong> definiëren die we willen opnemen in ons netwerkmeta-analysemodel. Dit kan worden gedaan door een listobject met drie elementen te genereren:</p>
+<ul>
+<li><p><strong>coëfficiënt</strong>: We stellen dit element in op “gedeeld” omdat we één gedeelde coëfficiënt willen schatten voor het effect van (hoog) biasrisico over alle behandelingen die zijn opgenomen in onze netwerkmeta-analyse.</p></li>
+<li><p><strong>variabele</strong>: Dit specificeert de naam van de variabele die we willen gebruiken als predictor (hier: <code>rob</code>).</p></li>
+<li><p><strong>controle</strong>: We moeten ook de behandeling specificeren die we als referentiegroep willen gebruiken. In ons voorbeeld gebruiken we <code>cau</code> (care as usual).</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>regressor <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">coefficient =</span> <span class="st">"shared"</span>,</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">variable =</span> <span class="st">"rob"</span>,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">control =</span> <span class="st">"cau"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Nu moeten we het model definiëren. We voorzien de functie <code>mtc.model</code> van het netwerk dat we zojuist hebben gegenereerd, stellen het type van ons model in op <code>regression</code> en voorzien de functie van het regressorobject dat we zojuist hebben gegenereerd. We slaan de uitvoer op onder de naam <code>model.mr</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>model.mr <span class="ot">&lt;-</span> <span class="fu">mtc.model</span>(network.mr,</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">likelihood =</span> <span class="st">"normal"</span>,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">link =</span> <span class="st">"identity"</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">"regression"</span>,</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">regressor =</span> regressor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Na deze stap kunnen we het model uitvoeren met de functie <code>mtc.run</code>. We gebruiken dezelfde specificaties als we eerder hebben gebruikt voor het passen van het <code>mcmc2</code>-model. De resultaten worden opgeslagen als <code>mcmc3</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mcmc3 <span class="ot">&lt;-</span> <span class="fu">mtc.run</span>(model.mr,</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n.adapt =</span> <span class="dv">5000</span>,</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n.iter =</span> <span class="fl">1e5</span>,</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">thin =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiling model graph
+   Resolving undeclared variables
+   Allocating nodes
+Graph information:
+   Observed stochastic nodes: 182
+   Unobserved stochastic nodes: 191
+   Total graph size: 2980
+
+Initializing model</code></pre>
+</div>
+</div>
+<p>Nu kunnen we het analyseren met de <code>summary</code>-functie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mcmc3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Results on the Mean Difference scale
+
+Iterations = 5010:105000
+Thinning interval = 10 
+Number of chains = 4 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+              Mean      SD  Naive SE Time-series SE
+d.ind.cau  0.69902 0.07980 0.0003990      0.0004198
+d.ind.grp  0.19288 0.10044 0.0005022      0.0005439
+d.ind.gsh  0.16121 0.10467 0.0005233      0.0005576
+d.ind.tel  0.02273 0.16239 0.0008119      0.0008164
+d.ind.wlc  0.95051 0.09206 0.0004603      0.0004994
+d.wlc.ush -0.45545 0.11540 0.0005770      0.0005744
+sd.d       0.47060 0.03403 0.0001701      0.0001711
+B         -0.33205 0.13003 0.0006502      0.0010424
+
+2. Quantiles for each variable:
+
+               2.5%      25%      50%     75%   97.5%
+d.ind.cau  0.542709  0.64513  0.69872  0.7525  0.8559
+d.ind.grp -0.004622  0.12585  0.19281  0.2599  0.3901
+d.ind.gsh -0.043723  0.09062  0.16180  0.2320  0.3650
+d.ind.tel -0.299458 -0.08486  0.02381  0.1314  0.3407
+d.ind.wlc  0.770141  0.88924  0.95011  1.0118  1.1333
+d.wlc.ush -0.680003 -0.53358 -0.45566 -0.3774 -0.2287
+sd.d       0.407829  0.44685  0.46930  0.4930  0.5408
+B         -0.586304 -0.41980 -0.33141 -0.2448 -0.0775
+
+-- Model fit (residual deviance):
+
+     Dbar        pD       DIC 
+185.73014  74.50512 260.23526 
+
+183 data points, ratio 1.015, I^2 = 2%
+
+-- Regression settings:
+
+Regression on "rob", shared coefficients, "cau" as control
+Input standardized: x' = (rob - 0.4340659) / 1
+Estimates at the centering value: rob = 0.4340659</code></pre>
+</div>
+</div>
+<p>De resultaten voor onze predictor worden gerapporteerd naast <span class="math inline">\(B\)</span>. Omdat onze voorspeller een dummycode heeft, vertegenwoordigt de waarde van <span class="math inline">\(B\)</span> het effect van een onderzoek met een hoog biasrisico. De schatting is <span class="math inline">\(b= -0,33\)</span>, en als we kijken naar de tweede tabel (Kwantielen voor elke variabele), zien we dat het 95% geloofwaardigheidsinterval van <span class="math inline">\(b\)</span> varieert van -0,59 tot -0,08. Omdat het interval geen nul bevat, kunnen we concluderen dat het biasrisico inderdaad van invloed is op de resultaten. Als het biasrisico hoog is (<code>rob</code> = 1), kunnen we hier hogere totale effecten voorspellen (omdat negatieve effectgroottes in ons voorbeeld wijzen op “betere” uitkomsten).</p>
+<p>We kunnen de resultaten verder onderzoeken door het maken van twee forestplot: een met lage bias en een met hoge bias. We gebruiken de functie <code>relative.effect</code> en specificeren <code>covariate</code> waarde 0 en 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(<span class="fu">relative.effect</span>(mcmc3, <span class="at">t1 =</span> <span class="st">"cau"</span>, <span class="at">covariate =</span> <span class="dv">1</span>),</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">use.description =</span> <span class="cn">TRUE</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">1</span>))</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Hoge Risicobias"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(<span class="fu">relative.effect</span>(mcmc3, <span class="at">t1 =</span> <span class="st">"cau"</span>, <span class="at">covariate =</span> <span class="dv">0</span>),</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">use.description =</span> <span class="cn">TRUE</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">1</span>))</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Lage Risicobias"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Als we de forest plots vergelijken, zien we dat er een patroon is. De behandelingseffecten op basis van studies met een hoog biasrisico zijn over het algemeen hoger (d.w.z. negatiever). Dit komt overeen met de schatting van onze predictor <span class="math inline">\(b\)</span> in het gepaste model.</p>
+<p>Tot slot kunnen we ook onderzoeken of het netwerkmeta-regressiemodel dat we net hebben gegenereerd beter past bij de gegevens dan het “normale” netwerkmeta-analysemodel van eerder. Om dit te doen, kunnen we de deviance-informatiecriteria (DIC’s) vergelijken, die een equivalent zijn van de AIC- en BIC-waarden in frequentistische statistieken. We kunnen de DIC van zowel <code>mcmc3</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mcmc3)<span class="sc">$</span>DIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Dbar          pD         DIC data points 
+  185.73014    74.50512   260.23526   183.00000 </code></pre>
+</div>
+</div>
+<p>als <code>mcmc2</code> opvragen met deze code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mcmc2)<span class="sc">$</span>DIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Dbar          pD         DIC data points 
+   185.2144    137.8202    323.0345    183.0000 </code></pre>
+</div>
+</div>
+<p>We zien in de uitvoer dat de DIC-waarde van ons meta-regressiemodel (<span class="math inline">\(DIC = 261,19\)</span>) lager is dan die van ons vorige model waarin niet werd gecontroleerd voor risico van vertekening (<span class="math inline">\(DIC = 323,6\)</span>). Lagere DIC-waarden duiden op een betere pasvorm. Op basis van deze bevinding kunnen we concluderen dat ons netwerk meta-regressiemodel beter past bij de gegevens dan een model zonder covariaat.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

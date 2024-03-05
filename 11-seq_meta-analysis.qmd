@@ -1,1 +1,118 @@
 # Structural Equation Modeling Meta-Analysis
+
+## Theorie
+Structural Equation Modeling (SEM) is een statistische techniek die kan worden gebruikt om **complexe relaties** tussen waargenomen (d.w.z. manifeste) en niet-waargenomen (d.w.z. latente) variabelen te testen. 
+
+Meta-analyse is gebaseerd op een multilevel model, en kan daarom ook worden geformuleerd vanuit een SEM perspectief. Dit kan worden gebruikt om random-effects meta-analyses te "repliceren" als structurele vergelijkingsmodellen. Belangrijker is echter dat dit ons in staat stelt om meta-analyses uit te voeren die complexere relaties tussen waargenomen effectgrootten modelleren.
+
+
+Meta-analytische SEM kan bijvoorbeeld worden toegepast om **multivariate meta-analyses** uit te voeren. In multivariate meta-analyses worden twee of meer uitkomsten gezamenlijk geschat, waarbij rekening wordt gehouden met de correlatie tussen beide uitkomstmaten.
+
+Een andere toepassing van meta-analytische SEM is **confirmatory factor analysis**. Om de geschiktheid van een voorgesteld factormodel voor alle geïncludeerde onderzoeken te testen, moet een tweestapsprocedure worden gebruikt. In de eerste fase worden correlatiematrices van individuele studies samengevoegd. Vervolgens wordt deze gepoolde correlatiematrix gebruikt om de veronderstelde SEM te fitten.
+
+## Praktijk
+### Multivariate Meta-Analyse
+
+```{r}
+library(metaSEM)   # voor SEM
+library(tidyverse) # voor databewerking
+library(dmetar)    # voor de data
+library(meta)      # voor de meta-analyse
+
+data(ThirdWave)
+glimpse(ThirdWave)
+```
+
+```{r}
+# Define vector with effects on anxiety (Hedges g)
+Anxiety <- c(0.224,0.389,0.913,0.255,0.615,-0.021,0.201, 
+             0.665,0.373,1.118,0.158,0.252,0.142,NA, 
+             0.410,1.139,-0.002,1.084)
+
+# Standard error of anxiety effects
+Anxiety_SE <- c(0.193,0.194,0.314,0.165,0.270,0.233,0.159,
+                0.298,0.153,0.388,0.206,0.256,0.256,NA,
+                0.431,0.242,0.274,0.250)
+
+# Covariance between stress and anxiety outcomes
+Covariance <- c(0.023,0.028,0.065,0.008,0.018,0.032,0.026, 
+                0.046,0.020,0.063,0.017,0.043,0.037,NA, 
+                0.079,0.046,0.040,0.041)
+```
+
+```{r}
+ThirdWaveMV <- data.frame(Author = ThirdWave$Author,
+                          Stress = ThirdWave$TE,
+                          Stress_var = ThirdWave$seTE^2,
+                          Anxiety = Anxiety,
+                          Anxiety_var = Anxiety_SE^2,
+                          Covariance = Covariance)
+
+format(head(ThirdWaveMV), digits = 2)
+```
+
+```{r}
+# We use the square root of the variance since SE = sqrt(var)
+cov.est <- with(ThirdWaveMV, 
+                sqrt(Stress_var) * sqrt(Anxiety_var) * 0.6)
+```
+
+### Specifying the Model
+
+```{r}
+m.mv <- meta(y = cbind(Stress, Anxiety), 
+             v = cbind(Stress_var, Covariance, Anxiety_var),
+             data = ThirdWaveMV)
+```
+
+```{r}
+
+#summary(m.mv)
+
+#rerun(m.mv)
+```
+
+```{r}
+tau.coefs <- coef(m.mv, select = "random")
+```
+
+```{r}
+# Create matrix
+tc.mat <- vec2symMat(tau.coefs)
+
+# Label rows and columns
+dimnames(tc.mat)[[1]] <- dimnames(tc.mat)[[2]] <- c("Stress", 
+                                                    "Anxiety")
+
+tc.mat
+```
+```{r}
+cov2cor(tc.mat)
+```
+
+```{r}
+m.mv <- meta(y = cbind(Stress, Anxiety), 
+             v = cbind(Stress_var, Covariance, Anxiety_var),
+             data = ThirdWaveMV,
+             intervals.type = "LB")
+```
+
+```{r}
+m.mv <- meta(y = cbind(Stress, Anxiety), 
+             v = cbind(Stress_var, Covariance, Anxiety_var),
+             data = ThirdWaveMV,
+             RE.constraints = matrix(0, nrow=2, ncol=2))
+```
+
+### Visualizing the results
+
+```{r}
+plot(m.mv, 
+     axis.labels = c("Perceived Stress", "Anxiety"), 
+     randeff.ellipse.col = "#014d64",
+     univariate.arrows.col = "gray40",
+     univariate.arrows.lwd = 9,
+     univariate.polygon.col = "gray40",
+     estimate.ellipse.col = "gray40",
+     estimate.col = "firebrick")
+```

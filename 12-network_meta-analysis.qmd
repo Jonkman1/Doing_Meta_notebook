@@ -1,1 +1,284 @@
 # Network Meta-Analysis
+
+## Theorie
+Netwerkmeta-analyse is een nuttig hulpmiddel om de relatieve effectiviteit van verschillende behandelingen of interventies gezamenlijk in te schatten. Netwerk meta-analyse staat ook bekend als **mixed-treatment comparison meta-analyse**. Dit komt omdat het meerdere directe en indirecte behandelingsvergelijkingen integreert in één model, dat kan worden geformaliseerd als een "netwerk" van vergelijkingen. Netwerk meta-analyse is een "hot" onderzoeksonderwerp. In de afgelopen tien jaar is het steeds meer opgepikt door toegepaste onderzoekers in de biomedische sector en andere disciplines. Deze methode gaat echter ook gepaard met extra uitdagingen en valkuilen, vooral met betrekking tot heterogeniteit en zogenaamde **netwerkinconsistentie**.
+
+Netwerk meta-analyse heeft enkele voordelen:
+- Het stelt ons in staat om alle beschikbare informatie van een reeks gerelateerde onderzoeken samen te voegen in één analyse. Bedenk hoe we in conventionele meta-analyses gewoonlijk omgaan met onderzoeken waarin verschillende behandelingen worden vergeleken met, laten we zeggen, een placebo. We zouden dan elke vergelijking moeten samenvoegen (bijv. behandeling A vergeleken met placebo, behandeling B vergeleken met placebo, behandeling A vergeleken met behandeling B, enz) in een aparte meta-analyse.    
+
+- Netwerkmeta-analyse kan indirect bewijs in een netwerk opnemen, wat niet mogelijk is in conventionele meta-analyse. In paarsgewijze meta-analyses kunnen we alleen direct bewijs samenvoegen van vergelijkingen die daadwerkelijk in een trial waren opgenomen.   
+
+- Als aan alle aannames is voldaan en als de resultaten voldoende overtuigend zijn, kunnen we uit netwerkmeta-analyses afleiden welk type behandeling de voorkeur verdient voor de onderzochte doelpopulatie.
+
+Om de behandelingseffecten te schatten, combineert netwerk meta-analyse dus zowel direct (d.w.z. waargenomen) als indirect bewijs. Dit is echter gebaseerd op de aanname van transitiviteit. Er is sprake van transitiviteit als we direct bewijs van twee vergelijkingen kunnen combineren om daaruit geldig indirect bewijs af te leiden over een derde vergelijking (van bv vergelijkingen $A-B$ en $C-B$ om indirect bewijs te leveren over een gerelateerde vergelijking als bv $A-C$). De statistische manifestatie van transitiviteit is **consistentie**, het tegenovergestelde daarvan is **inconsistentie**. Van consistentie is sprake wanneer het werkelijke effect van een vergelijking op basis van direct bewijs overeenkomt met het effect op basis van indirect bewijs, inconsistentie ontstaat wanneer dat niet het geval is.
+
+Er zijn verschillende netwerk meta-analyse modellen beschikbaar. Sommige methoden, zoals **nodesplitting** of **net heat plots**, kunnen worden gebruikt om inconsistenties in ons netwerk te identificeren. Als er inconsistenties worden gevonden, bedreigt dit de geldigheid van onze resultaten als geheel. In dergelijke gevallen moet het hele netwerk worden gecontroleerd op kenmerken die systematische verschillen tussen studies/ontwerpen kunnen hebben veroorzaakt. Netwerk meta-analyse kan met een frequentistische of een Bayesiaanse aanpak worden uitgevoerd. In de praktijk heeft elk van deze methoden zijn eigen sterke punten, maar de algemene resultaten lijken meestal erg op elkaar.
+
+In netwerkmeta-analyses op basis van een Bayesiaans hiërarchisch model kunnen we ook studiecovariaten toevoegen die verschillen in effectgrootte voorspellen. Dit resulteert in een netwerk meta-regressiemodel. 
+
+Indices zoals de SUCRA of P-score kunnen worden gebruikt om te onderzoeken welk type behandeling het meest effectief is in ons netwerk. Het is echter ook belangrijk om onzekerheid te integreren in ons besluitvormingsproces. 
+
+Waarschijnlijkheidsintervallen van verschillende behandelingen overlappen elkaar vaak, waardoor het minder duidelijk is of één vorm echt superieur is aan alle andere.
+
+## Praktijk
+Het {gemtc} pakket is afhankelijk van {rjags}, dat kan worden gebruikt voor de Gibbs sampling procedure. Daarvoor moet je wel **JAGS** hebben geinstalleerd op je computer. Daarna kun je {rjags} binnenhalen.
+
+```{r}
+library(gemtc)
+library(rjags)
+```
+
+### Data preparation
+De `TherapyFormatsGeMTC` dataset is eigenlijk een list met twee elementen, waarvan er één data heet. Dit element is het dataframe dat we nodig hebben om het model te draaien. Laten we er eens naar kijken.
+
+```{r}
+library(dmetar)
+data(TherapyFormatsGeMTC)
+
+head(TherapyFormatsGeMTC$data)
+```
+- **study**: de studie waaruit de data afkomstig is;
+- **diff**: de effectsize (SMD) van de vergelijking;   
+- **std.err**: de standaardfout van de effectsize;   
+- **treatment**: label voor soort behandeling.
+
+### Netwerk visualisatie
+Nu we de data hebben, zetten we de `mtc.network` functie aan. Het optionele treatments argument kan gebruikt worden om {gemtc} te voorzien van de werkelijke namen van alle behandelingen die in het netwerk zijn opgenomen. Deze informatie moet worden klaargezet in een dataframe met een `id`- en een `description`-kolom. We hebben zo'n dataframe gemaakt en opgeslagen als `treat.codes` in `TherapyFormatsGeMTC`:
+
+```{r}
+TherapyFormatsGeMTC$treat.codes
+```
+
+We gebruiken dit dataframe en onze effectsize-gegevens in `TherapyFormatsGeMTC` om ons `mtc.network-object` te maken. We slaan het op onder de naam `network`.
+
+```{r}
+network <- mtc.network(data.re  = TherapyFormatsGeMTC$data,
+                       treatments = TherapyFormatsGeMTC$treat.codes)
+```
+
+Door het resulterende object in de `summary`-functie te stoppen, krijgen we al wat interessante informatie over ons netwerk.
+
+```{r}
+summary(network)
+```
+We kunnen nu ook de `plot`-functie gebruiken om een netwerkplot te genereren. De dikte van de randen komt overeen met het aantal studies dat we hebben opgenomen voor die vergelijking.
+
+```{r}
+plot(network, 
+     use.description = TRUE) # Use full treatment names
+```
+Met het {igraph} pakket kunnen we de netwerkplot ook aanpassen. Kijk voor meer informatie over de mogelijke aanpassingen naar de documentatie van [igraph](https://igraph.org/r/doc/plot.common.html).
+
+```{r}
+library(igraph)
+set.seed(12345) # set seed for reproducibility
+
+plot(network, 
+     use.description = TRUE,            # Use full treatment names
+     vertex.color = "white",            # node color
+     vertex.label.color = "gray10",     # treatment label color
+     vertex.shape = "sphere",           # shape of the node
+     vertex.label.family = "Helvetica", # label font
+     vertex.size = 20,                  # size of the node
+     vertex.label.dist = 2,             # distance label-node center
+     vertex.label.cex = 1.5,            # node label size
+     edge.curved = 0.2,                 # edge curvature
+     layout = layout.fruchterman.reingold)
+```
+
+### Model samenstelling
+Nu we ons netwerk hebben, kunnen we een model samenstellen. We gebruiken de `mtc.model`-functie om een model te maken. We geven ons netwerk, de likelihood, link, linearModel en het aantal chains mee.
+
+```{r}
+# We give our compiled model the name `model`.
+model <- mtc.model(network,
+                   likelihood = "normal",
+                   link = "identity",
+                   linearModel = "random",
+                   n.chain = 4)
+```
+
+### MCMC sampling en convergentie
+
+Modellen kunnen we op verschillende manieren specificeren. Laten we twee modellen definieren.
+
+```{r}
+mcmc1 <- mtc.run(model, n.adapt = 50, n.iter = 1000, thin = 10)
+mcmc2 <- mtc.run(model, n.adapt = 5000, n.iter = 1e5, thin = 10)
+```
+
+Om te zien of de modellen zijn geconvergeerd, plotten we ze. Op basis van trace en met name densityplots zie je dat het tweede model er betrouwbaarder uitziet. 
+
+```{r}
+par(mar = c(1, 1, 1, 1))
+plot(mcmc1)
+plot(mcmc2)
+
+
+```
+
+Voor diagnostiek kun je ook nog Gelman-plots draaien. Waarden moeten dicht bij 1 liggen. Dat is bij beiden het geval ook al toont het tweede model een betere convergentie.
+
+```{r}
+par(mar = c(1, 1, 1, 1))
+gelman.plot(mcmc1)
+gelman.plot(mcmc2)
+```
+
+De waarde kun je ook direct opvragen.
+
+
+```{r}
+gelman.diag(mcmc1)$mpsrf
+```
+
+```{r}
+gelman.diag(mcmc2)$mpsrf
+
+```
+### Netwerk meta-regressie
+Een groot voordeel van het {gemtc} pakket is dat je er een netwerk meta-regressie mee kan uitvoeren. Stel dat we willen evalueren of het risico op bias van een studie invloed heeft op de effecten in onze netwerkmeta-analyse. Het zou bijvoorbeeld kunnen dat studies met een hoog biasrisico over het algemeen hogere effecten rapporteren in vergelijking met de controlegroep of alternatieve behandelingen. Door het biasrisico als voorspeller op te nemen in ons model, kunnen we controleren op een dergelijke associatie en de invloed ervan op onze resultaten beoordelen.
+
+```{r}
+TherapyFormatsGeMTC$study.info
+```
+
+De dataset bevat twee kolommen: `study`, de naam van de studie die is opgenomen in ons netwerk en `rob`, het biasrisico (o voor laag en 1 voor hoog biasrisico).
+
+Met dataframe `study.info` kunnen we nu een meta-regressienetwerk maken met `mtc.network`.
+
+```{r}
+network.mr <- mtc.network(data.re = TherapyFormatsGeMTC$data,
+                          studies = TherapyFormatsGeMTC$study.info,
+                          treatments = TherapyFormatsGeMTC$treat.codes)
+```
+
+Nu moeten we de **regressor** definiëren die we willen opnemen in ons netwerkmeta-analysemodel. Dit kan worden gedaan door een listobject met drie elementen te genereren:
+
+- **coëfficiënt**: We stellen dit element in op "gedeeld" omdat we één gedeelde coëfficiënt willen schatten voor het effect van (hoog) biasrisico over alle behandelingen die zijn opgenomen in onze netwerkmeta-analyse.   
+
+- **variabele**: Dit specificeert de naam van de variabele die we willen gebruiken als predictor (hier: `rob`).   
+
+- **controle**: We moeten ook de behandeling specificeren die we als referentiegroep willen gebruiken. In ons voorbeeld gebruiken we `cau` (care as usual).
+    
+```{r}
+regressor <- list(coefficient = "shared",
+                  variable = "rob",
+                  control = "cau")
+```
+
+Nu moeten we het model definiëren. We voorzien de functie `mtc.model` van het netwerk dat we zojuist hebben gegenereerd, stellen het type van ons model in op `regression` en voorzien de functie van het regressorobject dat we zojuist hebben gegenereerd. We slaan de uitvoer op onder de naam `model.mr`.
+
+```{r}
+model.mr <- mtc.model(network.mr,
+                      likelihood = "normal",
+                      link = "identity",
+                      type = "regression",
+                      regressor = regressor)
+```
+
+Na deze stap kunnen we het model uitvoeren met de functie `mtc.run`. We gebruiken dezelfde specificaties als we eerder hebben gebruikt voor het passen van het `mcmc2`-model. De resultaten worden opgeslagen als `mcmc3`.
+
+```{r}
+mcmc3 <- mtc.run(model.mr,
+                 n.adapt = 5000,
+                 n.iter = 1e5,
+                 thin = 10)
+```
+Nu kunnen we het analyseren met de `summary`-functie.
+
+```{r}
+summary(mcmc3)
+```
+
+De resultaten voor onze predictor worden gerapporteerd naast $B$. Omdat onze voorspeller een dummycode heeft, vertegenwoordigt de waarde van $B$ het effect van een onderzoek met een hoog biasrisico. De schatting is $b= -0,33$, en als we kijken naar de tweede tabel (Kwantielen voor elke variabele), zien we dat het 95% geloofwaardigheidsinterval van $b$ varieert van -0,59 tot -0,08. Omdat het interval geen nul bevat, kunnen we concluderen dat het biasrisico inderdaad van invloed is op de resultaten. Als het biasrisico hoog is (`rob` = 1), kunnen we hier hogere totale effecten voorspellen (omdat negatieve effectgroottes in ons voorbeeld wijzen op "betere" uitkomsten).
+
+We kunnen de resultaten verder onderzoeken door het maken van twee forestplot: een met lage bias en een met hoge bias. We gebruiken de functie `relative.effect` en specificeren `covariate` waarde 0 en 1.
+
+```{r}
+forest(relative.effect(mcmc3, t1 = "cau", covariate = 1),
+       use.description = TRUE, xlim = c(-1.5, 1))
+title("Hoge Risicobias")
+        
+forest(relative.effect(mcmc3, t1 = "cau", covariate = 0),
+       use.description = TRUE, xlim = c(-1.5, 1))
+title("Lage Risicobias")
+```
+
+Als we de forest plots vergelijken, zien we dat er een patroon is. De behandelingseffecten op basis van studies met een hoog biasrisico zijn over het algemeen hoger (d.w.z. negatiever). Dit komt overeen met de schatting van onze predictor $b$ in het gepaste model.
+
+Tot slot kunnen we ook onderzoeken of het netwerkmeta-regressiemodel dat we net hebben gegenereerd beter past bij de gegevens dan het "normale" netwerkmeta-analysemodel van eerder. Om dit te doen, kunnen we de deviance-informatiecriteria (DIC's) vergelijken, die een equivalent zijn van de AIC- en BIC-waarden in frequentistische statistieken. We kunnen de DIC van zowel `mcmc3`: 
+
+```{r}
+summary(mcmc3)$DIC
+```
+als `mcmc2` opvragen met deze code:
+
+```{r}
+summary(mcmc2)$DIC
+```
+
+We zien in de uitvoer dat de DIC-waarde van ons meta-regressiemodel ($DIC = 261,19$) lager is dan die van ons vorige model waarin niet werd gecontroleerd voor risico van vertekening ($DIC = 323,6$). Lagere DIC-waarden duiden op een betere pasvorm. Op basis van deze bevinding kunnen we concluderen dat ons netwerk meta-regressiemodel beter past bij de gegevens dan een model zonder covariaat.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
