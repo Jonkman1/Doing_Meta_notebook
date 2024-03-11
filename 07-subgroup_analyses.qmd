@@ -19,7 +19,7 @@ Het uitvoeren van een subgroepanalyse met behulp van het {meta} pakket is relati
 
 Laten we het databestand `ThirdWave` gebruiken om een subgroepanalyse uit te voeren en kjken naar de kolommen `author` en `RiskofBias`. 
 
-```{r}
+```{r, message=FALSE, warning=FALSE }
 library(tidyverse) # voor databewerking
 library(dmetar)    # voor de data
 library(meta)      # voor de meta-analyse
@@ -63,7 +63,7 @@ We zien dat de geschatte heterogeniteitsvariantie tussen studies $\tau^2$= 0,069
 De resultaten van subgroepanalyses worden meestal gerapporteerd in een tabel met het geschatte effect en de heterogeniteit in elke subgroep, evenals de p-waarde van de test voor subgroepverschillen.
 
 
-```{r, echo=F}
+```{r, message=FALSE, warning=FALSE}
 library(kableExtra)
 m.gen.sg = update.meta(m.gen, 
             subgroup = RiskOfBias, 
@@ -87,7 +87,7 @@ kable(dat, booktabs = T, digits = 2, escape = FALSE) %>%
   kable_styling(latex_options = c("scale_down"),
                 bootstrap_options = c("condensed", "striped"))
 
-# kable_styling(font_size = 7)
+
 
 
 ```

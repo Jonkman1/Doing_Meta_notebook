@@ -274,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-reporting_reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reporting &amp; Reproducibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Rapporteren &amp; Reproduceerbaarheid</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -344,60 +344,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Laad de pakketten die nodig zijn om de voorbeelden in dit boek uit te voeren.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading 'meta' package (version 6.5-0).
-Type 'help(meta)' for a brief overview.
-Readers of 'Meta-Analysis with R (Use R!)' should install
-older version of 'meta' package: https://tinyurl.com/dt4y5drs</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metafor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Matrix</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: metadat</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: numDeriv</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Loading the 'metafor' package (version 4.4-0). For an
-introduction to the package please type: help(metafor)</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Extensive documentation for the dmetar package can be found at: 
- www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ tidyr::expand() masks Matrix::expand()
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-✖ tidyr::pack()   masks Matrix::pack()
-✖ tidyr::unpack() masks Matrix::unpack()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metafor)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Haal ook de dataset<code>SuicidePrevention.xlx</code> die je <a href="https://www.protectlab.org/en/datasets/suicide-prevention/">hier</a> vandaan kunt halen en open die set.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span><span class="fu">read.xlsx</span>(<span class="st">"SuicidePrevention.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span><span class="fu">read.xlsx</span>(<span class="st">"SuicidePrevention.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Laten we naar die dataset kijken en zien welke variabelen er zijn. Er zijn tien kolommen (variabelen) en negen rijgen (individuele studies)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(SuicidePrevention)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(SuicidePrevention)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 9
 Columns: 10
@@ -415,42 +374,42 @@ $ control   &lt;fct&gt; WLC, no intervention, no intervention, WLC, WLC, no inte
 </div>
 <p>Je kunt de inhoud van een bepaalde kolommen alleen bekijken, bv deze:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>n.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>n.e</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  90  77  30  64  50 109  60  40  51</code></pre>
 </div>
 </div>
 <p>En je kunt ook zien wat voor een soort variabele het is.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(SuicidePrevention<span class="sc">$</span>n.e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(SuicidePrevention<span class="sc">$</span>n.e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "numeric"</code></pre>
 </div>
 </div>
 <p>Laten we het gemiddelde van deze variabele vaststellen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(SuicidePrevention<span class="sc">$</span>n.e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(SuicidePrevention<span class="sc">$</span>n.e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 63.44444</code></pre>
 </div>
 </div>
 <p>Zorg ervoor dat de variabelen de goede klasse hebben, bijvoorbeeld numeriek. Laten we dit veranderen voor enkele variabelen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>mean.e <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>mean.e)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>sd.e <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>sd.e)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>n.c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>n.c)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>mean.c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>mean.c)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>sd.c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>sd.c)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>n.c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>n.c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>mean.e <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>mean.e)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>sd.e <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>sd.e)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>n.c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>n.c)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>mean.c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>mean.c)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>sd.c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>sd.c)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>n.c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(SuicidePrevention<span class="sc">$</span>n.c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Twee variabelen moeten we veranderen in factoren om de analyse later correct te kunnen uitvoeren.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>age_group <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(SuicidePrevention<span class="sc">$</span>age_group)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>control <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(SuicidePrevention<span class="sc">$</span>control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>age_group <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(SuicidePrevention<span class="sc">$</span>age_group)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>control <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(SuicidePrevention<span class="sc">$</span>control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In dit geval is de variabele <code>age_group</code> opgesplitst in de niveaus <code>gen</code> en <code>older</code>, zie hier:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>age_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>age_group</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] gen   older gen   gen   gen   gen   gen   older older
 Levels: gen older</code></pre>
@@ -458,21 +417,21 @@ Levels: gen older</code></pre>
 </div>
 <p>Een logische variabele kan ook handig zijn, bijvoorbeeld voor de volgende variabele:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>pubyear</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>pubyear</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2006 2019 2006 2011 1997 2000 2013 2015 2014</code></pre>
 </div>
 </div>
 <p>Deze zetten we om in een logische variabele.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.logical</span>(SuicidePrevention<span class="sc">$</span>pubyear <span class="sc">&gt;=</span> <span class="dv">2010</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.logical</span>(SuicidePrevention<span class="sc">$</span>pubyear <span class="sc">&gt;=</span> <span class="dv">2010</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
 </div>
 </div>
 <p>Soms is het goed om naar specifieke gegevens uit het dataframe te kijken. Onthoud: <code>data.frame[rijen, kolommen]</code>. Dus kijken naar rij 2 wordt:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[<span class="dv">2</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[<span class="dv">2</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          author n.e mean.e sd.e n.c mean.c sd.c pubyear age_group
 2 DeVries et al.  77  16.21 5.35  69  20.13 7.43    2019     older
@@ -482,14 +441,14 @@ Levels: gen older</code></pre>
 </div>
 <p>Als je informatie van de eerste kolom én de tweede rij wilt zien, schrijf je:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[<span class="dv">2</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[<span class="dv">2</span>,<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "DeVries et al."</code></pre>
 </div>
 </div>
 <p>Gebruik de functie <code>c()</code> om delen van het dataframe te selecteren. Om rijen 2 en 3 en kolommen 4 en 6 te extraheren wordt</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),<span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">6</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  sd.e mean.c
 2 5.35  20.13
@@ -498,7 +457,7 @@ Levels: gen older</code></pre>
 </div>
 <p>Rijen selecteer je op nummer, kolommen kun je ook op naam selecteren, zoals in dit voorbeeld.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[, <span class="fu">c</span>(<span class="st">"author"</span>, <span class="st">"control"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[, <span class="fu">c</span>(<span class="st">"author"</span>, <span class="st">"control"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           author         control
 1    Berry et al.             WLC
@@ -514,7 +473,7 @@ Levels: gen older</code></pre>
 </div>
 <p>Je kunt voor een gegevensverzameling ook de functie <code>filter</code> gebruiken, die werkt op basis van rijwaarden, bijvoorbeeld de rijwaarden van <code>n.e.</code> zijn kleiner of gelijk aan 50. Dan schrijf je:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(SuicidePrevention, n.e <span class="sc">&lt;=</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(SuicidePrevention, n.e <span class="sc">&lt;=</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           author n.e mean.e sd.e n.c mean.c sd.c pubyear age_group
 1  Fleming et al.  30   3.01 0.87  30   3.13 1.23    2006       gen
@@ -528,23 +487,23 @@ Levels: gen older</code></pre>
 </div>
 <p>Je kunt gegevens zelf gemakkelijk transformeren. Dus als je de studie van <strong>De Vries et al.</strong> wilt transformeren van 2019 naar 2018, kun je het schrijven als:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[<span class="dv">2</span>, <span class="st">"pubyear"</span>] <span class="ot">&lt;-</span> <span class="dv">2018</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[<span class="dv">2</span>, <span class="st">"pubyear"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[<span class="dv">2</span>, <span class="st">"pubyear"</span>] <span class="ot">&lt;-</span> <span class="dv">2018</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>SuicidePrevention[<span class="dv">2</span>, <span class="st">"pubyear"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2018</code></pre>
 </div>
 </div>
 <p>Als je een nieuwe kolom wilt toevoegen aan je dataframe (bijvoorbeeld het gemiddelde verschil), kun je dat als volgt doen:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>md <span class="ot">&lt;-</span> SuicidePrevention<span class="sc">$</span>mean.e <span class="sc">-</span> SuicidePrevention<span class="sc">$</span>mean.c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>SuicidePrevention<span class="sc">$</span>md <span class="ot">&lt;-</span> SuicidePrevention<span class="sc">$</span>mean.e <span class="sc">-</span> SuicidePrevention<span class="sc">$</span>mean.c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Zodra alles is getransformeerd, kunnen we het bewerkte bestand opslaan. Je kunt het opslaan als een .rda-bestand, zo dan:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(SuicidePrevention, <span class="at">file =</span> <span class="st">"SuicidePrevention.rda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(SuicidePrevention, <span class="at">file =</span> <span class="st">"SuicidePrevention.rda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>of opslaan als een .csv-bestand, zo dan:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(SuicidePrevention, <span class="at">file =</span> <span class="st">"SuicidePrevention.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(SuicidePrevention, <span class="at">file =</span> <span class="st">"SuicidePrevention.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">

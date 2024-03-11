@@ -1,4 +1,4 @@
-# Structural Equation Modeling Meta-Analysis
+# Structural Equation Modeling Meta-Analyse
 
 ## Theorie
 Structural Equation Modeling (SEM) is een statistische techniek die kan worden gebruikt om **complexe relaties** tussen waargenomen (d.w.z. manifeste) en niet-waargenomen (d.w.z. latente) variabelen te testen. 
@@ -13,7 +13,7 @@ Een andere toepassing van meta-analytische SEM is **confirmatory factor analysis
 ## Praktijk
 ### Multivariate Meta-Analyse
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(metaSEM)   # voor SEM
 library(tidyverse) # voor databewerking
 library(dmetar)    # voor de data

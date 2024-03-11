@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -245,7 +279,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-reporting_reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reporting &amp; Reproducibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Rapporteren &amp; Reproduceerbaarheid</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -262,7 +296,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#theorie" id="toc-theorie" class="nav-link active" data-scroll-target="#theorie"><span class="header-section-number">9.1</span> Theorie</a></li>
+  <li><a href="#praktijk" id="toc-praktijk" class="nav-link" data-scroll-target="#praktijk"><span class="header-section-number">9.2</span> Praktijk</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -284,10 +325,36 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Publicatiebias treedt op wanneer sommige studies systematisch ontbreken in de gepubliceerde literatuur, en dus ook in onze meta-analyse. Strikt genomen is er sprake van publicatiebias als de waarschijnlijkheid dat een studie gepubliceerd wordt afhangt van de resultaten. Er is echter ook een reeks andere vertekeningen in de rapportage. Deze vertekeningen beïnvloeden ook hoe waarschijnlijk het is dat een bevinding in onze meta-analyse terechtkomt. Voorbeelden zijn citatiebias, taalbias of uitkomstbias. Het is ook mogelijk dat gepubliceerd bewijs vertekend is, bijvoorbeeld door twijfelachtige onderzoekspraktijken. Twee veelvoorkomende van dat soort praktijken zijn <span class="math inline">\(p\)</span>-hacking en HARKing, en beide kunnen het risico op overschatting van effecten in een meta-analyse vergroten.</p>
-<p>Veel methoden voor publicatiebias zijn gebaseerd op het idee van kleine-studie-effecten. Deze benaderingen gaan ervan uit dat alleen kleine studies met een verrassend hoge effectgrootte significante resultaten behalen en daarom worden geselecteerd voor publicatie. Dit leidt tot een asymmetrische funnel plot, wat een teken kan zijn van publicatiebias. Maar dat hoeft niet zo te zijn. Er zijn ook verschillende “goedaardige” oorzaken van effecten van kleine studies mogelijk. Een relatief nieuwe methode, p-curve, is gebaseerd op het idee dat we kunnen controleren op bewijskracht door alleen maar te kijken naar het patroon van significante (p&lt;0,05) effecten in onze gegevens. Deze methode kan worden gebruikt om te testen op zowel de aan- als afwezigheid van een echt effect en kan de grootte ervan schatten.</p>
+<section id="theorie" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="theorie"><span class="header-section-number">9.1</span> Theorie</h2>
+<p>Publicatiebias treedt op wanneer sommige studies systematisch ontbreken in de gepubliceerde literatuur, en dus ook in onze meta-analyse. Strikt genomen is er sprake van publicatiebias als de waarschijnlijkheid dat een studie gepubliceerd wordt afhangt van de resultaten. Er is echter ook een reeks andere vertekeningen in de rapportage. Deze vertekeningen beïnvloeden ook hoe waarschijnlijk het is dat een bevinding in onze meta-analyse terechtkomt. Voorbeelden zijn citatiebias, taalbias of uitkomstbias. Het is ook mogelijk dat gepubliceerd bewijs vertekend is, bijvoorbeeld door twijfelachtige onderzoekspraktijken. Twee veelvoorkomende van dat soort praktijken zijn <span class="math inline">\(p\)</span>-hacking (doorgaan tot de geschikte <span class="math inline">\(p\)</span>-waarde bereikt is) en HARKing (hypothese opstellen nadat de resultaten bekend zijn). Beide kunnen het risico op overschatting van effecten in een meta-analyse vergroten.</p>
+<p>Veel methoden voor publicatiebias zijn gebaseerd op het idee van kleine-studie-effecten. Deze benaderingen gaan ervan uit dat alleen kleine studies met een verrassend hoge effectgrootte significante resultaten behalen en daarom worden geselecteerd voor publicatie. Dit leidt tot een asymmetrische funnel plot, wat een teken kan zijn van publicatiebias. Maar dat hoeft niet zo te zijn. Er zijn ook verschillende “goedaardige” oorzaken van effecten van kleine studies mogelijk.</p>
+<p>Een relatief nieuwe methode, p-curve, is gebaseerd op het idee dat we kunnen controleren op bewijskracht door alleen maar te kijken naar het patroon van significante (<span class="math inline">\(p&lt;0,05\)</span>) effecten in onze gegevens. Deze methode kan worden gebruikt om te testen op zowel de aan- als afwezigheid van een echt effect en kan de grootte ervan schatten.</p>
 <p>Er is geen bewijs dat een bepaalde publicatiebias beter veel beter is dan een ander. Maar wat moet je dan kiezen? Om dit probleem aan te pakken, raden we aan om altijd meerdere methoden te gebruiken bij het evalueren van publicatiebias. Hieronder vind je een overzicht van de meest gebruikte methoden met de voor- en nadelen erbij.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">"data/pubbias_procon.xlsx"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Voordelen <span class="ot">=</span> <span class="fu">str_replace_all</span>(dat<span class="sc">$</span>Voordelen, <span class="st">"BREAK"</span>, <span class="st">""</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>Nadelen <span class="ot">=</span> <span class="fu">str_replace_all</span>(dat<span class="sc">$</span>Nadelen, <span class="st">"BREAK"</span>, <span class="st">""</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dat)[<span class="dv">1</span>] <span class="ot">=</span> <span class="st">" "</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>dat[<span class="dv">1</span>,<span class="dv">1</span>]<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Duval &amp; Tweedie  Trim-and-Fill"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dat <span class="sc">%&gt;%</span> <span class="fu">mutate_all</span>(linebreak), <span class="st">"html"</span>, <span class="at">booktabs =</span> T, <span class="at">escape =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">align =</span> <span class="st">"l"</span>, <span class="at">longtable =</span> T, </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Methoden om de ware effectgrootte te schatten, gecorrigeerd voor publicatiebias: Overzicht van voor- en nadelen."</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">"repeat_header"</span>), </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"condensed"</span>, <span class="st">"striped"</span>),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">font_size =</span> <span class="dv">15</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">row_spec</span>(<span class="dv">0</span>, <span class="at">bold=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">width =</span> <span class="st">"2cm"</span>, <span class="at">bold =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">2</span>, <span class="at">width =</span> <span class="st">"4cm"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">3</span>, <span class="at">width =</span> <span class="st">"5cm"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_spec</span>(<span class="dv">1</span>, <span class="at">italic=</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-condensed table-striped table-sm small" data-quarto-postprocess="true">
 <caption>Methoden om de ware effectgrootte te schatten, gecorrigeerd voor publicatiebias: Overzicht van voor- en nadelen.</caption>
@@ -301,28 +368,28 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td style="text-align: left; width: 2cm; font-weight: bold;">Duval &amp; Tweedie Trim-and-Fill</td>
-<td style="text-align: left; width: 4cm;">Very heavily used in practice. Can be interpreted by many researchers.</td>
-<td style="text-align: left; width: 5cm;">Often fails to correct the effect size enough, for example when the true effect is zero. Not robust when the heterogeneity is very large; often outperformed by other methods.</td>
+<td style="text-align: left; width: 4cm;">Zeer veel gebruikt in de praktijk. Kan door veel onderzoekers worden geïnterpreteerd.</td>
+<td style="text-align: left; width: 5cm;">Corrigeert de effectgrootte vaak niet voldoende, bijvoorbeeld als het werkelijke effect nul is. Niet robuust als de heterogeniteit erg groot is; presteert vaak beter dan andere methoden.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; width: 2cm; font-weight: bold;">PET-PEESE</td>
-<td style="text-align: left; width: 4cm;">Based on a simple and intuitive model. Easy to implement and interpret.</td>
-<td style="text-align: left; width: 5cm;">Sometimes massively over- or underestimates the effect. Weak performance for meta-analyses with few studies, low sample sizes, and high heterogeneity.</td>
+<td style="text-align: left; width: 4cm;">Gebaseerd op een eenvoudig en intuïtief model. Eenvoudig te implementeren en te interpreteren.</td>
+<td style="text-align: left; width: 5cm;">Over- of onderschat het effect soms enorm. Zwakke prestaties voor meta-analyses met weinig studies, lage steekproefgroottes en hoge heterogeniteit.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; width: 2cm; font-weight: bold;">Limit Meta-Analysis</td>
-<td style="text-align: left; width: 4cm;">Similar approach as PET-PEESE, but explicitly models between-study heterogeneity.</td>
-<td style="text-align: left; width: 5cm;">Performance is less well studied than the one of other methods. May fail when the number of studies is very low (&lt;10) and heterogeneity very high.</td>
+<td style="text-align: left; width: 4cm;">Vergelijkbare benadering als PET-PEESE, maar modelleert expliciet de heterogeniteit tussen studies.</td>
+<td style="text-align: left; width: 5cm;">De prestaties zijn minder goed onderzocht dan die van andere methoden. Kan falen als het aantal onderzoeken erg laag is (&lt;10) en de heterogeniteit erg hoog.</td>
 </tr>
 <tr class="even">
 <td style="text-align: left; width: 2cm; font-weight: bold;">P-Curve</td>
-<td style="text-align: left; width: 4cm;">Has been shown to outperform other methods (particularly trim-and-fill) when its assumptions are met.</td>
-<td style="text-align: left; width: 5cm;">Works under the assumption of no heterogeneity, which is unlikely in practice. Requires a minimum number of significant effect sizes. Less easy to interpret and communicate.</td>
+<td style="text-align: left; width: 4cm;">Het is aangetoond dat het beter presteert dan andere methoden (met name trim-and-fill) wanneer aan de aannames wordt voldaan.</td>
+<td style="text-align: left; width: 5cm;">Werkt onder de aanname van geen heterogeniteit, wat in de praktijk onwaarschijnlijk is. Vereist een minimum aantal significante effectgroottes. Minder gemakkelijk te interpreteren en te communiceren.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left; width: 2cm; font-weight: bold;">Selection Models</td>
-<td style="text-align: left; width: 4cm;">Can potentially model any kind of assumed selection process. The three-parameter selection model has shown good performance in simulation studies.</td>
-<td style="text-align: left; width: 5cm;">Only valid when the selection model describes the publication bias process adequately. Assume that other small-study effects are not relevant. Can be difficult to interpret and requires background knowledge.</td>
+<td style="text-align: left; width: 4cm;">Kan potentieel elk soort verondersteld selectieproces modelleren. Het drieparameterselectiemodel heeft goede prestaties laten zien in simulatiestudies.</td>
+<td style="text-align: left; width: 5cm;">Alleen geldig als het selectiemodel het proces van publicatiebias adequaat beschrijft. Veronderstellen dat andere effecten van kleine studies niet relevant zijn. Kan moeilijk te interpreteren zijn en vereist achtergrondkennis.</td>
 </tr>
 </tbody>
 </table>
@@ -332,8 +399,78 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>Het is vaak moeilijk, zo niet onmogelijk, om te weten welke aanpak het meest geschikt is voor onze gegevens en of de resultaten betrouwbaar zijn. Zoals we al eerder zeiden, zal de exacte mate waarin selectieve rapportage onze resultaten heeft beïnvloed altijd onbekend zijn. Maar door verschillende publicatiebias technieken toe te passen, kunnen we iets produceren dat lijkt op een reeks geloofwaardige ware effecten.</p>
 <p>Selectiemodellen zijn een zeer veelzijdige methode en kunnen worden gebruikt om verschillende publicatiebiasprocessen te modelleren. Ze geven echter alleen geldige resultaten als het veronderstelde model adequaat is en vereisen vaak een zeer groot aantal onderzoeken. Een zeer eenvoudig selectiemodel, het drieparametermodel, kan ook worden gebruikt voor kleinere datasets. Geen enkele publicatiebiasmethode presteert consistent beter dan alle andere. Het is daarom raadzaam om altijd meerdere technieken toe te passen en de gecorrigeerde effectgrootte voorzichtig te interpreteren. Grondig zoeken naar ongepubliceerd bewijs vermindert het risico van publicatiebias veel beter dan de huidige statistische benaderingen.</p>
+</section>
+<section id="praktijk" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="praktijk"><span class="header-section-number">9.2</span> Praktijk</h2>
+<p>In het praktijkdeel laten we enkel zien hoe je een funnel plot maakt.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># voor databewerking</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)    <span class="co"># voor de data</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)      <span class="co"># voor de meta-analyse</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ThirdWave)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 18
+Columns: 8
+$ Author               &lt;chr&gt; "Call et al.", "Cavanagh et al.", "DanitzOrsillo"…
+$ TE                   &lt;dbl&gt; 0.7091362, 0.3548641, 1.7911700, 0.1824552, 0.421…
+$ seTE                 &lt;dbl&gt; 0.2608202, 0.1963624, 0.3455692, 0.1177874, 0.144…
+$ RiskOfBias           &lt;chr&gt; "high", "low", "high", "low", "low", "low", "high…
+$ TypeControlGroup     &lt;chr&gt; "WLC", "WLC", "WLC", "no intervention", "informat…
+$ InterventionDuration &lt;chr&gt; "short", "short", "short", "short", "short", "sho…
+$ InterventionType     &lt;chr&gt; "mindfulness", "mindfulness", "ACT", "mindfulness…
+$ ModeOfDelivery       &lt;chr&gt; "group", "online", "group", "group", "online", "g…</code></pre>
+</div>
+</div>
+<p>We gebruiken opnieuw <code>m.gen</code> (zie hoofdstuk 4).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">metagen</span>(<span class="at">TE =</span> TE,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">seTE =</span> seTE,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> Author,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> ThirdWave,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"REML"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Third Wave Psychotherapies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Produce funnel plot</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">::</span><span class="fu">funnel</span>(m.gen,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">2</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">studlab =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add title</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Funnel Plot (Third Wave Psychotherapies)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="09-publication_bias_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define fill colors for contour</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>col.contour <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"gray75"</span>, <span class="st">"gray85"</span>, <span class="st">"gray95"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate funnel plot (we do not include study labels here)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>meta<span class="sc">::</span><span class="fu">funnel</span>(m.gen, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">2</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">contour =</span> <span class="fu">c</span>(<span class="fl">0.9</span>, <span class="fl">0.95</span>, <span class="fl">0.99</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.contour =</span> col.contour)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="fl">1.6</span>, <span class="at">y =</span> <span class="fl">0.01</span>, </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"p &lt; 0.1"</span>, <span class="st">"p &lt; 0.05"</span>, <span class="st">"p &lt; 0.01"</span>),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> col.contour)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a title</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Contour-Enhanced Funnel Plot (Third Wave Psychotherapies)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="09-publication_bias_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

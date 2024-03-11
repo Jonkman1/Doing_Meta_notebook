@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-reporting_reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reporting &amp; Reproducibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Rapporteren &amp; Reproduceerbaarheid</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -298,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#theorie" id="toc-theorie" class="nav-link active" data-scroll-target="#theorie"><span class="header-section-number">5.1</span> Theorie</a></li>
-  <li><a href="#practijk" id="toc-practijk" class="nav-link" data-scroll-target="#practijk"><span class="header-section-number">5.2</span> Practijk</a></li>
+  <li><a href="#praktijk" id="toc-praktijk" class="nav-link" data-scroll-target="#praktijk"><span class="header-section-number">5.2</span> Praktijk</a></li>
   </ul>
 </nav>
     </div>
@@ -329,70 +329,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Een statistische test van <span class="math inline">\(Q\)</span> hangt echter sterk af van het type gegevens dat we hebben. We moeten niet alleen op <span class="math inline">\(Q\)</span> vertrouwen om de mate van heterogeniteit te beoordelen. Er zijn andere maten, zoals <span class="math inline">\(I^2\)</span>, <span class="math inline">\(H^2\)</span>, <span class="math inline">\(tau\)</span> of voorspellingsintervallen, die aanvullend gebruikt kunnen worden om iets over de tussen-studie-heterogeniteit te zeggen.</p>
 <p>Het gemiddelde effect in een meta-analyse kan vertekend zijn als er uitschieters in onze gegevens zitten. Uitschieters hebben niet altijd een grote invloed op de resultaten van een meta-analyse. Maar als ze dat wel doen, spreken we van invloedrijke gevallen. Er zijn verschillende methoden om uitschieters en invloedrijke gevallen te identificeren. Als dergelijke studies die eruit schieten worden ontdekt, is het raadzaam om de resultaten van de meta-analyse opnieuw te berekenen zonder deze studies om te zien of dit de interpretatie van onze resultaten verandert.</p>
 </section>
-<section id="practijk" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="practijk"><span class="header-section-number">5.2</span> Practijk</h2>
+<section id="praktijk" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="praktijk"><span class="header-section-number">5.2</span> Praktijk</h2>
 <p>Ook hier de onderstaande pakketten laden, het databestand <code>ThirdWave</code> openen en dit databestand goed bekijken.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># needed for 'glimpse'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Extensive documentation for the dmetar package can be found at: 
- www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading 'meta' package (version 6.5-0).
-Type 'help(meta)' for a brief overview.
-Readers of 'Meta-Analysis with R (Use R!)' should install
-older version of 'meta' package: https://tinyurl.com/dt4y5drs</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ThirdWave)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 18
-Columns: 8
-$ Author               &lt;chr&gt; "Call et al.", "Cavanagh et al.", "DanitzOrsillo"…
-$ TE                   &lt;dbl&gt; 0.7091362, 0.3548641, 1.7911700, 0.1824552, 0.421…
-$ seTE                 &lt;dbl&gt; 0.2608202, 0.1963624, 0.3455692, 0.1177874, 0.144…
-$ RiskOfBias           &lt;chr&gt; "high", "low", "high", "low", "low", "low", "high…
-$ TypeControlGroup     &lt;chr&gt; "WLC", "WLC", "WLC", "no intervention", "informat…
-$ InterventionDuration &lt;chr&gt; "short", "short", "short", "short", "short", "sho…
-$ InterventionType     &lt;chr&gt; "mindfulness", "mindfulness", "ACT", "mindfulness…
-$ ModeOfDelivery       &lt;chr&gt; "group", "online", "group", "group", "online", "g…</code></pre>
-</div>
-</div>
 <p>Er zitten acht variabelen (kolommen) in (<code>Author</code>, <code>Year</code>, <code>TE</code>, <code>seTE</code>, <code>RiskOfBias</code>, <code>TypeControlGroup</code>, <code>InterventionDuration</code>, <code>InterventionType</code>, and <code>ModeOfDelivery</code>) en achttien studies (rijen) in. De uitkomstmaat is <code>TE</code> (Treatment Effect) en de standaardfout van de uitkomstmaat is <code>seTE</code> (Standard Error of the Treatment Effect). De variabele <code>Author</code> bevat de namen van de auteurs van de studies. De uitkomstmaat is een Standardized Mean Difference (SMD), er wordt een random-effects model gebruikt met de methode <code>REML</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">metagen</span>(<span class="at">TE =</span> TE,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">seTE =</span> seTE,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> Author,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> ThirdWave,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"REML"</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Third Wave Psychotherapies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">metagen</span>(<span class="at">TE =</span> TE,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">seTE =</span> seTE,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> Author,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> ThirdWave,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"REML"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Third Wave Psychotherapies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We gaan het voorspellen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">update.meta</span>(m.gen, <span class="at">prediction =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">update.meta</span>(m.gen, <span class="at">prediction =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We kunnen de resultaten van de meta-analyse bekijken met de <code>summary</code> functie.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.gen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.gen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Review:     Third Wave Psychotherapies
 
@@ -442,7 +401,7 @@ Details on meta-analytical method:
 &gt; “De heterogeniteitsvariantie tussen studies werd geschat op <span class="math inline">\(\tau^2\)</span> = 0,08 (95%CI: 0,03-0,35), met een <span class="math inline">\(I^2\)</span>-waarde van 63% (95%CI: 38-78%). Het voorspellingsinterval varieerde van <span class="math inline">\(g\)</span> = -0,06 tot 1,21, wat aangeeft dat negatieve interventie-effecten niet kunnen worden uitgesloten voor toekomstige studies.”</p>
 <p>Om uitschieters te vinden hebben we de functie <code>find.outliers</code> gebruikt, die een object nodig heeft dat is gemaakt door de functie <code>metagen</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find.outliers</span>(m.gen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find.outliers</span>(m.gen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Identified outliers (random-effects model) 
 ------------------------------------------ 
@@ -476,14 +435,14 @@ Details on meta-analytical method:
 </div>
 <p>We zien dat de <code>find.outliers</code> functie twee uitschieters detecteerde, “DanitzOrsillo” en “Shapiro et al.”. Het {dmetar} pakket bevat ook een functie genaamd <code>InfluenceAnalysis</code>, waarmee we deze verschillende invloedsdiagnoses kunnen berekenen met behulp van één functie. De functie kan worden gebruikt voor elk type meta-analyseobject dat is gemaakt door {meta} functies. We slaan de resultaten van de functie op in een object genaamd <code>m.gen.inf</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>m.gen.inf <span class="ot">&lt;-</span> <span class="fu">InfluenceAnalysis</span>(m.gen, <span class="at">random =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>m.gen.inf <span class="ot">&lt;-</span> <span class="fu">InfluenceAnalysis</span>(m.gen, <span class="at">random =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[===========================================================================] DONE </code></pre>
 </div>
 </div>
 <p>Dit creëert een <code>baujat</code> plot, die een grafische weergave geeft van de invloed van elke studie op de heterogeniteit van de meta-analyse.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"baujat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"baujat"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: ggrepel: 12 unlabeled data points (too many overlaps). Consider
 increasing max.overlaps</code></pre>
@@ -494,18 +453,18 @@ increasing max.overlaps</code></pre>
 </div>
 <p>De volgende plot bevat verschillende invloedsdiagnoses voor elk van onze onderzoeken. Deze kunnen worden uitgezet met deze code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"influence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"influence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="05-between_study_heterogeneity_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Het {dmetar} pakket bevat, tenslotte, ook een functie genaamd <code>InfluenceAnalysis</code>, waarmee we deze resultaten kunnen berekenen met behulp van de ‘leave-one-out’-methode. De eerste is gesorteerd op effectgrootte, de tweede op heterogeniteit.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"es"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"es"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="05-between_study_heterogeneity_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"i2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m.gen.inf, <span class="st">"i2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="05-between_study_heterogeneity_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
 </div>

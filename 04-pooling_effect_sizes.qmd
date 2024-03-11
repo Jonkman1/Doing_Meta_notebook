@@ -1,6 +1,6 @@
 # Effect Sizes samenbrengen
 
-Theory
+## Theorie
 
 In de statistiek wordt een model gezien als een vereenvoudigde "theorie", die het proces beschrijft waarmee de waargenomen gegevens zijn gegenereerd. Vaak wordt het geschreven als een wiskundige formule om processen in de wereld om ons heen op een geïdealiseerde manier te beschrijven.
 
@@ -11,11 +11,11 @@ Het random-effects model daarentegen stelt dat de ware effectgroottes ook varië
 De meest gebruikelijke manier om een gepoolde effectgrootte te berekenen is via de inverse-variantiemethode. In het `meta`-pakket is er een functie om meta-analyses uit te voeren van vooraf berekende effectgroottegegevens, evenals een reeks functies die kunnen worden gebruikt voor verschillende soorten "ruwe" uitkomstgegevens.
 
 
-Practijk
+## Praktijk
 
 Eerst kijken we hoe we een fixed-model kunnen uitvoeren met het `esc` pakket:
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 # Laad dmetar, esc en tidyverse
 library(dmetar)    ## voor de data
 library(esc)       ## voor de berekening van effect groottes 

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -242,7 +276,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-reporting_reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reporting &amp; Reproducibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Rapporteren &amp; Reproduceerbaarheid</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -259,7 +293,17 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#theorie" id="toc-theorie" class="nav-link active" data-scroll-target="#theorie"><span class="header-section-number">8.1</span> Theorie</a></li>
+  <li><a href="#praktijk" id="toc-praktijk" class="nav-link" data-scroll-target="#praktijk"><span class="header-section-number">8.2</span> Praktijk</a>
+  <ul class="collapse">
+  <li><a href="#meta-regressie-in-r" id="toc-meta-regressie-in-r" class="nav-link" data-scroll-target="#meta-regressie-in-r"><span class="header-section-number">8.2.1</span> Meta-regressie in R</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -281,10 +325,140 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>In meta-regressie passen we conventionele regressietechnieken aan op gegevens op studieniveau. Subgroepanalyses kunnen worden gezien als een speciaal geval van meta-regressie met categorische voorspellers en een gemeenschappelijke schatting van <span class="math inline">\(\tau^2\)</span>. Het doel van een meta-regressiemodel is om (delen van) de ware verschillen in effectgrootte in onze data te <strong>verklaren</strong> (d.w.z. de heterogeniteitsvariantie tussen studies, <span class="math inline">\(\tau^2\)</span>). Als een model goed bij de gegevens past, moet de afwijking van de ware effecten van de regressielijn kleiner zijn dan hun oorspronkelijke afwijking van het gepoolde effect. Als dit het geval is, zal de onverklaarde of residuele heterogeniteit klein zijn. Dit wordt weergegeven door de <code>R2∗index</code>, die ons vertelt welk percentage van de heterogeniteitsvariatie door ons model wordt verklaard.</p>
-<p>Bij meervoudige meta-regressie worden twee of meer voorspellers gebruikt in hetzelfde meta-regressiemodel. Het is ook mogelijk om te testen of de voorspellingen van een variabele veranderen voor verschillende waarden van een andere variabele, door interactietermen te introduceren. Hoewel (meervoudige) meta-regressie erg veelzijdig is, is het niet zonder beperkingen. Meervoudige meta-regressie maakt het erg gemakkelijk om modellen te overfitten, wat betekent dat willekeurige ruis in plaats van echte relaties gemodelleerd worden. Multi-collineariteit van voorspellers kan ook een bedreiging vormen voor de geldigheid van ons model. Er zijn verschillende manieren om ervoor te zorgen dat ons meta-regressiemodel robuust is. We kunnen bijvoorbeeld alleen modellen passen die gebaseerd zijn op een vooraf gedefinieerde theoretische rationale, of permutatietesten gebruiken. Multi-model inferentie kan worden gebruikt als een verkennende aanpak. Deze methode kan ons wijzen op mogelijk belangrijke voorspellers en kan worden gebruikt om hypotheses af te leiden die in toekomstig onderzoek moeten worden getest.</p>
+<section id="theorie" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="theorie"><span class="header-section-number">8.1</span> Theorie</h2>
+<p>In meta-regressie passen we conventionele regressietechnieken aan op gegevens op studieniveau. Subgroepanalyses kunnen worden gezien als een speciaal geval van meta-regressie met categorische voorspellers en een gemeenschappelijke schatting van <span class="math inline">\(\tau^2\)</span>. Als mensen over meta-regressie spreken, hebben ze voor een model met een continue variabele als voorspeller in hun hoofd. Dan heb je met een regressie-helling te maken en een bepaalde variabelen wordt vermenigvuldigd met een regressie-gewicht.</p>
+<p>Meta-regressiemodellen worden vaak gezien als een uitbreiding van het “normale” random-effectsmodel dat we gebruiken om effectgroottes samen te voegen. Het random-effect model is niets anders dan een meta-regressiemodel zonder hellingterm (slope). Omdat het geen helling bevat, voorspelt het random-effectsmodel simpelweg dezelfde waarde voor elk onderzoek: de schatting van de gepoolde effectgrootte <span class="math inline">\(\mu\)</span>, die gelijk is aan het intercept.</p>
+<p>Het doel van een meta-regressiemodel is om (delen van) de ware verschillen in effectgrootte in onze data te <strong>verklaren</strong> (d.w.z. de heterogeniteitsvariantie tussen studies, <span class="math inline">\(\tau^2\)</span>). Als een model goed bij de gegevens past, moet de afwijking van de ware effecten van de regressielijn kleiner zijn dan hun oorspronkelijke afwijking van het gepoolde effect. Als dit het geval is, zal de onverklaarde of residuele heterogeniteit klein zijn. Dit wordt weergegeven door de <code>R2∗index</code>, die ons vertelt welk percentage van de heterogeniteitsvariatie door ons model wordt verklaard.</p>
+<p>Bij meervoudige meta-regressie (waar in dit notebook verder niet op wordt ingegaan) worden twee of meer voorspellers gebruikt in hetzelfde meta-regressiemodel. Het is ook mogelijk om te testen of de voorspellingen van een variabele veranderen voor verschillende waarden van een andere variabele, door interactietermen te introduceren. Hoewel (meervoudige) meta-regressie erg veelzijdig is, is het niet zonder beperkingen. Meervoudige meta-regressie maakt het erg gemakkelijk om modellen te overfitten, wat betekent dat willekeurige ruis in plaats van echte relaties gemodelleerd worden. Multi-collineariteit van voorspellers kan ook een bedreiging vormen voor de geldigheid van ons model. Er zijn verschillende manieren om ervoor te zorgen dat ons meta-regressiemodel robuust is. We kunnen bijvoorbeeld alleen modellen passen die gebaseerd zijn op een vooraf gedefinieerde theoretische rationale, of permutatietesten gebruiken. Multi-model inferentie kan worden gebruikt als een verkennende aanpak. Deze methode kan ons wijzen op mogelijk belangrijke voorspellers en kan worden gebruikt om hypotheses af te leiden die in toekomstig onderzoek moeten worden getest.</p>
+</section>
+<section id="praktijk" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="praktijk"><span class="header-section-number">8.2</span> Praktijk</h2>
+<section id="meta-regressie-in-r" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="meta-regressie-in-r"><span class="header-section-number">8.2.1</span> Meta-regressie in R</h3>
+<p>In het {meta}-pakket zit de functie <code>metareg</code> waarmee we een meta-regressie kunnen uitvoeren. We gebruiken weer <code>ThirdWave</code>-dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># voor databewerking</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)    <span class="co"># voor de data</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)      <span class="co"># voor de meta-analyse</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ThirdWave)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 18
+Columns: 8
+$ Author               &lt;chr&gt; "Call et al.", "Cavanagh et al.", "DanitzOrsillo"…
+$ TE                   &lt;dbl&gt; 0.7091362, 0.3548641, 1.7911700, 0.1824552, 0.421…
+$ seTE                 &lt;dbl&gt; 0.2608202, 0.1963624, 0.3455692, 0.1177874, 0.144…
+$ RiskOfBias           &lt;chr&gt; "high", "low", "high", "low", "low", "low", "high…
+$ TypeControlGroup     &lt;chr&gt; "WLC", "WLC", "WLC", "no intervention", "informat…
+$ InterventionDuration &lt;chr&gt; "short", "short", "short", "short", "short", "sho…
+$ InterventionType     &lt;chr&gt; "mindfulness", "mindfulness", "ACT", "mindfulness…
+$ ModeOfDelivery       &lt;chr&gt; "group", "online", "group", "group", "online", "g…</code></pre>
+</div>
+</div>
+<p>We gebruiken opnieuw <code>m.gen</code> (zie hoofdstuk 4).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">metagen</span>(<span class="at">TE =</span> TE,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">seTE =</span> seTE,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> Author,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> ThirdWave,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"REML"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Third Wave Psychotherapies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We willen weten of de effectgroottes van de studies in de dataset samenhangen met het jaartal van publicatie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2014</span>, <span class="dv">1998</span>, <span class="dv">2010</span>, <span class="dv">1999</span>, <span class="dv">2005</span>, <span class="dv">2014</span>, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>          <span class="dv">2019</span>, <span class="dv">2010</span>, <span class="dv">1982</span>, <span class="dv">2020</span>, <span class="dv">1978</span>, <span class="dv">2001</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>          <span class="dv">2018</span>, <span class="dv">2002</span>, <span class="dv">2009</span>, <span class="dv">2011</span>, <span class="dv">2011</span>, <span class="dv">2013</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We voeren eerst een meta-analyse uit en passen daarna een meta-regressie toe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>m.gen.reg <span class="ot">&lt;-</span> <span class="fu">metareg</span>(m.gen, <span class="sc">~</span>year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We bekijken de resultaten.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>m.gen.reg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Mixed-Effects Model (k = 18; tau^2 estimator: REML)
+
+tau^2 (estimated amount of residual heterogeneity):     0.0188 (SE = 0.0226)
+tau (square root of estimated tau^2 value):             0.1371
+I^2 (residual heterogeneity / unaccounted variability): 29.26%
+H^2 (unaccounted variability / sampling variability):   1.41
+R^2 (amount of heterogeneity accounted for):            77.08%
+
+Test for Residual Heterogeneity:
+QE(df = 16) = 27.8273, p-val = 0.0332
+
+Test of Moderators (coefficient 2):
+F(df1 = 1, df2 = 16) = 9.3755, p-val = 0.0075
+
+Model Results:
+
+         estimate       se     tval  df    pval     ci.lb     ci.ub     
+intrcpt  -36.1546  11.9800  -3.0179  16  0.0082  -61.5510  -10.7582  ** 
+year       0.0183   0.0060   3.0619  16  0.0075    0.0056    0.0310  ** 
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>We zien dat de schatting van de residuele heterogeniteitsvariantie, de variantie die niet wordt verklaard door de voorspeller, <span class="math inline">\(\hat\tau^2_{unexplained}\)</span>=0.019.</p>
+<p>De uitvoer geeft ons ook een <span class="math inline">\(I^2\)</span>-equivalent, dat ons vertelt dat na inclusie van de voorspeller 29,26% van de variabiliteit in onze gegevens kan worden toegeschreven aan de resterende heterogeniteit tussen studies.</p>
+<p>In de laatste regel zien we de waarde van <span class="math inline">\(R^2_∗\)</span>, die in ons voorbeeld 77% is. Dit betekent dat 77% van het verschil in werkelijke effectgrootte kan worden verklaard door het publicatiejaar, een waarde die behoorlijk substantieel is.</p>
+<p>Dan zien we <code>Test for Residual Heterogeneity</code>, in wezen de <span class="math inline">\(Q\)</span>-test. Nu testen we echter of de heterogeniteit die niet wordt verklaard door de voorspeller significant is. We zien dat dit het geval is, met p = 0,03. Er zitten beperkingen aan de Q-toets en moeten daarom niet te veel vertrouwen op dit resultaat.</p>
+<p>Het volgende deel toont de <code>Test of Moderators</code>. We zien dat deze test ook significant is (<span class="math inline">\(p = 0,0075\)</span>). Dit betekent dat onze voorspeller, het publicatiejaar, inderdaad van invloed is op de effectgrootte van de studies.</p>
+<p>De laatste paragraaf geeft meer details over de geschatte regressiecoëfficiënten. De eerste regel toont de resultaten voor het intercept (intrcpt). Dit is de verwachte effectgrootte (in ons geval: Hedges’ <span class="math inline">\(g\)</span>) wanneer onze voorspeller publicatiejaar nul is. In ons voorbeeld vertegenwoordigt dit een scenario dat, aantoonbaar, een beetje gekunsteld is: het toont het voorspelde effect van een onderzoek dat is uitgevoerd in het jaar 0, wat <span class="math inline">\(\hat{g}= -36,15\)</span> is. Dit herinnert ons er nog maar eens aan dat goede statistische modellen geen perfecte weergave van de werkelijkheid hoeven te zijn; ze moeten gewoon nuttig zijn.</p>
+<p>De coëfficiënt waarin we vooral geïnteresseerd zijn, is die in de tweede rij. We zien dat de schatting van het regressiegewicht voor jaar in het model 0,01 is. Dit betekent dat voor elk extra jaar de effectgrootte <span class="math inline">\(g\)</span> van een onderzoek naar verwachting met 0,01 toeneemt. Daarom kunnen we zeggen dat de effectgroottes van onderzoeken in de loop van de tijd zijn toegenomen. Het 95% betrouwbaarheidsinterval loopt van 0,005 tot 0,3, wat aangeeft dat het effect significant is.</p>
+<p>We kunnen met {meta}pakket ook een bubble-plot maken. Dan zie je de regressie-helling van deze meta-regressie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bubble</span>(m.gen.reg, <span class="at">studlab =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="08-meta_regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We kunnen ook nog eens de subgroep-analyse vanuit meta-regressie raamwerk uitvoeren. We gebruiken de riskbias als categoriale voorspeller. Die variabele zit al <code>ThirdWave</code>-dataset. We kunnen <code>metareg</code>-functie gebruiken en <code>RiskOfBias</code> eraan toevoegen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">metareg</span>(m.gen, RiskOfBias)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Mixed-Effects Model (k = 18; tau^2 estimator: REML)
+
+tau^2 (estimated amount of residual heterogeneity):     0.0691 (SE = 0.0424)
+tau (square root of estimated tau^2 value):             0.2630
+I^2 (residual heterogeneity / unaccounted variability): 60.58%
+H^2 (unaccounted variability / sampling variability):   2.54
+R^2 (amount of heterogeneity accounted for):            15.66%
+
+Test for Residual Heterogeneity:
+QE(df = 16) = 39.3084, p-val = 0.0010
+
+Test of Moderators (coefficient 2):
+F(df1 = 1, df2 = 16) = 2.5066, p-val = 0.1329
+
+Model Results:
+
+               estimate      se     tval  df    pval    ci.lb   ci.ub      
+intrcpt          0.7691  0.1537   5.0022  16  0.0001   0.4431  1.0950  *** 
+RiskOfBiaslow   -0.2992  0.1890  -1.5832  16  0.1329  -0.6999  0.1014      
+
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>In de uitvoer zien we dat de waarde van <span class="math inline">\(R^2∗\)</span> met 15,66% aanzienlijk kleiner is dan die van het jaar. In overeenstemming met onze eerdere resultaten zien we dat de risk of bias-variabele geen significante effectgrootte voorspeller is (<span class="math inline">\(p= 0.13\)</span>).</p>
+<p>Onder <code>Model Resultats</code> zien we dat <code>metareg</code> <code>RiskOfBias</code> automatisch heeft omgezet in een dummyvariabele. De schatting van het intercept, dat het gepoolde effect van de subgroep “hoog risico” weergeeft, is <span class="math inline">\(g=0.76\)</span>. De schatting van de regressiecoëfficiënt die staat voor studies met een laag biasrisico is -0,29.</p>
+<p>Om de effectgrootte voor deze subgroep te krijgen, moeten we het regressiegewicht bij het intercept optellen, wat resulteert in <span class="math inline">\(g=0.76 - 0.29 \approx 0.47\)</span>. Deze resultaten zijn identiek aan die van een subgroepanalyse die uitgaat van een gemeenschappelijke schatting van <span class="math inline">\(\tau^2\)</span>.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

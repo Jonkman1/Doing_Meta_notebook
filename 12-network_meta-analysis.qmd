@@ -1,4 +1,4 @@
-# Network Meta-Analysis
+# Netwerk Meta-Analyse
 
 ## Theorie
 Netwerkmeta-analyse is een nuttig hulpmiddel om de relatieve effectiviteit van verschillende behandelingen of interventies gezamenlijk in te schatten. Netwerk meta-analyse staat ook bekend als **mixed-treatment comparison meta-analyse**. Dit komt omdat het meerdere directe en indirecte behandelingsvergelijkingen integreert in één model, dat kan worden geformaliseerd als een "netwerk" van vergelijkingen. Netwerk meta-analyse is een "hot" onderzoeksonderwerp. In de afgelopen tien jaar is het steeds meer opgepikt door toegepaste onderzoekers in de biomedische sector en andere disciplines. Deze methode gaat echter ook gepaard met extra uitdagingen en valkuilen, vooral met betrekking tot heterogeniteit en zogenaamde **netwerkinconsistentie**.
@@ -23,15 +23,15 @@ Waarschijnlijkheidsintervallen van verschillende behandelingen overlappen elkaar
 ## Praktijk
 Het {gemtc} pakket is afhankelijk van {rjags}, dat kan worden gebruikt voor de Gibbs sampling procedure. Daarvoor moet je wel **JAGS** hebben geinstalleerd op je computer. Daarna kun je {rjags} binnenhalen.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(gemtc)
 library(rjags)
 ```
 
-### Data preparation
+### Data voorbereding
 De `TherapyFormatsGeMTC` dataset is eigenlijk een list met twee elementen, waarvan er één data heet. Dit element is het dataframe dat we nodig hebben om het model te draaien. Laten we er eens naar kijken.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(dmetar)
 data(TherapyFormatsGeMTC)
 
@@ -69,7 +69,7 @@ plot(network,
 ```
 Met het {igraph} pakket kunnen we de netwerkplot ook aanpassen. Kijk voor meer informatie over de mogelijke aanpassingen naar de documentatie van [igraph](https://igraph.org/r/doc/plot.common.html).
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(igraph)
 set.seed(12345) # set seed for reproducibility
 

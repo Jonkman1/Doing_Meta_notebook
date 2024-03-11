@@ -1,1 +1,167 @@
-# Effect Size Calculation & Conversion
+# Effect Size Berekening & Conversie
+
+Soms kunnen "ruwe" effect size data niet direct gebruikt worden in een meta-analyse. In dat geval moeten ze eerst omgezet worden naar een andere effect size maat die wel aan deze eisen voldoet. Soms kunnen ze worden geconverteerd naar het juiste effect size formaat. In dit hoofdstuk staan daarvan voorbeelden waarbij veelal wordt gewerkt met het pakket `esc` (Lüdecke, 2018).
+
+## Gemiddelde en Standaard Fout (SE)
+
+$$SD=SE \times \sqrt{n}$$
+
+```{r}
+library(esc)
+
+esc_mean_se(grp1m = 8.5,   # mean of group 1
+            grp1se = 1.5,  # standard error of group 1
+            grp1n = 50,    # sample in group 1
+            grp2m = 11,    # mean of group 2
+            grp2se = 1.8,  # standard error of group 2
+            grp2n = 60,    # sample in group 2
+            es.type = "d") # convert to SMD; use "g" for Hedges' g
+```
+
+## Regressie Coëfficiënten
+
+
+SMDs, Hedges $g$ of een correlatie $r$ kunnen worden berekend uit gestandariseerde en ongestandariseerde regressie coëfficiënten. 
+
+Voor ongestandariseerde coëfficiënten kunnen we de `esc_B` functie uit {esc} gebruiken:
+
+```{r}
+library(esc)
+
+esc_B(b = 3.3,       # ongestandardiseerde regressie coëfficient
+      sdy = 5,       # standaard deviatie van voorspelde variabele y
+      grp1n = 100,   # sampleomvang van de eerste groep
+      grp2n = 150,   # sampleomvang van de tweede groep
+      es.type = "d") # converteer naar SMD; gebruik "g" voor Hedges' g
+```
+
+Voor gestandariseerde coëfficiënten kunnen we de `esc_beta` functie uit {esc} gebruiken:
+
+```{r}
+esc_beta(beta = 0.32,   # gestandardiseerde regressie coëfficient
+         sdy = 5,       # standaard deviatie van de voorspelde variabele y
+         grp1n = 100,   # sampleomvang van de eerste groep
+         grp2n = 150,   # sampleomvang van de tweede groep
+         es.type = "d") # converteer naar SMD; gebruik "g" voor Hedges' g
+```
+
+Hier naar correlatie:
+
+```{r}
+esc_beta(beta = 0.37,   # gestandardiseerde regressie coëfficient
+         sdy = 4,       # standaard deviatie van voorspelde variabele y
+         grp1n = 50,    # sampleomvang van de eerste groep
+         grp2n = 50,    # sampleomvang van de tweede groep
+         es.type = "r") # converteer naar correlatie
+```
+Opgelet: gebruik van regressiecoefficiënten kan ingewikkelde zijn in meta-analyse omdat niet altijd hetzelfde model is gebruikt in alle studies (bv. gecontroleerde voor verschillende covariaten). Dus $\beta$ waarden zijn niet altijd vergelijkbaar.
+
+## Correlaties
+
+Voor ongelijke groepen
+
+```{r}
+library(esc)
+
+esc_rpb(r = 0.25,      # point-biserial correlation
+        grp1n = 99,    # sample size of group 1
+        grp2n = 120,   # sample size of group 2
+        es.type = "d") # convert to SMD; use "g" for Hedges' g
+```
+
+## One-way ANOVAs
+
+Om SMD of Hedges' $g$ van $F$-waarden te berekenen gebruiken we de `esc_f` functie.
+
+```{r}
+esc_f(f = 5.04,      # F waarde voor de 'one-way anova'
+      grp1n = 519,   # sampleomvang voor groep 1 
+      grp2n = 528,   # sampleomvang voor groep 2
+      es.type = "g") # converteer naar Hedges' g; gebruik "d" voor SMD
+```
+
+## Twee groep $t$-tests
+
+Hier gebruiken we de `esc_t` functie.
+
+```{r}
+esc_t(t = 3.3,     # t-value 
+      grp1n = 100, # sample size of group1
+      grp2n = 150, # sample size of group 2
+      es.type="d") # convert to SMD; use "g" for Hedges' g
+```
+
+## $p$-waarden
+
+Soms rapporteren onderzoeken alleen de effectgrootte (bijvoorbeeld een waarde van Cohen's $d$), de $p$-waarde van dat effect en niets meer. Om de resultaten in een meta-analyse samen te voegen, hebben we echter een maat nodig voor de precisie van de effectgrootte, bij voorkeur de standaardfout.
+
+In dat geval moeten we de standaardfout schatten uit de $p$-waarde van de effectgrootte. Dit is mogelijk voor effectgroottes gebaseerd op verschillen (SMD's) of ratio's (risico- of oddsratio's). Deze formules zijn geïmplementeerd in de functie `se.from.p` in R.
+
+Uitgaande van een onderzoek met $N= 71$ deelnemers, met een effectgrootte van $d= 0,71$ waarvoor $p= 0,013$, kunnen we de standaardfout als volgt berekenen:
+
+```{r}
+library(dmetar)
+
+se.from.p(0.71,
+          p = 0.013,
+          N = 71,
+          effect.size.type = "difference")
+```
+
+Voor een onderzoek met $N= 200$ deelnemers dat een effectgrootte rapporteert van $OR = 0,91$ met $p= 0,38$, wordt de standaardfout op deze manier berekend:
+
+```{r}
+library(tidyverse) # voor pipe |>
+
+
+se.from.p(0.91, p = 0.38, N = 200,
+          effect.size.type = "ratio") |> 
+          t()
+
+
+```
+Als `effect.size.type = "ratio"` berekent de functie automatisch ook de log-getransformeerde effectgrootte en standaardfout, die nodig zijn om de `metagen`-functie te gebruiken.
+
+
+## 
+$\chi^2$-tests
+
+Om een $\chi^2$ statistiek om te zetten naar een odds-ratio kan de functie `esc_chisq` gebruikt worden, zoals bv hieronder:
+
+```{r}
+esc_chisq(chisq = 7.9,        # chi-squared waarde
+          totaln = 100,       # totale sampleompvang
+          es.type = "cox.or") # converteer naar odds ratio
+```
+
+## Number Needed to Treat (NNT)
+Effectgroottes zoals Cohen's $d$ of Hedges' $g$ zijn vanuit praktisch oogpunt vaak moeilijk te interpreteren. Stel dat we in onze meta-analyse een interventie-effect vaststellen van $g=0,35$. Hoe kunnen we communiceren wat een dergelijk effect betekent voor patiënten, overheidsfunctionarissen, medische professionals of andere belanghebbenden?
+
+Om het voor anderen gemakkelijker te maken om de resultaten te begrijpen, wordt in meta-analyses ook vaak het aantal benodigde behandelingen ($NNT$) vermeld. Deze maat wordt het meest gebruikt in medisch onderzoek. Het geeft aan hoeveel extra patiënten de onderzochte behandeling moeten krijgen om één extra negatieve gebeurtenis (bijv. terugval) te voorkomen of één extra positieve gebeurtenis (bijv. symptoomremissie, respons) te bereiken. Als $NNT = 3$, bijvoorbeeld, kunnen we zeggen dat drie personen de behandeling moeten krijgen om één extra terugval te voorkomen; of dat drie patiënten moeten worden behandeld om één extra geval van betrouwbare symptoomremissie te bereiken, afhankelijk van de onderzoeksvraag.
+
+Als we risico- of oddsratio's gebruiken als maatstaven voor de effectgrootte, kunnen NNT's direct worden berekend uit {meta} objecten met behulp van de `nnt`-functie. Nadat we onze meta-analyse hebben uitgevoerd met `metabin`, hoeven we alleen de resultaten in de `nnt`-functie te stoppen. Hier is een voorbeeld:
+
+```{r}
+library(meta)
+data(Olkin1995)
+
+# Draai meta-analyse met binaire effect size data
+m.b <- metabin(ev.exp, n.exp, ev.cont, n.cont, 
+               data = Olkin1995,
+               sm = "RR")
+nnt(m.b)
+```
+
+Gestandaardiseerde gemiddelde verschillen of Hedges' $g$ kunnen worden omgezet naar de $NNT$ met behulp van de `NNT`-functie in {dmetar}.
+
+```{r}
+# library(dmetar)
+NNT(d = 0.245)
+```
+
+De Furukawa methode wordt gebruikt als er een `CER` is toegevoegd.
+
+```{r}
+NNT(d = 0.245, CER = 0.35)
+```
+

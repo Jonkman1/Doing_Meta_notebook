@@ -11,7 +11,7 @@ book:
       chapters:
         - 01-introductie.qmd
         - 02-discovering_R.qmd
-    - part: "Meta-Analysis in R"
+    - part: "Meta-Analyse in R"
       chapters:
         - 03-effect_sizes.qmd
         - 04-pooling_effect_sizes.qmd
@@ -20,13 +20,13 @@ book:
         - 07-subgroup_analyses.qmd
         - 08-meta_regression.qmd
         - 09-publication_bias.qmd
-    - part: "Advanced Methods"
+    - part: "Geavanceerde Methodes"
       chapters:
         - 10-multilevel_meta-analysis.qmd
         - 11-seq_meta-analysis.qmd
         - 12-network_meta-analysis.qmd
         - 13-bayesian_meta-analysis.qmd
-    - part: "Helpful Tools"
+    - part: "Bruikbare Gereedschappen"
       chapters:
         - 14-power_analysis.qmd
         - 15-risk_bias_plots.qmd

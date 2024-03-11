@@ -15,7 +15,7 @@ Het `meta`-pakket in R is een veelgebruikte tool voor het maken van forest plots
 
 We beginnen met het databestand zoals eerder omhoog gehaald.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(tidyverse) # voor databewerking
 library(dmetar)    # voor de data
 library(meta)      # voor de meta-analyse

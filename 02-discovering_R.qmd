@@ -29,7 +29,7 @@ Installeer eerst de pakketten die nodig zijn voor dit boek. Ik moest zelf een vo
 
 Laad de pakketten die nodig zijn om de voorbeelden in dit boek uit te voeren.
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 library(meta)
 library(metafor)
 library(dmetar)

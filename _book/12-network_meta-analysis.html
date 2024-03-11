@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 12&nbsp; Network Meta-Analysis</title>
+<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 12&nbsp; Netwerk Meta-Analyse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-multilevel_meta-analysis.html">Advanced Methods</a></li><li class="breadcrumb-item"><a href="./12-network_meta-analysis.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Network Meta-Analysis</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-multilevel_meta-analysis.html">Advanced Methods</a></li><li class="breadcrumb-item"><a href="./12-network_meta-analysis.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Netwerk Meta-Analyse</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -229,19 +229,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multilevel_meta-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">“Multilevel” Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">“Multilevel” Meta-Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-seq_meta-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Structural Equation Modeling Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Structural Equation Modeling Meta-Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-network_meta-analysis.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Network Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Netwerk Meta-Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-reporting_reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reporting &amp; Reproducibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Rapporteren &amp; Reproduceerbaarheid</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -300,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#theorie" id="toc-theorie" class="nav-link active" data-scroll-target="#theorie"><span class="header-section-number">12.1</span> Theorie</a></li>
   <li><a href="#praktijk" id="toc-praktijk" class="nav-link" data-scroll-target="#praktijk"><span class="header-section-number">12.2</span> Praktijk</a>
   <ul class="collapse">
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">12.2.1</span> Data preparation</a></li>
+  <li><a href="#data-voorbereding" id="toc-data-voorbereding" class="nav-link" data-scroll-target="#data-voorbereding"><span class="header-section-number">12.2.1</span> Data voorbereding</a></li>
   <li><a href="#netwerk-visualisatie" id="toc-netwerk-visualisatie" class="nav-link" data-scroll-target="#netwerk-visualisatie"><span class="header-section-number">12.2.2</span> Netwerk visualisatie</a></li>
   <li><a href="#model-samenstelling" id="toc-model-samenstelling" class="nav-link" data-scroll-target="#model-samenstelling"><span class="header-section-number">12.2.3</span> Model samenstelling</a></li>
   <li><a href="#mcmc-sampling-en-convergentie" id="toc-mcmc-sampling-en-convergentie" class="nav-link" data-scroll-target="#mcmc-sampling-en-convergentie"><span class="header-section-number">12.2.4</span> MCMC sampling en convergentie</a></li>
@@ -314,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Network Meta-Analysis</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Netwerk Meta-Analyse</span></h1>
 </div>
 
 
@@ -347,39 +347,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="12.2" class="anchored" data-anchor-id="praktijk"><span class="header-section-number">12.2</span> Praktijk</h2>
 <p>Het {gemtc} pakket is afhankelijk van {rjags}, dat kan worden gebruikt voor de Gibbs sampling procedure. Daarvoor moet je wel <strong>JAGS</strong> hebben geinstalleerd op je computer. Daarna kun je {rjags} binnenhalen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gemtc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: coda</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gemtc)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjags)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rjags)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linked to JAGS 4.3.0</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loaded modules: basemod,bugs</code></pre>
-</div>
-</div>
-<section id="data-preparation" class="level3" data-number="12.2.1">
-<h3 data-number="12.2.1" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">12.2.1</span> Data preparation</h3>
+<section id="data-voorbereding" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="data-voorbereding"><span class="header-section-number">12.2.1</span> Data voorbereding</h3>
 <p>De <code>TherapyFormatsGeMTC</code> dataset is eigenlijk een list met twee elementen, waarvan er één data heet. Dit element is het dataframe dat we nodig hebben om het model te draaien. Laten we er eens naar kijken.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Extensive documentation for the dmetar package can be found at: 
- www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dmetar'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:gemtc':
-
-    sucra</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(TherapyFormatsGeMTC)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TherapyFormatsGeMTC<span class="sc">$</span>data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(TherapyFormatsGeMTC)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TherapyFormatsGeMTC<span class="sc">$</span>data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         study   diff std.err treatment
 1 Ausbun, 1997  0.092   0.195       ind
@@ -403,7 +381,7 @@ Attaching package: 'dmetar'</code></pre>
 <h3 data-number="12.2.2" class="anchored" data-anchor-id="netwerk-visualisatie"><span class="header-section-number">12.2.2</span> Netwerk visualisatie</h3>
 <p>Nu we de data hebben, zetten we de <code>mtc.network</code> functie aan. Het optionele treatments argument kan gebruikt worden om {gemtc} te voorzien van de werkelijke namen van alle behandelingen die in het netwerk zijn opgenomen. Deze informatie moet worden klaargezet in een dataframe met een <code>id</code>- en een <code>description</code>-kolom. We hebben zo’n dataframe gemaakt en opgeslagen als <code>treat.codes</code> in <code>TherapyFormatsGeMTC</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>TherapyFormatsGeMTC<span class="sc">$</span>treat.codes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>TherapyFormatsGeMTC<span class="sc">$</span>treat.codes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   id        description
 1 ind         Individual
@@ -417,12 +395,12 @@ Attaching package: 'dmetar'</code></pre>
 </div>
 <p>We gebruiken dit dataframe en onze effectsize-gegevens in <code>TherapyFormatsGeMTC</code> om ons <code>mtc.network-object</code> te maken. We slaan het op onder de naam <code>network</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>network <span class="ot">&lt;-</span> <span class="fu">mtc.network</span>(<span class="at">data.re  =</span> TherapyFormatsGeMTC<span class="sc">$</span>data,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">treatments =</span> TherapyFormatsGeMTC<span class="sc">$</span>treat.codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>network <span class="ot">&lt;-</span> <span class="fu">mtc.network</span>(<span class="at">data.re  =</span> TherapyFormatsGeMTC<span class="sc">$</span>data,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">treatments =</span> TherapyFormatsGeMTC<span class="sc">$</span>treat.codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Door het resulterende object in de <code>summary</code>-functie te stoppen, krijgen we al wat interessante informatie over ons netwerk.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(network)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$Description
 [1] "MTC dataset: Network"
@@ -457,42 +435,28 @@ $`Studies per treatment comparison`
 </div>
 <p>We kunnen nu ook de <code>plot</code>-functie gebruiken om een netwerkplot te genereren. De dikte van de randen komt overeen met het aantal studies dat we hebben opgenomen voor die vergelijking.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">use.description =</span> <span class="cn">TRUE</span>) <span class="co"># Use full treatment names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">use.description =</span> <span class="cn">TRUE</span>) <span class="co"># Use full treatment names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Met het {igraph} pakket kunnen we de netwerkplot ook aanpassen. Kijk voor meer informatie over de mogelijke aanpassingen naar de documentatie van <a href="https://igraph.org/r/doc/plot.common.html">igraph</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'igraph'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    decompose, spectrum</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:base':
-
-    union</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>) <span class="co"># set seed for reproducibility</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network, </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">use.description =</span> <span class="cn">TRUE</span>,            <span class="co"># Use full treatment names</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">"white"</span>,            <span class="co"># node color</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">"gray10"</span>,     <span class="co"># treatment label color</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">"sphere"</span>,           <span class="co"># shape of the node</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.family =</span> <span class="st">"Helvetica"</span>, <span class="co"># label font</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">20</span>,                  <span class="co"># size of the node</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.dist =</span> <span class="dv">2</span>,             <span class="co"># distance label-node center</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">1.5</span>,            <span class="co"># node label size</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.2</span>,                 <span class="co"># edge curvature</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout.fruchterman.reingold)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>) <span class="co"># set seed for reproducibility</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(network, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">use.description =</span> <span class="cn">TRUE</span>,            <span class="co"># Use full treatment names</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">"white"</span>,            <span class="co"># node color</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">"gray10"</span>,     <span class="co"># treatment label color</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">"sphere"</span>,           <span class="co"># shape of the node</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.family =</span> <span class="st">"Helvetica"</span>, <span class="co"># label font</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">20</span>,                  <span class="co"># size of the node</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.dist =</span> <span class="dv">2</span>,             <span class="co"># distance label-node center</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">1.5</span>,            <span class="co"># node label size</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.2</span>,                 <span class="co"># edge curvature</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout.fruchterman.reingold)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -502,19 +466,19 @@ Attaching package: 'igraph'</code></pre>
 <h3 data-number="12.2.3" class="anchored" data-anchor-id="model-samenstelling"><span class="header-section-number">12.2.3</span> Model samenstelling</h3>
 <p>Nu we ons netwerk hebben, kunnen we een model samenstellen. We gebruiken de <code>mtc.model</code>-functie om een model te maken. We geven ons netwerk, de likelihood, link, linearModel en het aantal chains mee.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We give our compiled model the name `model`.</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">mtc.model</span>(network,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">likelihood =</span> <span class="st">"normal"</span>,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">link =</span> <span class="st">"identity"</span>,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">linearModel =</span> <span class="st">"random"</span>,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n.chain =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We give our compiled model the name `model`.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">mtc.model</span>(network,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">likelihood =</span> <span class="st">"normal"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">link =</span> <span class="st">"identity"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">linearModel =</span> <span class="st">"random"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n.chain =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="mcmc-sampling-en-convergentie" class="level3" data-number="12.2.4">
 <h3 data-number="12.2.4" class="anchored" data-anchor-id="mcmc-sampling-en-convergentie"><span class="header-section-number">12.2.4</span> MCMC sampling en convergentie</h3>
 <p>Modellen kunnen we op verschillende manieren specificeren. Laten we twee modellen definieren.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mcmc1 <span class="ot">&lt;-</span> <span class="fu">mtc.run</span>(model, <span class="at">n.adapt =</span> <span class="dv">50</span>, <span class="at">n.iter =</span> <span class="dv">1000</span>, <span class="at">thin =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mcmc1 <span class="ot">&lt;-</span> <span class="fu">mtc.run</span>(model, <span class="at">n.adapt =</span> <span class="dv">50</span>, <span class="at">n.iter =</span> <span class="dv">1000</span>, <span class="at">thin =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Compiling model graph
    Resolving undeclared variables
@@ -533,7 +497,7 @@ syntax[["inits"]], : Adaptation incomplete</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>NOTE: Stopping adaptation</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mcmc2 <span class="ot">&lt;-</span> <span class="fu">mtc.run</span>(model, <span class="at">n.adapt =</span> <span class="dv">5000</span>, <span class="at">n.iter =</span> <span class="fl">1e5</span>, <span class="at">thin =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mcmc2 <span class="ot">&lt;-</span> <span class="fu">mtc.run</span>(model, <span class="at">n.adapt =</span> <span class="dv">5000</span>, <span class="at">n.iter =</span> <span class="fl">1e5</span>, <span class="at">thin =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Compiling model graph
    Resolving undeclared variables
@@ -548,15 +512,15 @@ Initializing model</code></pre>
 </div>
 <p>Om te zien of de modellen zijn geconvergeerd, plotten we ze. Op basis van trace en met name densityplots zie je dat het tweede model er betrouwbaarder uitziet.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
 <p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid" width="672"></p>
 </div>
@@ -566,27 +530,27 @@ Initializing model</code></pre>
 </div>
 <p>Voor diagnostiek kun je ook nog Gelman-plots draaien. Waarden moeten dicht bij 1 liggen. Dat is bij beiden het geval ook al toont het tweede model een betere convergentie.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.plot</span>(mcmc1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.plot</span>(mcmc1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.plot</span>(mcmc2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.plot</span>(mcmc2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>De waarde kun je ook direct opvragen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.diag</span>(mcmc1)<span class="sc">$</span>mpsrf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.diag</span>(mcmc1)<span class="sc">$</span>mpsrf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.035278</code></pre>
+<pre><code>[1] 1.028578</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.diag</span>(mcmc2)<span class="sc">$</span>mpsrf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gelman.diag</span>(mcmc2)<span class="sc">$</span>mpsrf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.000577</code></pre>
+<pre><code>[1] 1.000782</code></pre>
 </div>
 </div>
 </section>
@@ -594,7 +558,7 @@ Initializing model</code></pre>
 <h3 data-number="12.2.5" class="anchored" data-anchor-id="netwerk-meta-regressie"><span class="header-section-number">12.2.5</span> Netwerk meta-regressie</h3>
 <p>Een groot voordeel van het {gemtc} pakket is dat je er een netwerk meta-regressie mee kan uitvoeren. Stel dat we willen evalueren of het risico op bias van een studie invloed heeft op de effecten in onze netwerkmeta-analyse. Het zou bijvoorbeeld kunnen dat studies met een hoog biasrisico over het algemeen hogere effecten rapporteren in vergelijking met de controlegroep of alternatieve behandelingen. Door het biasrisico als voorspeller op te nemen in ons model, kunnen we controleren op een dergelijke associatie en de invloed ervan op onze resultaten beoordelen.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>TherapyFormatsGeMTC<span class="sc">$</span>study.info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>TherapyFormatsGeMTC<span class="sc">$</span>study.info</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       study rob
 1             Campbell, 2000   1
@@ -785,9 +749,9 @@ Initializing model</code></pre>
 <p>De dataset bevat twee kolommen: <code>study</code>, de naam van de studie die is opgenomen in ons netwerk en <code>rob</code>, het biasrisico (o voor laag en 1 voor hoog biasrisico).</p>
 <p>Met dataframe <code>study.info</code> kunnen we nu een meta-regressienetwerk maken met <code>mtc.network</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>network.mr <span class="ot">&lt;-</span> <span class="fu">mtc.network</span>(<span class="at">data.re =</span> TherapyFormatsGeMTC<span class="sc">$</span>data,</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">studies =</span> TherapyFormatsGeMTC<span class="sc">$</span>study.info,</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">treatments =</span> TherapyFormatsGeMTC<span class="sc">$</span>treat.codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>network.mr <span class="ot">&lt;-</span> <span class="fu">mtc.network</span>(<span class="at">data.re =</span> TherapyFormatsGeMTC<span class="sc">$</span>data,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">studies =</span> TherapyFormatsGeMTC<span class="sc">$</span>study.info,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">treatments =</span> TherapyFormatsGeMTC<span class="sc">$</span>treat.codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nu moeten we de <strong>regressor</strong> definiëren die we willen opnemen in ons netwerkmeta-analysemodel. Dit kan worden gedaan door een listobject met drie elementen te genereren:</p>
 <ul>
@@ -796,24 +760,24 @@ Initializing model</code></pre>
 <li><p><strong>controle</strong>: We moeten ook de behandeling specificeren die we als referentiegroep willen gebruiken. In ons voorbeeld gebruiken we <code>cau</code> (care as usual).</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>regressor <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">coefficient =</span> <span class="st">"shared"</span>,</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">variable =</span> <span class="st">"rob"</span>,</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">control =</span> <span class="st">"cau"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>regressor <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">coefficient =</span> <span class="st">"shared"</span>,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">variable =</span> <span class="st">"rob"</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">control =</span> <span class="st">"cau"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nu moeten we het model definiëren. We voorzien de functie <code>mtc.model</code> van het netwerk dat we zojuist hebben gegenereerd, stellen het type van ons model in op <code>regression</code> en voorzien de functie van het regressorobject dat we zojuist hebben gegenereerd. We slaan de uitvoer op onder de naam <code>model.mr</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>model.mr <span class="ot">&lt;-</span> <span class="fu">mtc.model</span>(network.mr,</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">likelihood =</span> <span class="st">"normal"</span>,</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">link =</span> <span class="st">"identity"</span>,</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">"regression"</span>,</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">regressor =</span> regressor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>model.mr <span class="ot">&lt;-</span> <span class="fu">mtc.model</span>(network.mr,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">likelihood =</span> <span class="st">"normal"</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">link =</span> <span class="st">"identity"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">type =</span> <span class="st">"regression"</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">regressor =</span> regressor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Na deze stap kunnen we het model uitvoeren met de functie <code>mtc.run</code>. We gebruiken dezelfde specificaties als we eerder hebben gebruikt voor het passen van het <code>mcmc2</code>-model. De resultaten worden opgeslagen als <code>mcmc3</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mcmc3 <span class="ot">&lt;-</span> <span class="fu">mtc.run</span>(model.mr,</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n.adapt =</span> <span class="dv">5000</span>,</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n.iter =</span> <span class="fl">1e5</span>,</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">thin =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>mcmc3 <span class="ot">&lt;-</span> <span class="fu">mtc.run</span>(model.mr,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n.adapt =</span> <span class="dv">5000</span>,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">n.iter =</span> <span class="fl">1e5</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">thin =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Compiling model graph
    Resolving undeclared variables
@@ -828,7 +792,7 @@ Initializing model</code></pre>
 </div>
 <p>Nu kunnen we het analyseren met de <code>summary</code>-functie.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mcmc3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mcmc3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Results on the Mean Difference scale
@@ -842,31 +806,31 @@ Sample size per chain = 10000
    plus standard error of the mean:
 
               Mean      SD  Naive SE Time-series SE
-d.ind.cau  0.69902 0.07980 0.0003990      0.0004198
-d.ind.grp  0.19288 0.10044 0.0005022      0.0005439
-d.ind.gsh  0.16121 0.10467 0.0005233      0.0005576
-d.ind.tel  0.02273 0.16239 0.0008119      0.0008164
-d.ind.wlc  0.95051 0.09206 0.0004603      0.0004994
-d.wlc.ush -0.45545 0.11540 0.0005770      0.0005744
-sd.d       0.47060 0.03403 0.0001701      0.0001711
-B         -0.33205 0.13003 0.0006502      0.0010424
+d.ind.cau  0.69905 0.07887 0.0003944      0.0004015
+d.ind.grp  0.19314 0.09964 0.0004982      0.0005278
+d.ind.gsh  0.16079 0.10482 0.0005241      0.0005555
+d.ind.tel  0.02347 0.16281 0.0008141      0.0008231
+d.ind.wlc  0.95129 0.09201 0.0004601      0.0005088
+d.wlc.ush -0.45557 0.11447 0.0005723      0.0005802
+sd.d       0.47006 0.03401 0.0001700      0.0001746
+B         -0.33114 0.12941 0.0006471      0.0010408
 
 2. Quantiles for each variable:
 
-               2.5%      25%      50%     75%   97.5%
-d.ind.cau  0.542709  0.64513  0.69872  0.7525  0.8559
-d.ind.grp -0.004622  0.12585  0.19281  0.2599  0.3901
-d.ind.gsh -0.043723  0.09062  0.16180  0.2320  0.3650
-d.ind.tel -0.299458 -0.08486  0.02381  0.1314  0.3407
-d.ind.wlc  0.770141  0.88924  0.95011  1.0118  1.1333
-d.wlc.ush -0.680003 -0.53358 -0.45566 -0.3774 -0.2287
-sd.d       0.407829  0.44685  0.46930  0.4930  0.5408
-B         -0.586304 -0.41980 -0.33141 -0.2448 -0.0775
+               2.5%      25%      50%     75%    97.5%
+d.ind.cau  0.542788  0.64620  0.69886  0.7514  0.85403
+d.ind.grp -0.001496  0.12606  0.19314  0.2600  0.39038
+d.ind.gsh -0.045500  0.09095  0.16041  0.2313  0.36610
+d.ind.tel -0.298262 -0.08531  0.02475  0.1320  0.34211
+d.ind.wlc  0.768403  0.88989  0.95130  1.0126  1.13266
+d.wlc.ush -0.680694 -0.53181 -0.45554 -0.3784 -0.23150
+sd.d       0.407557  0.44647  0.46869  0.4921  0.54075
+B         -0.585983 -0.41846 -0.33118 -0.2452 -0.07541
 
 -- Model fit (residual deviance):
 
      Dbar        pD       DIC 
-185.73014  74.50512 260.23526 
+185.71148  74.86501 260.57649 
 
 183 data points, ratio 1.015, I^2 = 2%
 
@@ -880,15 +844,15 @@ Estimates at the centering value: rob = 0.4340659</code></pre>
 <p>De resultaten voor onze predictor worden gerapporteerd naast <span class="math inline">\(B\)</span>. Omdat onze voorspeller een dummycode heeft, vertegenwoordigt de waarde van <span class="math inline">\(B\)</span> het effect van een onderzoek met een hoog biasrisico. De schatting is <span class="math inline">\(b= -0,33\)</span>, en als we kijken naar de tweede tabel (Kwantielen voor elke variabele), zien we dat het 95% geloofwaardigheidsinterval van <span class="math inline">\(b\)</span> varieert van -0,59 tot -0,08. Omdat het interval geen nul bevat, kunnen we concluderen dat het biasrisico inderdaad van invloed is op de resultaten. Als het biasrisico hoog is (<code>rob</code> = 1), kunnen we hier hogere totale effecten voorspellen (omdat negatieve effectgroottes in ons voorbeeld wijzen op “betere” uitkomsten).</p>
 <p>We kunnen de resultaten verder onderzoeken door het maken van twee forestplot: een met lage bias en een met hoge bias. We gebruiken de functie <code>relative.effect</code> en specificeren <code>covariate</code> waarde 0 en 1.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(<span class="fu">relative.effect</span>(mcmc3, <span class="at">t1 =</span> <span class="st">"cau"</span>, <span class="at">covariate =</span> <span class="dv">1</span>),</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">use.description =</span> <span class="cn">TRUE</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">1</span>))</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Hoge Risicobias"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(<span class="fu">relative.effect</span>(mcmc3, <span class="at">t1 =</span> <span class="st">"cau"</span>, <span class="at">covariate =</span> <span class="dv">1</span>),</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">use.description =</span> <span class="cn">TRUE</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">1</span>))</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Hoge Risicobias"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(<span class="fu">relative.effect</span>(mcmc3, <span class="at">t1 =</span> <span class="st">"cau"</span>, <span class="at">covariate =</span> <span class="dv">0</span>),</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">use.description =</span> <span class="cn">TRUE</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">1</span>))</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Lage Risicobias"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">forest</span>(<span class="fu">relative.effect</span>(mcmc3, <span class="at">t1 =</span> <span class="st">"cau"</span>, <span class="at">covariate =</span> <span class="dv">0</span>),</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">use.description =</span> <span class="cn">TRUE</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="dv">1</span>))</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Lage Risicobias"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="12-network_meta-analysis_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid" width="672"></p>
 </div>
@@ -896,18 +860,18 @@ Estimates at the centering value: rob = 0.4340659</code></pre>
 <p>Als we de forest plots vergelijken, zien we dat er een patroon is. De behandelingseffecten op basis van studies met een hoog biasrisico zijn over het algemeen hoger (d.w.z. negatiever). Dit komt overeen met de schatting van onze predictor <span class="math inline">\(b\)</span> in het gepaste model.</p>
 <p>Tot slot kunnen we ook onderzoeken of het netwerkmeta-regressiemodel dat we net hebben gegenereerd beter past bij de gegevens dan het “normale” netwerkmeta-analysemodel van eerder. Om dit te doen, kunnen we de deviance-informatiecriteria (DIC’s) vergelijken, die een equivalent zijn van de AIC- en BIC-waarden in frequentistische statistieken. We kunnen de DIC van zowel <code>mcmc3</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mcmc3)<span class="sc">$</span>DIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mcmc3)<span class="sc">$</span>DIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Dbar          pD         DIC data points 
-  185.73014    74.50512   260.23526   183.00000 </code></pre>
+  185.71148    74.86501   260.57649   183.00000 </code></pre>
 </div>
 </div>
 <p>als <code>mcmc2</code> opvragen met deze code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mcmc2)<span class="sc">$</span>DIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mcmc2)<span class="sc">$</span>DIC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Dbar          pD         DIC data points 
-   185.2144    137.8202    323.0345    183.0000 </code></pre>
+   185.3234    137.8889    323.2123    183.0000 </code></pre>
 </div>
 </div>
 <p>We zien in de uitvoer dat de DIC-waarde van ons meta-regressiemodel (<span class="math inline">\(DIC = 261,19\)</span>) lager is dan die van ons vorige model waarin niet werd gecontroleerd voor risico van vertekening (<span class="math inline">\(DIC = 323,6\)</span>). Lagere DIC-waarden duiden op een betere pasvorm. Op basis van deze bevinding kunnen we concluderen dat ons netwerk meta-regressiemodel beter past bij de gegevens dan een model zonder covariaat.</p>
@@ -1153,7 +1117,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./11-seq_meta-analysis.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Structural Equation Modeling Meta-Analysis</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Structural Equation Modeling Meta-Analyse</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-reporting_reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reporting &amp; Reproducibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Rapporteren &amp; Reproduceerbaarheid</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -337,33 +337,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Het uitvoeren van een subgroepanalyse met behulp van het {meta} pakket is relatief eenvoudig. In elke meta-analysefunctie in {meta} kan het argument subgroep worden gespecificeerd. Dit vertelt de functie welke effectgrootte in welke subgroep valt en voert een subgroepanalyse uit. Het argument subgroep accepteert diverse soorten variabelen. Het enige waar we op moeten letten is dat studies in dezelfde subgroep absoluut identieke labels hebben.</p>
 <p>Laten we het databestand <code>ThirdWave</code> gebruiken om een subgroepanalyse uit te voeren en kjken naar de kolommen <code>author</code> en <code>RiskofBias</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># voor databewerking</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)    <span class="co"># voor de data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Extensive documentation for the dmetar package can be found at: 
- www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)      <span class="co"># voor de meta-analyse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading 'meta' package (version 6.5-0).
-Type 'help(meta)' for a brief overview.
-Readers of 'Meta-Analysis with R (Use R!)' should install
-older version of 'meta' package: https://tinyurl.com/dt4y5drs</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ThirdWave[,<span class="fu">c</span>(<span class="st">"Author"</span>, <span class="st">"RiskOfBias"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># voor databewerking</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)    <span class="co"># voor de data</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)      <span class="co"># voor de meta-analyse</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ThirdWave[,<span class="fu">c</span>(<span class="st">"Author"</span>, <span class="st">"RiskOfBias"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           Author RiskOfBias
 1     Call et al.       high
@@ -376,21 +355,21 @@ older version of 'meta' package: https://tinyurl.com/dt4y5drs</code></pre>
 </div>
 <p>Laten we eerst m.gen aanmaken en vervolgens de subgroepanalyse uitvoeren.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">metagen</span>(<span class="at">TE =</span> TE,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">seTE =</span> seTE,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> Author,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> ThirdWave,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"REML"</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Third Wave Psychotherapies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m.gen <span class="ot">&lt;-</span> <span class="fu">metagen</span>(<span class="at">TE =</span> TE,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">seTE =</span> seTE,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">studlab =</span> Author,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> ThirdWave,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">sm =</span> <span class="st">"SMD"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fixed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">random =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">method.tau =</span> <span class="st">"REML"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">hakn =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">"Third Wave Psychotherapies"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update.meta</span>(m.gen, </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">subgroup =</span> RiskOfBias, </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">tau.common =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update.meta</span>(m.gen, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">subgroup =</span> RiskOfBias, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">tau.common =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Review:     Third Wave Psychotherapies
 
@@ -426,7 +405,7 @@ Details on meta-analytical method:
 <p>In de uitvoer zien we een nieuw gedeelte genaamd <em>Results for subgroups</em>. Dit deel van de uitvoer toont de gepoolde effectgrootte afzonderlijk voor elke subgroep. We zien dat er k=7 studies zijn met een hoog risico op vertekening en 11 met een laag risico op vertekening. De geschatte heterogeniteit tussen studies verschilt aanzienlijk, met <span class="math inline">\(I^2\)</span>=77% in studies met een hoog risico op vertekening, maar slechts 26% in studies met een laag risico. Met <span class="math inline">\(g\)</span>=0,43 is de effectschatting in studies met een laag vertekeningsrisico kleiner dan in studies met een hoog vertekeningsrisico. Dit is een veel voorkomende bevinding, omdat vertekende studies de effecten van een behandeling eerder overschatten.</p>
 <p>Maar is het verschil statistisch significant? We kunnen dit controleren door te kijken naar de resultaten van de <em>Test for subgroup differences</em>. Dit toont ons de <span class="math inline">\(Q\)</span>-test, die in ons voorbeeld met 2 subgroepen gebaseerd is op één vrijheidsgraad. De <span class="math inline">\(p\)</span>-waarde van de test is 0,09, wat groter is dan de conventionele significantiedrempel, maar nog steeds een verschil op trendniveau aangeeft.We kunnen de resultaten ook controleren als we uitgaan van een gemeenschappelijke <span class="math inline">\(\tau^2\)</span>-schatting in beide subgroepen. We hoeven alleen <code>tau.common</code> op <code>TRUE</code> te zetten.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update.meta</span>(m.gen, <span class="at">subgroup =</span> RiskOfBias, <span class="at">tau.common =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">update.meta</span>(m.gen, <span class="at">subgroup =</span> RiskOfBias, <span class="at">tau.common =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Review:     Third Wave Psychotherapies
 
@@ -468,15 +447,28 @@ Details on meta-analytical method:
 <p>We zien dat de geschatte heterogeniteitsvariantie tussen studies <span class="math inline">\(\tau^2\)</span>= 0,069 is, en identiek in beide subgroepen. We hebben twee <span class="math inline">\(Q\)</span>-tests: één tussen groepen (de eigenlijke subgroeptoets) en één voor de heterogeniteit binnen de subgroepen. Net als in een normale meta-analyse geeft dit laatste simpelweg aan dat er een overmatige variabiliteit is in de subgroepen (<span class="math inline">\(p\)</span>= 0,001). De test van subgroepverschillen geeft opnieuw aan dat er geen significant verschil is tussen studies met een laag versus hoog risico op vertekening (p= 0,181).</p>
 <p>De resultaten van subgroepanalyses worden meestal gerapporteerd in een tabel met het geschatte effect en de heterogeniteit in elke subgroep, evenals de p-waarde van de test voor subgroepverschillen.</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'kableExtra'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:dplyr':
-
-    group_rows</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>m.gen.sg <span class="ot">=</span> <span class="fu">update.meta</span>(m.gen, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">subgroup =</span> RiskOfBias, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">tau.common =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">g =</span> <span class="fu">round</span>(m.gen.sg<span class="sc">$</span>TE.random.w, <span class="dv">2</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">g.ci =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(m.gen.sg<span class="sc">$</span>lower.random.w,<span class="dv">2</span>),<span class="st">"-"</span>, </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">format</span>(<span class="fu">round</span>(m.gen.sg<span class="sc">$</span>upper.random.w,<span class="dv">2</span>), <span class="at">nsmall =</span> <span class="dv">2</span>)),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">p =</span> <span class="fu">c</span>(<span class="st">"0.009"</span>, <span class="fu">format.pval</span>(m.gen.sg<span class="sc">$</span>pval.random.w[<span class="dv">2</span>], <span class="at">eps =</span> <span class="fl">0.001</span>)),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">i2 =</span> <span class="fu">round</span>(m.gen.sg<span class="sc">$</span>I2.w, <span class="dv">2</span>),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ci.i2 =</span> <span class="fu">paste0</span>(<span class="fu">format</span>(<span class="fu">round</span>(m.gen.sg<span class="sc">$</span>lower.I2.w, <span class="dv">2</span>), <span class="at">nsmall=</span><span class="dv">2</span>), <span class="st">"-"</span>, <span class="fu">round</span>(m.gen.sg<span class="sc">$</span>upper.I2.w, <span class="dv">2</span>)),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">p.sg =</span> <span class="fu">c</span>(<span class="st">" "</span>, <span class="st">" "</span>))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>p <span class="ot">=</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(dat<span class="sc">$</span>p, <span class="st">"</span><span class="sc">\\</span><span class="st">&lt;"</span>, <span class="st">"$&lt;$"</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">=</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="fl">0.092</span>), dat)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(dat) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Risk of Bias"</span>, <span class="st">"- High"</span>, <span class="st">"- Low"</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dat) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"$g$"</span>, <span class="st">"95</span><span class="sc">\\</span><span class="st">%CI"</span>, <span class="st">"$p$"</span>, <span class="st">"$I^2$"</span>, <span class="st">"95</span><span class="sc">\\</span><span class="st">%CI"</span>, <span class="st">"$p$&lt;sub&gt;subgroup&lt;/sub&gt;"</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dat, <span class="at">booktabs =</span> T, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">escape =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="fu">c</span>(<span class="st">"scale_down"</span>),</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                <span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">"condensed"</span>, <span class="st">"striped"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-condensed table-striped table-sm small" data-quarto-postprocess="true">
 <thead>

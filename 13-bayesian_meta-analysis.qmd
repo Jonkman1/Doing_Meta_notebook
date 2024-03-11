@@ -1,4 +1,4 @@
-# Bayesian Meta-Analysis
+# Bayesiaanse Meta-Analyse
 
 ## Theorie
 Hoewel meta-analyses meestal worden uitgevoerd met behulp van frequentistische statistieken (zoals in de vorige hoofdstukken die werden uitgevoerd met de `meta` en `metafor`-pakketten), is het ook mogelijk om Bayesiaanse meta-analyses uit te voeren (die met andere pakketten worden uitgevoerd, zoals in dit hoofdstuk met het `brms`-pakket). 
@@ -26,13 +26,13 @@ Nu gaan we een Bayesiaanse meta-analyse uitvoeren en dat doen we met het `brms`-
 
 We laden `brms` eerst.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(brms)
 ```
 
 **1. Importeren en bekijken van dataset** 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(tidyverse) # voor databewerking
 library(dmetar)    # voor de data
 library(meta)      # voor de meta-analyse
@@ -110,7 +110,7 @@ names(post.samples) <- c("smd", "tau")
 
 Nu kunnen we density plots maken van deze posterior distributies. We gebruiken het `ggplot` pakket.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 ggplot(aes(x = smd), data = post.samples) +
   geom_density(fill = "lightblue",                # set the color
                color = "lightblue", alpha = 0.7) +  

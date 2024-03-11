@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Doing Meta-Analysis with R. A Hands-On Guide - 17&nbsp; Effect Size Calculation &amp; Conversion</title>
+<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 17&nbsp; Effect Size Berekening &amp; Conversie</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -61,6 +95,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -73,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-power_analysis.html">Helpful Tools</a></li><li class="breadcrumb-item"><a href="./17-es_calculation_conversion.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Effect Size Calculation &amp; Conversion</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./14-power_analysis.html">Bruikbare Gereedschappen</a></li><li class="breadcrumb-item"><a href="./17-es_calculation_conversion.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Effect Size Berekening &amp; Conversie</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -88,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Doing Meta-Analysis with R. A Hands-On Guide</a> 
+      <a href="./">Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -122,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-discovering_R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discovering R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R ontdekken</span></span></a>
   </div>
 </li>
       </ul>
@@ -130,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Meta-Analysis in R</span></a>
+ <span class="menu-text">Meta-Analyse in R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -145,37 +181,37 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-pooling_effect_sizes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pooling Effect Sizes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Effect Sizes samenbrengen</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-between_study_heterogeneity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Between-Study-Herterogeneity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Heterogeniteit tussen studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-forest_plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Forest Plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">De forest Plots</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-subgroup_analyses.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroup Analyse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Subgroep Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-meta_regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Meta-Regressie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-publication_bias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Publication Bias</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Publicatie Bias</span></span></a>
   </div>
 </li>
       </ul>
@@ -183,7 +219,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
- <span class="menu-text">Advanced Methods</span></a>
+ <span class="menu-text">Geavanceerde Methodes</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -192,25 +228,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multilevel_meta-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">“Multilevel” Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">“Multilevel” Meta-Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-seq_meta-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Structural Equation Modeling Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Structural Equation Modeling Meta-Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-network_meta-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Network Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Netwerk Meta-Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bayesian_meta-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesian Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesiaanse Meta-Analyse</span></span></a>
   </div>
 </li>
       </ul>
@@ -218,7 +254,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
- <span class="menu-text">Helpful Tools</span></a>
+ <span class="menu-text">Bruikbare Gereedschappen</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -227,25 +263,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-power_analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Power Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Power Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-risk_bias_plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Risk of Bias Plots</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Plots van Biasrisico</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-reporting_reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reporting &amp; Reproducibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Rapporteren &amp; Reproduceerbaarheid</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-es_calculation_conversion.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Effect Size Calculation &amp; Conversion</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Effect Size Berekening &amp; Conversie</span></span></a>
   </div>
 </li>
       </ul>
@@ -256,14 +292,27 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#gemiddelde-en-standaard-fout-se" id="toc-gemiddelde-en-standaard-fout-se" class="nav-link active" data-scroll-target="#gemiddelde-en-standaard-fout-se"><span class="header-section-number">17.1</span> Gemiddelde en Standaard Fout (SE)</a></li>
+  <li><a href="#regressie-coëfficiënten" id="toc-regressie-coëfficiënten" class="nav-link" data-scroll-target="#regressie-coëfficiënten"><span class="header-section-number">17.2</span> Regressie Coëfficiënten</a></li>
+  <li><a href="#correlaties" id="toc-correlaties" class="nav-link" data-scroll-target="#correlaties"><span class="header-section-number">17.3</span> Correlaties</a></li>
+  <li><a href="#one-way-anovas" id="toc-one-way-anovas" class="nav-link" data-scroll-target="#one-way-anovas"><span class="header-section-number">17.4</span> One-way ANOVAs</a></li>
+  <li><a href="#twee-groep-t-tests" id="toc-twee-groep-t-tests" class="nav-link" data-scroll-target="#twee-groep-t-tests"><span class="header-section-number">17.5</span> Twee groep <span class="math inline">\(t\)</span>-tests</a></li>
+  <li><a href="#p-waarden" id="toc-p-waarden" class="nav-link" data-scroll-target="#p-waarden"><span class="header-section-number">17.6</span> <span class="math inline">\(p\)</span>-waarden</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">17.7</span> </a></li>
+  <li><a href="#number-needed-to-treat-nnt" id="toc-number-needed-to-treat-nnt" class="nav-link" data-scroll-target="#number-needed-to-treat-nnt"><span class="header-section-number">17.8</span> Number Needed to Treat (NNT)</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Effect Size Calculation &amp; Conversion</span></h1>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Effect Size Berekening &amp; Conversie</span></h1>
 </div>
 
 
@@ -278,8 +327,300 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>Soms kunnen “ruwe” effect size data niet direct gebruikt worden in een meta-analyse. In dat geval moeten ze eerst omgezet worden naar een andere effect size maat die wel aan deze eisen voldoet. Soms kunnen ze worden geconverteerd naar het juiste effect size formaat. In dit hoofdstuk staan daarvan voorbeelden waarbij veelal wordt gewerkt met het pakket <code>esc</code> (Lüdecke, 2018).</p>
+<section id="gemiddelde-en-standaard-fout-se" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="gemiddelde-en-standaard-fout-se"><span class="header-section-number">17.1</span> Gemiddelde en Standaard Fout (SE)</h2>
+<p><span class="math display">\[SD=SE \times \sqrt{n}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(esc)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">esc_mean_se</span>(<span class="at">grp1m =</span> <span class="fl">8.5</span>,   <span class="co"># mean of group 1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">grp1se =</span> <span class="fl">1.5</span>,  <span class="co"># standard error of group 1</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">grp1n =</span> <span class="dv">50</span>,    <span class="co"># sample in group 1</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">grp2m =</span> <span class="dv">11</span>,    <span class="co"># mean of group 2</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">grp2se =</span> <span class="fl">1.8</span>,  <span class="co"># standard error of group 2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">grp2n =</span> <span class="dv">60</span>,    <span class="co"># sample in group 2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">es.type =</span> <span class="st">"d"</span>) <span class="co"># convert to SMD; use "g" for Hedges' g</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Effect Size Calculation for Meta Analysis
+
+     Conversion: mean and se to effect size d
+    Effect Size:  -0.2012
+ Standard Error:   0.1920
+       Variance:   0.0369
+       Lower CI:  -0.5774
+       Upper CI:   0.1751
+         Weight:  27.1366</code></pre>
+</div>
+</div>
+</section>
+<section id="regressie-coëfficiënten" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="regressie-coëfficiënten"><span class="header-section-number">17.2</span> Regressie Coëfficiënten</h2>
+<p>SMDs, Hedges <span class="math inline">\(g\)</span> of een correlatie <span class="math inline">\(r\)</span> kunnen worden berekend uit gestandariseerde en ongestandariseerde regressie coëfficiënten.</p>
+<p>Voor ongestandariseerde coëfficiënten kunnen we de <code>esc_B</code> functie uit {esc} gebruiken:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(esc)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">esc_B</span>(<span class="at">b =</span> <span class="fl">3.3</span>,       <span class="co"># ongestandardiseerde regressie coëfficient</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">sdy =</span> <span class="dv">5</span>,       <span class="co"># standaard deviatie van voorspelde variabele y</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">grp1n =</span> <span class="dv">100</span>,   <span class="co"># sampleomvang van de eerste groep</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">grp2n =</span> <span class="dv">150</span>,   <span class="co"># sampleomvang van de tweede groep</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">es.type =</span> <span class="st">"d"</span>) <span class="co"># converteer naar SMD; gebruik "g" voor Hedges' g</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Effect Size Calculation for Meta Analysis
+
+     Conversion: unstandardized regression coefficient to effect size d
+    Effect Size:   0.6962
+ Standard Error:   0.1328
+       Variance:   0.0176
+       Lower CI:   0.4359
+       Upper CI:   0.9565
+         Weight:  56.7018</code></pre>
+</div>
+</div>
+<p>Voor gestandariseerde coëfficiënten kunnen we de <code>esc_beta</code> functie uit {esc} gebruiken:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">esc_beta</span>(<span class="at">beta =</span> <span class="fl">0.32</span>,   <span class="co"># gestandardiseerde regressie coëfficient</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">sdy =</span> <span class="dv">5</span>,       <span class="co"># standaard deviatie van de voorspelde variabele y</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">grp1n =</span> <span class="dv">100</span>,   <span class="co"># sampleomvang van de eerste groep</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">grp2n =</span> <span class="dv">150</span>,   <span class="co"># sampleomvang van de tweede groep</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">es.type =</span> <span class="st">"d"</span>) <span class="co"># converteer naar SMD; gebruik "g" voor Hedges' g</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Effect Size Calculation for Meta Analysis
+
+     Conversion: standardized regression coefficient to effect size d
+    Effect Size:   0.6867
+ Standard Error:   0.1327
+       Variance:   0.0176
+       Lower CI:   0.4266
+       Upper CI:   0.9468
+         Weight:  56.7867</code></pre>
+</div>
+</div>
+<p>Hier naar correlatie:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">esc_beta</span>(<span class="at">beta =</span> <span class="fl">0.37</span>,   <span class="co"># gestandardiseerde regressie coëfficient</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">sdy =</span> <span class="dv">4</span>,       <span class="co"># standaard deviatie van voorspelde variabele y</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">grp1n =</span> <span class="dv">50</span>,    <span class="co"># sampleomvang van de eerste groep</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">grp2n =</span> <span class="dv">50</span>,    <span class="co"># sampleomvang van de tweede groep</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">es.type =</span> <span class="st">"r"</span>) <span class="co"># converteer naar correlatie</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Effect Size Calculation for Meta Analysis
+
+     Conversion: standardized regression coefficient to effect size correlation
+    Effect Size:   0.3668
+ Standard Error:   0.1033
+       Variance:   0.0107
+       Lower CI:   0.1803
+       Upper CI:   0.5278
+         Weight:  93.7884
+     Fisher's z:   0.3847
+      Lower CIz:   0.1823
+      Upper CIz:   0.5871</code></pre>
+</div>
+</div>
+<p>Opgelet: gebruik van regressiecoefficiënten kan ingewikkelde zijn in meta-analyse omdat niet altijd hetzelfde model is gebruikt in alle studies (bv. gecontroleerde voor verschillende covariaten). Dus <span class="math inline">\(\beta\)</span> waarden zijn niet altijd vergelijkbaar.</p>
+</section>
+<section id="correlaties" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="correlaties"><span class="header-section-number">17.3</span> Correlaties</h2>
+<p>Voor ongelijke groepen</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(esc)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">esc_rpb</span>(<span class="at">r =</span> <span class="fl">0.25</span>,      <span class="co"># point-biserial correlation</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">grp1n =</span> <span class="dv">99</span>,    <span class="co"># sample size of group 1</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">grp2n =</span> <span class="dv">120</span>,   <span class="co"># sample size of group 2</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">es.type =</span> <span class="st">"d"</span>) <span class="co"># convert to SMD; use "g" for Hedges' g</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Effect Size Calculation for Meta Analysis
+
+     Conversion: point-biserial r to effect size d
+    Effect Size:   0.5188
+ Standard Error:   0.1380
+       Variance:   0.0190
+       Lower CI:   0.2483
+       Upper CI:   0.7893
+         Weight:  52.4967</code></pre>
+</div>
+</div>
+</section>
+<section id="one-way-anovas" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="one-way-anovas"><span class="header-section-number">17.4</span> One-way ANOVAs</h2>
+<p>Om SMD of Hedges’ <span class="math inline">\(g\)</span> van <span class="math inline">\(F\)</span>-waarden te berekenen gebruiken we de <code>esc_f</code> functie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">esc_f</span>(<span class="at">f =</span> <span class="fl">5.04</span>,      <span class="co"># F waarde voor de 'one-way anova'</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">grp1n =</span> <span class="dv">519</span>,   <span class="co"># sampleomvang voor groep 1 </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">grp2n =</span> <span class="dv">528</span>,   <span class="co"># sampleomvang voor groep 2</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">es.type =</span> <span class="st">"g"</span>) <span class="co"># converteer naar Hedges' g; gebruik "d" voor SMD</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Effect Size Calculation for Meta Analysis
+
+     Conversion: F-value (one-way-Anova) to effect size Hedges' g
+    Effect Size:   0.1387
+ Standard Error:   0.0619
+       Variance:   0.0038
+       Lower CI:   0.0174
+       Upper CI:   0.2600
+         Weight: 261.1022</code></pre>
+</div>
+</div>
+</section>
+<section id="twee-groep-t-tests" class="level2" data-number="17.5">
+<h2 data-number="17.5" class="anchored" data-anchor-id="twee-groep-t-tests"><span class="header-section-number">17.5</span> Twee groep <span class="math inline">\(t\)</span>-tests</h2>
+<p>Hier gebruiken we de <code>esc_t</code> functie.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">esc_t</span>(<span class="at">t =</span> <span class="fl">3.3</span>,     <span class="co"># t-value </span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">grp1n =</span> <span class="dv">100</span>, <span class="co"># sample size of group1</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">grp2n =</span> <span class="dv">150</span>, <span class="co"># sample size of group 2</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">es.type=</span><span class="st">"d"</span>) <span class="co"># convert to SMD; use "g" for Hedges' g</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Effect Size Calculation for Meta Analysis
+
+     Conversion: t-value to effect size d
+    Effect Size:   0.4260
+ Standard Error:   0.1305
+       Variance:   0.0170
+       Lower CI:   0.1703
+       Upper CI:   0.6818
+         Weight:  58.7211</code></pre>
+</div>
+</div>
+</section>
+<section id="p-waarden" class="level2" data-number="17.6">
+<h2 data-number="17.6" class="anchored" data-anchor-id="p-waarden"><span class="header-section-number">17.6</span> <span class="math inline">\(p\)</span>-waarden</h2>
+<p>Soms rapporteren onderzoeken alleen de effectgrootte (bijvoorbeeld een waarde van Cohen’s <span class="math inline">\(d\)</span>), de <span class="math inline">\(p\)</span>-waarde van dat effect en niets meer. Om de resultaten in een meta-analyse samen te voegen, hebben we echter een maat nodig voor de precisie van de effectgrootte, bij voorkeur de standaardfout.</p>
+<p>In dat geval moeten we de standaardfout schatten uit de <span class="math inline">\(p\)</span>-waarde van de effectgrootte. Dit is mogelijk voor effectgroottes gebaseerd op verschillen (SMD’s) of ratio’s (risico- of oddsratio’s). Deze formules zijn geïmplementeerd in de functie <code>se.from.p</code> in R.</p>
+<p>Uitgaande van een onderzoek met <span class="math inline">\(N= 71\)</span> deelnemers, met een effectgrootte van <span class="math inline">\(d= 0,71\)</span> waarvoor <span class="math inline">\(p= 0,013\)</span>, kunnen we de standaardfout als volgt berekenen:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Extensive documentation for the dmetar package can be found at: 
+ www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">se.from.p</span>(<span class="fl">0.71</span>,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">p =</span> <span class="fl">0.013</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">N =</span> <span class="dv">71</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">effect.size.type =</span> <span class="st">"difference"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  EffectSize StandardError StandardDeviation      LLCI     ULCI
+1       0.71     0.2860464           2.41027 0.1493594 1.270641</code></pre>
+</div>
+</div>
+<p>Voor een onderzoek met <span class="math inline">\(N= 200\)</span> deelnemers dat een effectgrootte rapporteert van <span class="math inline">\(OR = 0,91\)</span> met <span class="math inline">\(p= 0,38\)</span>, wordt de standaardfout op deze manier berekend:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># voor pipe |&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">se.from.p</span>(<span class="fl">0.91</span>, <span class="at">p =</span> <span class="fl">0.38</span>, <span class="at">N =</span> <span class="dv">200</span>,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">effect.size.type =</span> <span class="st">"ratio"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">t</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            [,1]
+logEffectSize        -0.09431068
+logStandardError      0.10598174
+logStandardDeviation  1.49880810
+logLLCI              -0.30203107
+logULCI               0.11340971
+EffectSize            0.91000000
+LLCI                  0.73931510
+ULCI                  1.12009075</code></pre>
+</div>
+</div>
+<p>Als <code>effect.size.type = "ratio"</code> berekent de functie automatisch ook de log-getransformeerde effectgrootte en standaardfout, die nodig zijn om de <code>metagen</code>-functie te gebruiken.</p>
+</section>
+<section id="section" class="level2" data-number="17.7">
+<h2 data-number="17.7" class="anchored" data-anchor-id="section"><span class="header-section-number">17.7</span> </h2>
+<p><span class="math inline">\(\chi^2\)</span>-tests</p>
+<p>Om een <span class="math inline">\(\chi^2\)</span> statistiek om te zetten naar een odds-ratio kan de functie <code>esc_chisq</code> gebruikt worden, zoals bv hieronder:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">esc_chisq</span>(<span class="at">chisq =</span> <span class="fl">7.9</span>,        <span class="co"># chi-squared waarde</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">totaln =</span> <span class="dv">100</span>,       <span class="co"># totale sampleompvang</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">es.type =</span> <span class="st">"cox.or"</span>) <span class="co"># converteer naar odds ratio</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Effect Size Calculation for Meta Analysis
+
+     Conversion: chi-squared-value to effect size Cox odds ratios
+    Effect Size:   2.6287
+ Standard Error:   0.3440
+       Variance:   0.1183
+       Lower CI:   1.3394
+       Upper CI:   5.1589
+         Weight:   8.4502</code></pre>
+</div>
+</div>
+</section>
+<section id="number-needed-to-treat-nnt" class="level2" data-number="17.8">
+<h2 data-number="17.8" class="anchored" data-anchor-id="number-needed-to-treat-nnt"><span class="header-section-number">17.8</span> Number Needed to Treat (NNT)</h2>
+<p>Effectgroottes zoals Cohen’s <span class="math inline">\(d\)</span> of Hedges’ <span class="math inline">\(g\)</span> zijn vanuit praktisch oogpunt vaak moeilijk te interpreteren. Stel dat we in onze meta-analyse een interventie-effect vaststellen van <span class="math inline">\(g=0,35\)</span>. Hoe kunnen we communiceren wat een dergelijk effect betekent voor patiënten, overheidsfunctionarissen, medische professionals of andere belanghebbenden?</p>
+<p>Om het voor anderen gemakkelijker te maken om de resultaten te begrijpen, wordt in meta-analyses ook vaak het aantal benodigde behandelingen (<span class="math inline">\(NNT\)</span>) vermeld. Deze maat wordt het meest gebruikt in medisch onderzoek. Het geeft aan hoeveel extra patiënten de onderzochte behandeling moeten krijgen om één extra negatieve gebeurtenis (bijv. terugval) te voorkomen of één extra positieve gebeurtenis (bijv. symptoomremissie, respons) te bereiken. Als <span class="math inline">\(NNT = 3\)</span>, bijvoorbeeld, kunnen we zeggen dat drie personen de behandeling moeten krijgen om één extra terugval te voorkomen; of dat drie patiënten moeten worden behandeld om één extra geval van betrouwbare symptoomremissie te bereiken, afhankelijk van de onderzoeksvraag.</p>
+<p>Als we risico- of oddsratio’s gebruiken als maatstaven voor de effectgrootte, kunnen NNT’s direct worden berekend uit {meta} objecten met behulp van de <code>nnt</code>-functie. Nadat we onze meta-analyse hebben uitgevoerd met <code>metabin</code>, hoeven we alleen de resultaten in de <code>nnt</code>-functie te stoppen. Hier is een voorbeeld:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading 'meta' package (version 6.5-0).
+Type 'help(meta)' for a brief overview.
+Readers of 'Meta-Analysis with R (Use R!)' should install
+older version of 'meta' package: https://tinyurl.com/dt4y5drs</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Olkin1995)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Draai meta-analyse met binaire effect size data</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>m.b <span class="ot">&lt;-</span> <span class="fu">metabin</span>(ev.exp, n.exp, ev.cont, n.cont, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> Olkin1995,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">sm =</span> <span class="st">"RR"</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">nnt</span>(m.b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number needed to treat (common effect model): 
+
+     RR    p.c    NNTB             95%-CI
+ 0.7728 0.1440 30.5677 [26.1222; 37.2386]
+ 0.7728 0.3750 11.7383 [10.0312; 14.3001]
+
+Number needed to treat (random effects model): 
+
+     RR    p.c    NNTB             95%-CI
+ 0.7694 0.1440 30.1139 [24.0662; 41.3519]
+ 0.7694 0.3750 11.5641 [ 9.2417; 15.8796]</code></pre>
+</div>
+</div>
+<p>Gestandaardiseerde gemiddelde verschillen of Hedges’ <span class="math inline">\(g\)</span> kunnen worden omgezet naar de <span class="math inline">\(NNT\)</span> met behulp van de <code>NNT</code>-functie in {dmetar}.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(dmetar)</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">NNT</span>(<span class="at">d =</span> <span class="fl">0.245</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Kraemer &amp; Kupfer method used. 
+[1] 7.270711</code></pre>
+</div>
+</div>
+<p>De Furukawa methode wordt gebruikt als er een <code>CER</code> is toegevoegd.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">NNT</span>(<span class="at">d =</span> <span class="fl">0.245</span>, <span class="at">CER =</span> <span class="fl">0.35</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Furukawa &amp; Leucht method used. 
+[1] 10.61533</code></pre>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -518,7 +859,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./16-reporting_reproducibility.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reporting &amp; Reproducibility</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Rapporteren &amp; Reproduceerbaarheid</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

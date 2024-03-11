@@ -1,13 +1,16 @@
 # Publicatie Bias
 
-Publicatiebias treedt op wanneer sommige studies systematisch ontbreken in de gepubliceerde literatuur, en dus ook in onze meta-analyse. Strikt genomen is er sprake van publicatiebias als de waarschijnlijkheid dat een studie gepubliceerd wordt afhangt van de resultaten. Er is echter ook een reeks andere vertekeningen in de rapportage. Deze vertekeningen beïnvloeden ook hoe waarschijnlijk het is dat een bevinding in onze meta-analyse terechtkomt. Voorbeelden zijn citatiebias, taalbias of uitkomstbias. Het is ook mogelijk dat gepubliceerd bewijs vertekend is, bijvoorbeeld door twijfelachtige onderzoekspraktijken. Twee veelvoorkomende van dat soort praktijken zijn $p$-hacking en HARKing, en beide kunnen het risico op overschatting van effecten in een meta-analyse vergroten.
+## Theorie
+Publicatiebias treedt op wanneer sommige studies systematisch ontbreken in de gepubliceerde literatuur, en dus ook in onze meta-analyse. Strikt genomen is er sprake van publicatiebias als de waarschijnlijkheid dat een studie gepubliceerd wordt afhangt van de resultaten. Er is echter ook een reeks andere vertekeningen in de rapportage. Deze vertekeningen beïnvloeden ook hoe waarschijnlijk het is dat een bevinding in onze meta-analyse terechtkomt. Voorbeelden zijn citatiebias, taalbias of uitkomstbias. Het is ook mogelijk dat gepubliceerd bewijs vertekend is, bijvoorbeeld door twijfelachtige onderzoekspraktijken. Twee veelvoorkomende van dat soort praktijken zijn $p$-hacking (doorgaan tot de geschikte $p$-waarde bereikt is) en HARKing (hypothese opstellen nadat de resultaten bekend zijn). Beide kunnen het risico op overschatting van effecten in een meta-analyse vergroten.
 
-Veel methoden voor publicatiebias zijn gebaseerd op het idee van kleine-studie-effecten. Deze benaderingen gaan ervan uit dat alleen kleine studies met een verrassend hoge effectgrootte significante resultaten behalen en daarom worden geselecteerd voor publicatie. Dit leidt tot een asymmetrische funnel plot, wat een teken kan zijn van publicatiebias. Maar dat hoeft niet zo te zijn. Er zijn ook verschillende "goedaardige" oorzaken van effecten van kleine studies mogelijk. Een relatief nieuwe methode, p-curve, is gebaseerd op het idee dat we kunnen controleren op bewijskracht door alleen maar te kijken naar het patroon van significante (p<0,05) effecten in onze gegevens. Deze methode kan worden gebruikt om te testen op zowel de aan- als afwezigheid van een echt effect en kan de grootte ervan schatten.
+Veel methoden voor publicatiebias zijn gebaseerd op het idee van kleine-studie-effecten. Deze benaderingen gaan ervan uit dat alleen kleine studies met een verrassend hoge effectgrootte significante resultaten behalen en daarom worden geselecteerd voor publicatie. Dit leidt tot een asymmetrische funnel plot, wat een teken kan zijn van publicatiebias. Maar dat hoeft niet zo te zijn. Er zijn ook verschillende "goedaardige" oorzaken van effecten van kleine studies mogelijk. 
+
+Een relatief nieuwe methode, p-curve, is gebaseerd op het idee dat we kunnen controleren op bewijskracht door alleen maar te kijken naar het patroon van significante ($p<0,05$) effecten in onze gegevens. Deze methode kan worden gebruikt om te testen op zowel de aan- als afwezigheid van een echt effect en kan de grootte ervan schatten.
 
 Er is geen bewijs dat een bepaalde publicatiebias beter veel beter is dan een ander. Maar wat moet je dan kiezen? Om dit probleem aan te pakken, raden we aan om altijd meerdere methoden te gebruiken bij het evalueren van publicatiebias. Hieronder vind je een overzicht van de meest gebruikte methoden met de voor- en nadelen erbij.
 
 
-```{r pubtab, echo=F, message=F}
+```{r pubtab, message=FALSE, warning=FALSE}
 library(kableExtra)
 library(dplyr)
 library(stringr)
@@ -38,3 +41,60 @@ Het is vaak moeilijk, zo niet onmogelijk, om te weten welke aanpak het meest ges
 
 
 Selectiemodellen zijn een zeer veelzijdige methode en kunnen worden gebruikt om verschillende publicatiebiasprocessen te modelleren. Ze geven echter alleen geldige resultaten als het veronderstelde model adequaat is en vereisen vaak een zeer groot aantal onderzoeken. Een zeer eenvoudig selectiemodel, het drieparametermodel, kan ook worden gebruikt voor kleinere datasets. Geen enkele publicatiebiasmethode presteert consistent beter dan alle andere. Het is daarom raadzaam om altijd meerdere technieken toe te passen en de gecorrigeerde effectgrootte voorzichtig te interpreteren. Grondig zoeken naar ongepubliceerd bewijs vermindert het risico van publicatiebias veel beter dan de huidige statistische benaderingen.
+
+## Praktijk
+In het praktijkdeel laten we enkel zien hoe je een funnel plot maakt.
+
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse) # voor databewerking
+library(dmetar)    # voor de data
+library(meta)      # voor de meta-analyse
+
+data(ThirdWave)
+glimpse(ThirdWave)
+```
+
+We gebruiken opnieuw `m.gen` (zie hoofdstuk 4).
+
+```{r}
+m.gen <- metagen(TE = TE,
+                 seTE = seTE,
+                 studlab = Author,
+                 data = ThirdWave,
+                 sm = "SMD",
+                 fixed = FALSE,
+                 random = TRUE,
+                 method.tau = "REML",
+                 hakn = TRUE,
+                 title = "Third Wave Psychotherapies")
+```
+
+```{r}
+# Produce funnel plot
+meta::funnel(m.gen,
+             xlim = c(-0.5, 2),
+             studlab = TRUE)
+
+# Add title
+title("Funnel Plot (Third Wave Psychotherapies)")
+```
+
+```{r}
+# Define fill colors for contour
+col.contour = c("gray75", "gray85", "gray95")
+
+# Generate funnel plot (we do not include study labels here)
+meta::funnel(m.gen, xlim = c(-0.5, 2),
+             contour = c(0.9, 0.95, 0.99),
+             col.contour = col.contour)
+
+# Add a legend
+legend(x = 1.6, y = 0.01, 
+       legend = c("p < 0.1", "p < 0.05", "p < 0.01"),
+       fill = col.contour)
+
+# Add a title
+title("Contour-Enhanced Funnel Plot (Third Wave Psychotherapies)")
+```
+

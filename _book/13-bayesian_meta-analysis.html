@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 13&nbsp; Bayesian Meta-Analysis</title>
+<title>Notitieboekje dat hoort bij Doing Meta-Analysis with R. A Hands-On Guide - 13&nbsp; Bayesiaanse Meta-Analyse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-multilevel_meta-analysis.html">Advanced Methods</a></li><li class="breadcrumb-item"><a href="./13-bayesian_meta-analysis.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesian Meta-Analysis</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-multilevel_meta-analysis.html">Advanced Methods</a></li><li class="breadcrumb-item"><a href="./13-bayesian_meta-analysis.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesiaanse Meta-Analyse</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -229,25 +229,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-multilevel_meta-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">“Multilevel” Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">“Multilevel” Meta-Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-seq_meta-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Structural Equation Modeling Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Structural Equation Modeling Meta-Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-network_meta-analysis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Network Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Netwerk Meta-Analyse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-bayesian_meta-analysis.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesian Meta-Analysis</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesiaanse Meta-Analyse</span></span></a>
   </div>
 </li>
       </ul>
@@ -276,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-reporting_reproducibility.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reporting &amp; Reproducibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Rapporteren &amp; Reproduceerbaarheid</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -310,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesian Meta-Analysis</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesiaanse Meta-Analyse</span></h1>
 </div>
 
 
@@ -346,53 +346,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We laden <code>brms</code> eerst.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Rcpp</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading 'brms' package (version 2.20.4). Useful instructions
-can be found by typing help('brms'). A more detailed introduction
-to the package is available through vignette('brms_overview').</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'brms'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:stats':
-
-    ar</code></pre>
-</div>
 </div>
 <p><strong>1. Importeren en bekijken van dataset</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># voor databewerking</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)    <span class="co"># voor de data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Extensive documentation for the dmetar package can be found at: 
- www.bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)      <span class="co"># voor de meta-analyse</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading 'meta' package (version 6.5-0).
-Type 'help(meta)' for a brief overview.
-Readers of 'Meta-Analysis with R (Use R!)' should install
-older version of 'meta' package: https://tinyurl.com/dt4y5drs</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ThirdWave)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># voor databewerking</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)    <span class="co"># voor de data</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(meta)      <span class="co"># voor de meta-analyse</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(ThirdWave)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ThirdWave)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 18
 Columns: 8
@@ -408,8 +370,8 @@ $ ModeOfDelivery       &lt;chr&gt; "group", "online", "group", "group", "online"
 </div>
 <p>In Bayesiaanse modellen is het belangrijk om priors te specificeren. We specificeren hier een prior voor de intercept en de standaarddeviatie van de effectgroottes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>priors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">class =</span> Intercept),</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>,<span class="fl">0.5</span>), <span class="at">class =</span> sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>priors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">prior</span>(<span class="fu">cauchy</span>(<span class="dv">0</span>,<span class="fl">0.5</span>), <span class="at">class =</span> sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nu kunnen we gaan modelleren.</p>
 <p><strong>2. Modelleren</strong> In de syntax hieronder wordt de formule voor het model gespecificeerd. Het {brms} pakket gebruikt een regressieformule notatie, waarin een uitkomst (in ons geval een waargenomen effectgrootte) <span class="math inline">\(y\)</span> wordt voorspeld door een of meer voorspellers <span class="math inline">\(x\)</span>. Een tilde (<span class="math inline">\({\sim}\)</span>) wordt gebruikt om aan te geven dat er een voorspellende relatie is: <span class="math inline">\(y {\sim} x\)</span>.</p>
@@ -417,38 +379,12 @@ $ ModeOfDelivery       &lt;chr&gt; "group", "online", "group", "group", "online"
 <p>Als we een random-effectmodel willen gebruiken, is de laatste stap het toevoegen van een random-effectterm <span class="math inline">\((1|studie)\)</span> aan de rechterkant van de formule. Dit specificeert dat de effectgroottes in <span class="math inline">\(y\)</span> verondersteld worden genest te zijn binnen studies, waarvan de ware effecten zelf willekeurige trekkingen zijn uit een overkoepelende populatie van ware effectgroottes. Als we een model met vast effect willen gebruiken, kunnen we deze term gewoon weglaten. De algemene volledige formule voor een random-effect model ziet er dan als volgt uit: <span class="math inline">\(y|se(se_y) ~ 1 + (1|random)\)</span>.</p>
 <p>Let op, onderstaande code kan enige tijd duren om uit te voeren.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>m.brm <span class="ot">&lt;-</span> <span class="fu">brm</span>(TE<span class="sc">|</span><span class="fu">se</span>(seTE) <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Author),</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> ThirdWave,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">prior =</span> priors,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">iter =</span> <span class="dv">4000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>m.brm <span class="ot">&lt;-</span> <span class="fu">brm</span>(TE<span class="sc">|</span><span class="fu">se</span>(seTE) <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Author),</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> ThirdWave,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">prior =</span> priors,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">iter =</span> <span class="dv">4000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Compiling Stan program...</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Trying to compile a simple C file</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Running /Library/Frameworks/R.framework/Resources/bin/R CMD SHLIB foo.c
-clang -mmacosx-version-min=10.13 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/library/Rcpp/include/"  -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/library/RcppEigen/include/"  -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/library/RcppEigen/include/unsupported"  -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/library/BH/include" -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/library/StanHeaders/include/src/"  -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/library/StanHeaders/include/"  -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/library/RcppParallel/include/"  -I"/Library/Frameworks/R.framework/Versions/4.2/Resources/library/rstan/include" -DEIGEN_NO_DEBUG  -DBOOST_DISABLE_ASSERTS  -DBOOST_PENDING_INTEGER_LOG2_HPP  -DSTAN_THREADS  -DUSE_STANC3 -DSTRICT_R_HEADERS  -DBOOST_PHOENIX_NO_VARIADIC_EXPRESSION  -D_HAS_AUTO_PTR_ETC=0  -include '/Library/Frameworks/R.framework/Versions/4.2/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp'  -D_REENTRANT -DRCPP_PARALLEL_USE_TBB=1   -I/usr/local/include   -fPIC  -Wall -g -O2  -c foo.c -o foo.o
-In file included from &lt;built-in&gt;:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.2/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
-In file included from /Library/Frameworks/R.framework/Versions/4.2/Resources/library/RcppEigen/include/Eigen/Dense:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.2/Resources/library/RcppEigen/include/Eigen/Core:88:
-/Library/Frameworks/R.framework/Versions/4.2/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:1: error: unknown type name 'namespace'
-namespace Eigen {
-^
-/Library/Frameworks/R.framework/Versions/4.2/Resources/library/RcppEigen/include/Eigen/src/Core/util/Macros.h:628:16: error: expected ';' after top level declarator
-namespace Eigen {
-               ^
-               ;
-In file included from &lt;built-in&gt;:1:
-In file included from /Library/Frameworks/R.framework/Versions/4.2/Resources/library/StanHeaders/include/stan/math/prim/fun/Eigen.hpp:22:
-In file included from /Library/Frameworks/R.framework/Versions/4.2/Resources/library/RcppEigen/include/Eigen/Dense:1:
-/Library/Frameworks/R.framework/Versions/4.2/Resources/library/RcppEigen/include/Eigen/Core:96:10: fatal error: 'complex' file not found
-#include &lt;complex&gt;
-         ^~~~~~~~~
-3 errors generated.
-make: *** [foo.o] Error 1</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Start sampling</code></pre>
@@ -457,8 +393,8 @@ make: *** [foo.o] Error 1</code></pre>
 <pre><code>
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
 Chain 1: 
-Chain 1: Gradient evaluation took 4.5e-05 seconds
-Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.45 seconds.
+Chain 1: Gradient evaluation took 4.7e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.47 seconds.
 Chain 1: Adjust your expectations accordingly!
 Chain 1: 
 Chain 1: 
@@ -475,15 +411,15 @@ Chain 1: Iteration: 3200 / 4000 [ 80%]  (Sampling)
 Chain 1: Iteration: 3600 / 4000 [ 90%]  (Sampling)
 Chain 1: Iteration: 4000 / 4000 [100%]  (Sampling)
 Chain 1: 
-Chain 1:  Elapsed Time: 0.355 seconds (Warm-up)
-Chain 1:                0.334 seconds (Sampling)
-Chain 1:                0.689 seconds (Total)
+Chain 1:  Elapsed Time: 0.922 seconds (Warm-up)
+Chain 1:                0.885 seconds (Sampling)
+Chain 1:                1.807 seconds (Total)
 Chain 1: 
 
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
 Chain 2: 
-Chain 2: Gradient evaluation took 8e-06 seconds
-Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.08 seconds.
+Chain 2: Gradient evaluation took 1e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
 Chain 2: Adjust your expectations accordingly!
 Chain 2: 
 Chain 2: 
@@ -500,15 +436,15 @@ Chain 2: Iteration: 3200 / 4000 [ 80%]  (Sampling)
 Chain 2: Iteration: 3600 / 4000 [ 90%]  (Sampling)
 Chain 2: Iteration: 4000 / 4000 [100%]  (Sampling)
 Chain 2: 
-Chain 2:  Elapsed Time: 0.356 seconds (Warm-up)
-Chain 2:                0.406 seconds (Sampling)
-Chain 2:                0.762 seconds (Total)
+Chain 2:  Elapsed Time: 1.137 seconds (Warm-up)
+Chain 2:                0.497 seconds (Sampling)
+Chain 2:                1.634 seconds (Total)
 Chain 2: 
 
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 3).
 Chain 3: 
-Chain 3: Gradient evaluation took 8e-06 seconds
-Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.08 seconds.
+Chain 3: Gradient evaluation took 1e-05 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
 Chain 3: Adjust your expectations accordingly!
 Chain 3: 
 Chain 3: 
@@ -525,15 +461,15 @@ Chain 3: Iteration: 3200 / 4000 [ 80%]  (Sampling)
 Chain 3: Iteration: 3600 / 4000 [ 90%]  (Sampling)
 Chain 3: Iteration: 4000 / 4000 [100%]  (Sampling)
 Chain 3: 
-Chain 3:  Elapsed Time: 0.372 seconds (Warm-up)
-Chain 3:                0.349 seconds (Sampling)
-Chain 3:                0.721 seconds (Total)
+Chain 3:  Elapsed Time: 0.916 seconds (Warm-up)
+Chain 3:                0.912 seconds (Sampling)
+Chain 3:                1.828 seconds (Total)
 Chain 3: 
 
 SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 4).
 Chain 4: 
-Chain 4: Gradient evaluation took 8e-06 seconds
-Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.08 seconds.
+Chain 4: Gradient evaluation took 9e-06 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.09 seconds.
 Chain 4: Adjust your expectations accordingly!
 Chain 4: 
 Chain 4: 
@@ -550,15 +486,15 @@ Chain 4: Iteration: 3200 / 4000 [ 80%]  (Sampling)
 Chain 4: Iteration: 3600 / 4000 [ 90%]  (Sampling)
 Chain 4: Iteration: 4000 / 4000 [100%]  (Sampling)
 Chain 4: 
-Chain 4:  Elapsed Time: 0.371 seconds (Warm-up)
-Chain 4:                0.328 seconds (Sampling)
-Chain 4:                0.699 seconds (Total)
+Chain 4:  Elapsed Time: 0.911 seconds (Warm-up)
+Chain 4:                0.808 seconds (Sampling)
+Chain 4:                1.719 seconds (Total)
 Chain 4: </code></pre>
 </div>
 </div>
 <p><strong>3. Resultaten bekijken</strong> Nu kun je de resultaten bekijken. Maar kijk wel of het model heeft geconvergeerd (dat betekent dat je er zeker van bent dat het MCMC algoritme de optimale oplossing gevonden heeft). Bekijk de <span class="math inline">\(hat{R}\)</span> waarden. De <span class="math inline">\(hat{R}\)</span> waarden geven aan hoeveel de ketens van het model van elkaar verschillen. Als de <span class="math inline">\(hat{R}\)</span> waarden dicht bij 1 liggen, is het model geconvergeerd.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.brm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m.brm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
   Links: mu = identity; sigma = identity 
@@ -570,11 +506,11 @@ Formula: TE | se(seTE) ~ 1 + (1 | Author)
 Group-Level Effects: 
 ~Author (Number of levels: 18) 
               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-sd(Intercept)     0.29      0.10     0.12     0.52 1.00     2605     3363
+sd(Intercept)     0.29      0.10     0.11     0.51 1.00     2358     3383
 
 Population-Level Effects: 
           Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept     0.57      0.09     0.39     0.76 1.00     4478     4194
+Intercept     0.57      0.09     0.40     0.77 1.00     3400     4222
 
 Family Specific Parameters: 
       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
@@ -587,7 +523,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p><strong>4. Valideren</strong> Je kunt de resultaten valideren door de posterior predictive checks te bekijken. Dit zijn de voorspelde effectgroottes van het model. Voor validatie kunnen we verwachten dat de replicaties (blauwe lijnen) ongeveer gelijk zijn aan die van de waargenomen gegevens (zwarte lijn). Dit kan eenvoudig worden gecontroleerd met de uitvoer van de functie pp_check.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(m.brm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(m.brm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Using 10 posterior draws for ppc type 'dens_overlay' by default.</code></pre>
 </div>
@@ -599,30 +535,30 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <p>We kunnen beginnen met het interpreteren van de resultaten door eerst te kijken naar de effecten op groepsniveau in onze samenvattende uitvoer. Dit gedeelte is gereserveerd voor het willekeurige effect dat we in onze formule hebben gedefinieerd. Omdat we een random-effect meta-analysemodel hebben toegepast, is de variabele <code>~Author</code>, die de individuele studies aangeeft, gemodelleerd met een random intercept.</p>
 <p>Zoals we eerder beschreven, vertegenwoordigt dit onze aanname op niveau 2 dat elke studie zijn eigen “ware” effectgrootte heeft, die is genomen uit een overkoepelende verdeling van ware effectgroottes. We zien ook dat ons effect op groepsniveau 18 niveaus heeft, wat overeenkomt met de <span class="math inline">\(K= 18\)</span> onderzoeken in onze gegevens.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(m.brm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ranef</span>(m.brm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$Author
 , , Intercept
 
-                          Estimate Est.Error         Q2.5       Q97.5
-Call et al.             0.07189163 0.1936376 -0.309127168  0.46717641
-Cavanagh et al.        -0.14025633 0.1780704 -0.503539985  0.19795655
-DanitzOrsillo           0.48972884 0.2863537  0.001300353  1.09783927
-de Vibe et al.         -0.31951422 0.1438052 -0.618468804 -0.04759875
-Frazier et al.         -0.11351230 0.1504414 -0.419397959  0.16581592
-Frogeli et al.          0.03894014 0.1726801 -0.303395102  0.38477523
-Gallego et al.          0.09083868 0.1781655 -0.253086814  0.45645967
-Hazlett-Stevens &amp; Oren -0.02571507 0.1781782 -0.385061025  0.32151043
-Hintz et al.           -0.20110673 0.1635725 -0.537159537  0.10170118
-Kang et al.             0.28523892 0.2440696 -0.149691728  0.80560147
-Kuhlmann et al.        -0.30539003 0.1825887 -0.687654040  0.03201563
-Lever Taylor et al.    -0.10432654 0.1865457 -0.493461745  0.25241641
-Phang et al.           -0.01604668 0.1916494 -0.405906674  0.35900337
-Rasanen et al.         -0.07866751 0.2007168 -0.490698099  0.30207909
-Ratanasiripong         -0.02373599 0.2320420 -0.509482081  0.43393135
-Shapiro et al.          0.40341236 0.2581403 -0.043087679  0.93980982
-Song &amp; Lindquist        0.02229791 0.1849255 -0.342200588  0.39215805
-Warnecke et al.         0.01353748 0.1952486 -0.379068846  0.39691994</code></pre>
+                          Estimate Est.Error        Q2.5       Q97.5
+Call et al.             0.07114896 0.2029978 -0.31927299  0.48939355
+Cavanagh et al.        -0.14022801 0.1768387 -0.51371919  0.18798225
+DanitzOrsillo           0.48903030 0.2832536  0.01105400  1.09039454
+de Vibe et al.         -0.32113208 0.1471973 -0.61892323 -0.04624428
+Frazier et al.         -0.11490265 0.1517988 -0.43087436  0.17376382
+Frogeli et al.          0.03706950 0.1715014 -0.30476920  0.37987216
+Gallego et al.          0.08797101 0.1879824 -0.26925234  0.47810895
+Hazlett-Stevens &amp; Oren -0.02954891 0.1810667 -0.39442815  0.31962005
+Hintz et al.           -0.20631877 0.1657774 -0.54418644  0.09843247
+Kang et al.             0.28771071 0.2443427 -0.14624887  0.79920718
+Kuhlmann et al.        -0.30840494 0.1912425 -0.70181421  0.03683617
+Lever Taylor et al.    -0.10981177 0.1891373 -0.50358874  0.25119769
+Phang et al.           -0.01802969 0.1892723 -0.40379303  0.35221968
+Rasanen et al.         -0.07800406 0.1959571 -0.47836214  0.29897684
+Ratanasiripong         -0.02098242 0.2299182 -0.48788934  0.43436685
+Shapiro et al.          0.40297354 0.2535675 -0.02844762  0.95116680
+Song &amp; Lindquist        0.02109764 0.1850037 -0.34585228  0.37872260
+Warnecke et al.         0.01283180 0.1949736 -0.38540961  0.40146856</code></pre>
 </div>
 </div>
 <p>Het volgende deel van de uitvoer dat we kunnen interpreteren zijn de effecten op populatieniveau. Dit deel geeft de “vaste” populatieparameters weer die we hebben gemodelleerd. In ons geval is dit <span class="math inline">\(\mu\)</span> de totale effectgrootte van onze meta-analyse.</p>
@@ -630,58 +566,58 @@ Warnecke et al.         0.01353748 0.1952486 -0.379068846  0.39691994</code></pr
 <p>Omdat dit een Bayesiaans model is, vinden we hier geen p-waarden. Maar ons voorbeeld zou moeten onderstrepen dat we ook redelijke conclusies kunnen trekken zonder onze toevlucht te hoeven nemen tot klassieke significantietests.</p>
 <p>Wat we goed kunnen doen in een Bayesiaanse, maar niet in een frequentistische meta-analyse, is de parameters die we willen schatten probabilistisch modelleren. Het Bayesiaanse model schat niet alleen de parameters die van belang zijn, maar een hele posterior verdeling voor <span class="math inline">\(\tau^2\)</span> en <span class="math inline">\(\mu\)</span>, waar we vrij eenvoudig toegang toe hebben. We hoeven alleen maar de posterior_samples functie te gebruiken.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>post.samples <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(m.brm, <span class="fu">c</span>(<span class="st">"^b"</span>, <span class="st">"^sd"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>post.samples <span class="ot">&lt;-</span> <span class="fu">posterior_samples</span>(m.brm, <span class="fu">c</span>(<span class="st">"^b"</span>, <span class="st">"^sd"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Method 'posterior_samples' is deprecated. Please see ?as_draws for
 recommended alternatives.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(post.samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(post.samples)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "b_Intercept"          "sd_Author__Intercept"</code></pre>
 </div>
 </div>
 <p>Het resulterende dataframe bevat twee kolommen: b_Intercept, de posterior steekproefgegevens voor de gepoolde effectgrootte, en sd_Author_Intercept, die voor de heterogeniteit τ tussen de studies. We hernoemen de kolommen smd en tau om de naam informatiever te maken.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(post.samples) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"smd"</span>, <span class="st">"tau"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(post.samples) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"smd"</span>, <span class="st">"tau"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nu kunnen we density plots maken van deze posterior distributies. We gebruiken het <code>ggplot</code> pakket.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> smd), <span class="at">data =</span> post.samples) <span class="sc">+</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>,                <span class="co"># set the color</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span>  </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">y =</span> <span class="dv">0</span>,                               <span class="co"># add point at mean</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="fu">mean</span>(post.samples<span class="sc">$</span>smd)) <span class="sc">+</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">italic</span>(SMD)),</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> smd), <span class="at">data =</span> post.samples) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>,                <span class="co"># set the color</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span>  </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">y =</span> <span class="dv">0</span>,                               <span class="co"># add point at mean</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="fu">mean</span>(post.samples<span class="sc">$</span>smd)) <span class="sc">+</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(<span class="fu">italic</span>(SMD)),</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="13-bayesian_meta-analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> tau), <span class="at">data =</span> post.samples) <span class="sc">+</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"lightgreen"</span>,               <span class="co"># set the color</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"lightgreen"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span>  </span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">y =</span> <span class="dv">0</span>, </span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="fu">mean</span>(post.samples<span class="sc">$</span>tau)) <span class="sc">+</span>        <span class="co"># add point at mean</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(tau),</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> tau), <span class="at">data =</span> post.samples) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"lightgreen"</span>,               <span class="co"># set the color</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">color =</span> <span class="st">"lightgreen"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span>  </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">y =</span> <span class="dv">0</span>, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="fu">mean</span>(post.samples<span class="sc">$</span>tau)) <span class="sc">+</span>        <span class="co"># add point at mean</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">expression</span>(tau),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="13-bayesian_meta-analysis_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We kunnen ook probabilistische uitspraken doen over de kans dat het ware effect groter of kleiner is dan een bepaalde drempelwaarde (bv dat het gepoolde effect kleiner is dan 0.30). We kunnen dit doen door de <code>ecdf</code>-functie te gebruiken.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>smd.ecdf <span class="ot">&lt;-</span> <span class="fu">ecdf</span>(post.samples<span class="sc">$</span>smd)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">smd.ecdf</span>(<span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>smd.ecdf <span class="ot">&lt;-</span> <span class="fu">ecdf</span>(post.samples<span class="sc">$</span>smd)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">smd.ecdf</span>(<span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.001625</code></pre>
+<pre><code>[1] 0.00225</code></pre>
 </div>
 </div>
 <p>We zien dat met 0,21% de kans dat ons gepoolde effect kleiner is dan 0,30 heel erg klein is. Ervan uitgaande dat de cut-off geldig is, zou dit betekenen dat het totale effect van de interventie dat we in deze meta-analyse vinden zeer waarschijnlijk zinvol is.</p>
 <p><strong>6. Een forest plot genereren</strong> Forest plots kunnen nog niet in <code>brms</code> worden gemaakt. We doen het zelf en doen wat bewerkingen via <code>tidybayes</code>.</p>
 <p>Laad deze pakketten.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidybayes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidybayes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'tidybayes'</code></pre>
@@ -691,9 +627,9 @@ Attaching package: 'tidybayes'</code></pre>
 
     dstudent_t, pstudent_t, qstudent_t, rstudent_t</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'ggridges'</code></pre>
@@ -706,65 +642,65 @@ Attaching package: 'ggridges'</code></pre>
     scale_point_fill_continuous, scale_point_fill_discrete,
     scale_point_size_continuous</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Voordat we de plot kunnen genereren, moeten we de gegevens voorbereiden. We moeten de posterior distributie voor elke studie afzonderlijk extraheren (aangezien forest plots ook de specifieke effectgrootte van elke studie weergeven). Om dit te bereiken, kunnen we de spread_draws functie in het {tidybayes} pakket gebruiken. De functie heeft drie argumenten nodig als invoer: ons gepaste {brms} model, de random-effects factor waarmee de resultaten moeten worden geïndexeerd en de parameter die we willen extraheren (hier <code>b_Intercept</code>, omdat we de vaste term willen extraheren: de effectgrootte).</p>
 <p>Met behulp van de <code>mutate</code>-functie in {dplyr} berekenen we de werkelijke effectgrootte van elke studie door de gepoolde effectgrootte <code>b_Intercept</code> op te tellen bij de geschatte afwijking van elke studie. We slaan het resultaat op als <code>study.draws</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>study.draws <span class="ot">&lt;-</span> <span class="fu">spread_draws</span>(m.brm, r_Author[Author,], b_Intercept) <span class="sc">%&gt;%</span> </span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">b_Intercept =</span> r_Author <span class="sc">+</span> b_Intercept)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>study.draws <span class="ot">&lt;-</span> <span class="fu">spread_draws</span>(m.brm, r_Author[Author,], b_Intercept) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">b_Intercept =</span> r_Author <span class="sc">+</span> b_Intercept)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Vervolgens willen we de verdeling van het gepoolde effect op een vergelijkbare manier genereren (omdat in forest plots het samenvattende effect meestal in de laatste rij wordt weergegeven). Daarom passen we de code van hiervoor enigszins aan, waarbij we het tweede argument laten vallen om alleen het gepoolde effect te krijgen. De oproep tot muteren voegt alleen een extra kolom toe met de naam “<code>Author</code>”. We slaan het resultaat op als pooled.effect.draws.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>pooled.effect.draws <span class="ot">&lt;-</span> <span class="fu">spread_draws</span>(m.brm, b_Intercept) <span class="sc">%&gt;%</span> </span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Author =</span> <span class="st">"Pooled Effect"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>pooled.effect.draws <span class="ot">&lt;-</span> <span class="fu">spread_draws</span>(m.brm, b_Intercept) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Author =</span> <span class="st">"Pooled Effect"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Vervolgens binden we <code>study.draws</code> en <code>pooled.effect.draws</code> samen in één dataframe. Vervolgens starten we weer een pipe, waarbij we eerst <code>ungroup</code> aanroepen en vervolgens <code>mutate</code> gebruiken om (1) de studielabels op te schonen (d.w.z. punten vervangen door spaties) en (2) de studiefactorniveaus te herschikken op effectgrootte (hoog naar laag). Het resultaat zijn de gegevens die we nodig hebben voor het plotten, die we opslaan als <code>forest.data</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>forest.data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(study.draws, </span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                         pooled.effect.draws) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">Author =</span> <span class="fu">str_replace_all</span>(Author, <span class="st">"[.]"</span>, <span class="st">" "</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">Author =</span> <span class="fu">reorder</span>(Author, b_Intercept))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>forest.data <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(study.draws, </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                         pooled.effect.draws) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">Author =</span> <span class="fu">str_replace_all</span>(Author, <span class="st">"[.]"</span>, <span class="st">" "</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">Author =</span> <span class="fu">reorder</span>(Author, b_Intercept))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ten slotte moet de forest plot ook de effectgrootte (SMD en betrouwbaarheidsinterval) van elke studie weergeven. Om dit te doen, gebruiken we onze nieuw gegenereerde <code>forest.data</code> dataset, groeperen deze op <code>Author</code> en gebruiken vervolgens de <code>mean_qi</code> functie om deze waarden te berekenen. We slaan de uitvoer op als <code>forest.data.summary</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>forest.data.summary <span class="ot">&lt;-</span> <span class="fu">group_by</span>(forest.data, Author) <span class="sc">%&gt;%</span> </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean_qi</span>(b_Intercept)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>forest.data.summary <span class="ot">&lt;-</span> <span class="fu">group_by</span>(forest.data, Author) <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean_qi</span>(b_Intercept)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nu kunnen we een forest plot maken met <code>ggplot</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(b_Intercept, </span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">relevel</span>(Author, <span class="st">"Pooled Effect"</span>, </span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">after =</span> <span class="cn">Inf</span>)), </span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> forest.data) <span class="sc">+</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add vertical lines for pooled effect and CI</span></span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">fixef</span>(m.brm)[<span class="dv">1</span>, <span class="dv">1</span>], </span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">fixef</span>(m.brm)[<span class="dv">1</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], </span>
-<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>, </span>
-<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add densities</span></span>
-<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="at">fill =</span> <span class="st">"blue"</span>, </span>
-<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">rel_min_height =</span> <span class="fl">0.01</span>, </span>
-<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>                      <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">scale =</span> <span class="dv">1</span>,</span>
-<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>                      <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointintervalh</span>(<span class="at">data =</span> forest.data.summary, </span>
-<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>                      <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add text and labels</span></span>
-<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> <span class="fu">mutate_if</span>(forest.data.summary, </span>
-<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>                             is.numeric, round, <span class="dv">2</span>),</span>
-<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">glue</span>(<span class="st">"{b_Intercept} [{.lower}, {.upper}]"</span>), </span>
-<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="cn">Inf</span>), <span class="at">hjust =</span> <span class="st">"inward"</span>) <span class="sc">+</span></span>
-<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Standardized Mean Difference"</span>, <span class="co"># summary measure</span></span>
-<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
-<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(b_Intercept, </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">relevel</span>(Author, <span class="st">"Pooled Effect"</span>, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">after =</span> <span class="cn">Inf</span>)), </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> forest.data) <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add vertical lines for pooled effect and CI</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">fixef</span>(m.brm)[<span class="dv">1</span>, <span class="dv">1</span>], </span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">fixef</span>(m.brm)[<span class="dv">1</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>], </span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>, </span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add densities</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges</span>(<span class="at">fill =</span> <span class="st">"blue"</span>, </span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">rel_min_height =</span> <span class="fl">0.01</span>, </span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>                      <span class="at">col =</span> <span class="cn">NA</span>, <span class="at">scale =</span> <span class="dv">1</span>,</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>                      <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointintervalh</span>(<span class="at">data =</span> forest.data.summary, </span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>                      <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Add text and labels</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> <span class="fu">mutate_if</span>(forest.data.summary, </span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>                             is.numeric, round, <span class="dv">2</span>),</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">glue</span>(<span class="st">"{b_Intercept} [{.lower}, {.upper}]"</span>), </span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="cn">Inf</span>), <span class="at">hjust =</span> <span class="st">"inward"</span>) <span class="sc">+</span></span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Standardized Mean Difference"</span>, <span class="co"># summary measure</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 ℹ Please use `linewidth` instead.</code></pre>
@@ -775,7 +711,7 @@ Use 'geom_pointinterval' instead.
 See help("Deprecated") and help("tidybayes-deprecated").</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Picking joint bandwidth of 0.0271</code></pre>
+<pre><code>Picking joint bandwidth of 0.0272</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="13-bayesian_meta-analysis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
@@ -1023,7 +959,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./12-network_meta-analysis.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Network Meta-Analysis</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Netwerk Meta-Analyse</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
