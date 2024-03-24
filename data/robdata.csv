@@ -1,0 +1,10 @@
+﻿Study;D1;D2;D3;D4;D5;Overall;Weigh
+Study 1;Low;Low;Low;Low;Low;Low;33.333
+Study 2;Some con;Low;Low;Low;Low;Low;33.333
+Study 3;Some con;Low;Some con;Low;Low;Some con;0.143
+Study 4;Low;Low;High;Low;Some con;High;9.091
+Study 5;High;High;Low;Low;Some con;Low;12.5
+Study 6;Low;High;Some con;Low;Low;Some con;25
+Study 7;Low;Some con;Some con;High;Low;Some con;200
+Study 8;Low;Some con;Low;Low;Low;Low;11.111
+Study 9;Low;Low;High;Low;Low;High;1.111

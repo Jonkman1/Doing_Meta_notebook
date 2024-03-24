@@ -1,1 +1,53 @@
 # Power Analyse
+
+Harrie: Dit hoofdstuk nog aanpassen
+## Introductie
+
+## Fixed-Effect Model
+
+```{r}
+# Defineer assumpties
+theta <- 0.2
+K <- 10
+n1 <- 25
+n2 <- 25
+
+# Calculeer gepoolde effect standaard fout
+sigma <- sqrt(((n1+n2)/(n1*n2)+(theta^2/(2*n1+n2)))/K)
+
+# Calculeer z
+z = theta/sigma
+
+# Calculeer de power
+1 - pnorm(1.96-z) + pnorm(-1.96-z)
+```
+
+```{r}
+library(dmetar)
+power.analysis(d = 0.2, 
+               k = 10, 
+               n1 = 25, 
+               n2 = 25, 
+               p = 0.05)
+```
+
+## Random-Effects Model
+
+```{r}
+power.analysis(d = 0.2, 
+               k = 10, 
+               n1 = 25, 
+               n2 = 25, 
+               p = 0.05,
+               heterogeneity = "moderate")
+```
+
+## Subgroep analyse
+
+```{r}
+power.analysis.subgroup(TE1 = 0.30, TE2 = 0.66, 
+                        seTE1 = 0.13, seTE2 = 0.14)
+```
+
+
+```{r}
