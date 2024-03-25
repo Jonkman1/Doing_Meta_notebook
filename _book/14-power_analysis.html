@@ -96,6 +96,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -295,9 +297,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#fixed-effect-model" id="toc-fixed-effect-model" class="nav-link active" data-scroll-target="#fixed-effect-model"><span class="header-section-number">14.1</span> Fixed-Effect Model</a></li>
-  <li><a href="#random-effects-model" id="toc-random-effects-model" class="nav-link" data-scroll-target="#random-effects-model"><span class="header-section-number">14.2</span> Random-Effects Model</a></li>
-  <li><a href="#subgroep-analyse" id="toc-subgroep-analyse" class="nav-link" data-scroll-target="#subgroep-analyse"><span class="header-section-number">14.3</span> Subgroep analyse</a></li>
+  <li><a href="#introductie" id="toc-introductie" class="nav-link active" data-scroll-target="#introductie"><span class="header-section-number">14.1</span> Introductie</a></li>
+  <li><a href="#fixed-effect-model" id="toc-fixed-effect-model" class="nav-link" data-scroll-target="#fixed-effect-model"><span class="header-section-number">14.2</span> Fixed-Effect Model</a></li>
+  <li><a href="#random-effects-model" id="toc-random-effects-model" class="nav-link" data-scroll-target="#random-effects-model"><span class="header-section-number">14.3</span> Random-Effects Model</a></li>
+  <li><a href="#subgroep-analyse" id="toc-subgroep-analyse" class="nav-link" data-scroll-target="#subgroep-analyse"><span class="header-section-number">14.4</span> Subgroep analyse</a></li>
   </ul>
 </nav>
     </div>
@@ -321,9 +324,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Harrie: Dit hoofdstuk nog aanpassen ## Introductie</p>
-<section id="fixed-effect-model" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="fixed-effect-model"><span class="header-section-number">14.1</span> Fixed-Effect Model</h2>
+<section id="introductie" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="introductie"><span class="header-section-number">14.1</span> Introductie</h2>
+<p>Een van de redenen waarom meta-analyse zo nuttig kan zijn, is dat het ons in staat stelt om verschillende onnauwkeurige bevindingen te combineren tot een nauwkeuriger resultaat. In de meeste gevallen leveren meta-analyses schattingen op met kleinere betrouwbaarheidsintervallen dan die van de geïncludeerde onderzoeken. Dit is vooral nuttig als het werkelijke effect klein is. Terwijl primaire onderzoeken misschien niet in staat zijn om de significantie van een klein effect vast te stellen, kunnen meta-analytische schattingen vaak de statistische kracht leveren die nodig is om na te gaan of zo’n klein effect bestaat.</p>
+<p>Gebrek aan statistisch vermogen kan echter nog steeds een belangrijke rol spelen, zelfs bij meta-analyses. Het aantal geïncludeerde onderzoeken in veel meta-analyses is klein, vaak minder dan <span class="math inline">\(K= 10\)</span>. Het mediane aantal onderzoeken in Cochrane systematische reviews is bijvoorbeeld zes. Dit alles wordt nog problematischer als we rekening houden met het feit dat meta-analyses vaak subgroepanalyses en meta-regressie omvatten, waarvoor nog meer power nodig is. Bovendien vertonen veel meta-analyses een hoge heterogeniteit tussen studies. Dit vermindert ook de algehele precisie en dus de statistische power.</p>
+<p>Het idee achter statistisch vermogen is afgeleid van klassieke hypothesetests. Het houdt rechtstreeks verband met de twee soorten fouten die in een hypothesetest kunnen optreden. De eerste fout is het accepteren van de alternatieve hypothese (bijvoorbeeld <span class="math inline">\(\mu1 \neq \mu2\)</span>) terwijl de nulhypothese (<span class="math inline">\(\mu1= \mu2\)</span>) waar is. Dit leidt tot vals positief, ook wel een <strong>Type I</strong> of <span class="math inline">\(\alpha\)</span> fout genoemd. Omgekeerd is het ook mogelijk dat we de nulhypothese aannemen, terwijl de alternatieve hypothese waar is. Dit leidt tot vals-negatief, ook wel een <strong>Type II</strong>- of <span class="math inline">\(\beta\)</span>-fout genoemd.</p>
+<p>Het is gebruikelijk om aan te nemen dat een type I-fout ernstiger is dan een type II-fout. Daarom wordt het <span class="math inline">\(\alpha\)</span>-niveau gewoonlijk vastgesteld op <span class="math inline">\(0,05\)</span> en het <span class="math inline">\(\beta\)</span>-niveau op <span class="math inline">\(0,2\)</span>. Dit leidt tot een drempel van <span class="math inline">\(1-\beta = 1 - 0,2 = 80%\)</span>. Dit leidt tot een drempel van <span class="math inline">\(1-\beta = 1 - 0,2 = 80%\)</span>, die gewoonlijk wordt gebruikt om te bepalen of de statistische power van een test voldoende is of niet.</p>
+</section>
+<section id="fixed-effect-model" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="fixed-effect-model"><span class="header-section-number">14.2</span> Fixed-Effect Model</h2>
+<p>Met <code>R</code> kun je goed de power van de meta-analyse berekenen, bv. die van een fixed-effect model. Stel dat we <span class="math inline">\(K= 10\)</span> onderzoeken verwachten, elk met ongeveer 25 deelnemers in beide groepen. We willen een effect van <span class="math inline">\(SMD = 0,2\)</span> kunnen detecteren. Welke power heeft zo’n meta-analyse?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defineer assumpties</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
@@ -343,6 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 0.6059151</code></pre>
 </div>
 </div>
+<p>We zien dat een dergelijke meta-analyse met 60,6% <strong>te weinig power</strong> heeft, ook al zijn er 10 studies geïncludeerd. Een handigere manier om de power van een (fixed-effect) meta-analyse te berekenen is door de functie <code>power.analysis</code> te gebruiken, met verschillende argumenten zoals <code>d</code>, <code>OR</code>, <code>k</code>, <code>n1</code>en <code>n2</code>, <code>p</code> en <code>heterogenity</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dmetar)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -369,8 +380,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="random-effects-model" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="random-effects-model"><span class="header-section-number">14.2</span> Random-Effects Model</h2>
+<section id="random-effects-model" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="random-effects-model"><span class="header-section-number">14.3</span> Random-Effects Model</h2>
+<p>De <code>power.analysis</code>-functie kan ook worden gebruikt voor random-effects meta-analyses. De hoeveelheid aangenomen heterogeniteit tussen studies kan worden geregeld met het argument heterogeniteit. Mogelijke waarden zijn “laag”, “matig” en “hoog”. Laten we nu, met dezelfde waarden als in het vorige voorbeeld, de verwachte power berekenen als de heterogeniteit tussen studies matig is.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.analysis</span>(<span class="at">d =</span> <span class="fl">0.2</span>, </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">k =</span> <span class="dv">10</span>, </span>
@@ -393,8 +405,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="subgroep-analyse" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="subgroep-analyse"><span class="header-section-number">14.3</span> Subgroep analyse</h2>
+<section id="subgroep-analyse" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="subgroep-analyse"><span class="header-section-number">14.4</span> Subgroep analyse</h2>
+<p>Bij het plannen van subgroepanalyses kan het relevant zijn om te weten hoe groot het verschil tussen twee groepen moet zijn zodat we het kunnen detecteren, gegeven het aantal studies dat we tot onze beschikking hebben. Dit is waar een poweranalyse voor subgroepverschillen kan worden toegepast. Een poweranalyse voor subgroepen kan worden uitgevoerd in R met de functie <code>power.analysis.subgroup</code>.</p>
+<p>Laten we aannemen dat we verwachten dat de eerste groep een effect heeft van <span class="math inline">\(SMD = 0,3\)</span> met een standaardfout van 0,13, terwijl de tweede groep een effect heeft van <span class="math inline">\(SMD = 0,66\)</span> en een standaardfout van 0,14. We kunnen deze aannames gebruiken als invoer voor onze aanroep van de functie:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">power.analysis.subgroup</span>(<span class="at">TE1 =</span> <span class="fl">0.30</span>, <span class="at">TE2 =</span> <span class="fl">0.66</span>, </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">seTE1 =</span> <span class="fl">0.13</span>, <span class="at">seTE2 =</span> <span class="fl">0.14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -410,6 +424,7 @@ Power for subgroup difference test (two-tailed): 46.99%</code></pre>
 <p><img src="14-power_analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>In de uitvoer kunnen we zien dat de power van onze denkbeeldige subgroeptoets (47%) niet voldoende zou zijn. De uitvoer vertelt ons ook dat, ceteris paribus, het verschil in effectgrootte ten minste 0,54 moet zijn om voldoende power te bereiken.</p>
 
 
 </section>
