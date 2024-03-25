@@ -291,7 +291,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introductie" id="toc-introductie" class="nav-link active" data-scroll-target="#introductie"><span class="header-section-number">15.1</span> Introductie</a></li>
+  <li><a href="#samenvattende-plots" id="toc-samenvattende-plots" class="nav-link" data-scroll-target="#samenvattende-plots"><span class="header-section-number">15.2</span> Samenvattende plots</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -313,12 +320,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Harrie: Dit hoofdstuk wordt nog aangepast.</p>
-<p>Dit hoofdstuk is geschreven door Luke A. McGuinness (McGuinness, L. A. (2021). Risk of Bias Plots. In Harrer, M., Cuijpers, P., Furukawa, T.A., &amp; Ebert, D.D., <em>Doing Meta-Analysis with R: A Hands-On Guide</em> (online version). bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/rob-plots.html. )</p>
+<section id="introductie" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="introductie"><span class="header-section-number">15.1</span> Introductie</h2>
+<p>Dit hoofdstuk laat zien hoe je biasrisico plots kunt met maken met <code>R</code>, met behulp van de <code>robvis</code> package. Deze plots kunnen worden gebruikt om de risico’s van bias in de geïncludeerde studies te visualiseren. Het pakket biedt functies biedt om een overzichtstabel met een biasrisico-beoordeling om te zetten in een samenvattingsplot (of een stoplichtplot, dat in dit notitieboekje niet aan bod komt. Dit hoofdstuk is geschreven door Luke A. McGuinness <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Eerst maar eens de benodigde packages laden.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the required package</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(robvis)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(robvis)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -332,6 +340,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
+<p>De gegevens van de biasrisico moet je wel eerst zelf in een excelbestand zetten. De gegevens moeten in een specifieke volgorde staan, met aandacht voor de studie(id), elementen van de biasrisico, een overall score en een gewicht hiervan.</p>
+<p>{robvis} heeft een aantal templates: - <strong>ROB1</strong>, het Cochrane-instrument voor vertekeningsrisico’s bij gerandomiseerde gecontroleerde onderzoeken en het kan ook worden gebruikt om de resultaten te visualiseren van beoordelingen die zijn uitgevoerd met andere domeingebaseerde tools die niet in de onderstaande lijst zijn opgenomen (<code>data_rob1</code>: voorbeelddata voor de ROB1-tool);<br>
+- <strong>ROB2</strong>, het nieuwe Cochrane-instrument voor vertekeningsrisico’s bij gerandomiseerde gecontroleerde onderzoeken (<code>data_rob2</code>: voorbeelddata voor de ROB2-tool);<br>
+- <strong>ROBINS-I</strong>, de Risk of Bias In Non-randomized Studies - of Interventions tool (<code>data_robins</code>: voorbeelddata voor de RObins-1-tool);<br>
+- <strong>QUADAS-2</strong>, de Quality and Applicability of Diagnostic Accuracy Studies, versie 2 (<code>data_quadas</code>: voorbeelddata voor de Quadas-2-tool).</p>
+<p>Laten we eens naar de <code>data_robins</code> kijken:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_robins<span class="ot">&lt;-</span>data_robins</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(data_robins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -350,6 +364,10 @@ $ Overall &lt;fct&gt; Critical, Low, Serious, Low, Serious, Serious, Moderate, M
 $ Weight  &lt;dbl&gt; 33.3333333, 33.3333333, 0.1428571, 9.0909091, 12.5000000, 25.0…</code></pre>
 </div>
 </div>
+</section>
+<section id="samenvattende-plots" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="samenvattende-plots"><span class="header-section-number">15.2</span> Samenvattende plots</h2>
+<p>Zodra we de overzichtstabel met het vertekeningsrisico met succes hebben geïmporteerd in R, is het maken van zo’n plot vrij eenvoudig. Om te beginnen wordt een eenvoudig gewogen overzichtsstaafdiagram gemaakt met behulp van de ROB2 voorbeelddataset (<code>data_rob2</code>) door de volgende code uit te voeren:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rob_summary</span>(<span class="at">data =</span> data_rob2, </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROB2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -357,6 +375,8 @@ $ Weight  &lt;dbl&gt; 33.3333333, 33.3333333, 0.1428571, 9.0909091, 12.5000000, 
 <p><img src="15-risk_bias_plots_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>De <code>rob_summary</code> kun je aanpassen met verschillende parameters: <code>data</code>, <code>tool</code>, <code>overall</code>, <code>weighted</code>, <code>color</code>, <code>quiet</code>).</p>
+<p>Als we een andere tool willen gebruiken (bv. ROBINS-I).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rob_summary</span>(<span class="at">data =</span> data_robins, </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROBINS-I"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -364,45 +384,67 @@ $ Weight  &lt;dbl&gt; 33.3333333, 33.3333333, 0.1428571, 9.0909091, 12.5000000, 
 <p><img src="15-risk_bias_plots_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Of QUADAS-2:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rob_summary</span>(<span class="at">data =</span> data_robins, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROBINS-I"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rob_summary</span>(<span class="at">data =</span> data_quadas, </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"QUADAS-2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="15-risk_bias_plots_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Als je de overall-risk wilt afbeelden, zet je dit in de code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rob_summary</span>(<span class="at">data =</span> data_quadas, </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"QUADAS-2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rob_summary</span>(<span class="at">data =</span> data_rob2, </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROB2"</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">overall =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="15-risk_bias_plots_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Je kunt gewogen biasplots maken:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rob_summary</span>(<span class="at">data =</span> data_rob2, </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROB2"</span>, </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">overall =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROB2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="15-risk_bias_plots_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>En ongewogen biasplots:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rob_summary</span>(<span class="at">data =</span> data_rob2, </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROB2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROB2"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">weighted =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="15-risk_bias_plots_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Je kunt de kleuren van de plot aanpassen (bv. in kleuren voor kleurenblinden):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rob_summary</span>(<span class="at">data =</span> data_rob2, </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROB2"</span>,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">weighted =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROB2"</span>, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour =</span> <span class="st">"colourblind"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="15-risk_bias_plots_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Of je eigen kleuren gebruiken:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rob_summary</span>(<span class="at">data =</span> data_rob2, </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">tool =</span> <span class="st">"ROB2"</span>, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour =</span> <span class="fu">c</span>(<span class="st">"#f442c8"</span>,<span class="st">"#bef441"</span>,<span class="st">"#000000"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="15-risk_bias_plots_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>McGuinness, L. A. (2021). Risk of Bias Plots. In Harrer, M., Cuijpers, P., Furukawa, T.A., &amp; Ebert, D.D., <em>Doing Meta-Analysis with R: A Hands-On Guide</em> (online version). bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/rob-plots.html.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
