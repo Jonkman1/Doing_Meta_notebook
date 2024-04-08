@@ -132,7 +132,7 @@ library(esc)
 convert_z2r(0.52)
 ```
 
-We zien dat dit leidt tot een correlatie van ongeveer $\tau\approx$0,48. Dit kan als groot worden beschouwd. Er lijkt een substantieel verband te zijn tussen mutatiepercentages en blootstelling aan straling van Tsjernobyl. De `Test voor Heterogeniteit` in de uitvoer wijst op echte effectgrootteverschillen in onze gegevens ($p\$\<0,001). Dit resultaat is echter niet erg informatief. We zijn meer geïnteresseerd in de precieze hoeveelheid heterogeniteitsvariantie die door elk niveau in ons model wordt gevangen. Het zou goed zijn om te weten hoeveel van de heterogeniteit wordt veroorzaakt door verschillen tussen participanten (niveau 1), binnen studies (niveau 2) en hoeveel door verschillen tussen studies (niveau 3).
+We zien dat dit leidt tot een correlatie van ongeveer $\tau\approx0,48$. Dit kan als groot worden beschouwd. Er lijkt een substantieel verband te zijn tussen mutatiepercentages en blootstelling aan straling van Tsjernobyl. De `Test voor Heterogeniteit` in de uitvoer wijst op echte effectgrootteverschillen in onze gegevens ($p<0,001$). Dit resultaat is echter niet erg informatief. We zijn meer geïnteresseerd in de precieze hoeveelheid heterogeniteitsvariantie die door elk niveau in ons model wordt gevangen. Het zou goed zijn om te weten hoeveel van de heterogeniteit wordt veroorzaakt door verschillen tussen participanten (niveau 1), binnen studies (niveau 2) en hoeveel door verschillen tussen studies (niveau 3).
 
 ### Variantie die aan elk niveau is toe te schrijven.
 
